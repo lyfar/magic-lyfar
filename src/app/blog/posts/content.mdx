@@ -7,7 +7,7 @@ tag: "Magic Portfolio"
 
 ## Avatar
 
-Replace the `public/images/avatar.jpg` file with your own avatar image. It is used on the `/about` page as well as on the dynamically generated `open-graph` images.
+Replace the `public/images/me.png` file with your own avatar image. It is used on the `/about` page as well as on the dynamically generated `open-graph` images.
 
 ## Favicon
 
@@ -47,13 +47,13 @@ Your personal details are used across the whole app to render personalized headi
   {
     code:
 `const person = {
-    firstName: "Selene",
-    lastName: "Yu",
+    firstName: "Egor",
+    lastName: "Lyfar",
     get name() {
       return "...";
     },
     role: "Design Engineer",
-    avatar: "/images/avatar.jpg",
+    avatar: "/images/me.png",
     location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
     languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
 };`,
@@ -99,12 +99,12 @@ Each page have it's own object that manages the personalized content, such as he
     code:
 `const home = {
     label: "Home",
-    title: "Selene Yu's Portfolio",
-    description: "Portfolio website showcasing my work as a Design Engineer",
-    headline: <>Design engineer and builder</>,
+    title: "Egor Lyfar's Portfolio",
+    description: "Portfolio website showcasing my work as a Full Stack Developer",
+    headline: <>Full stack developer and builder</>,
     subline: (
       <>
-        I'm Selene, a design engineer at <InlineCode>FLY</InlineCode>, where I craft intuitive
+        I'm Egor, a full stack developer passionate about building scalable web applications
         <br /> user experiences. After hours, I build my own projects.
       </>
     ),

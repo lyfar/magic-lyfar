@@ -5,7 +5,7 @@ import { Projects } from "@/components/work/Projects";
 
 import { baseURL, routes } from "@/app/resources";
 import { home, about, person, newsletter } from "@/app/resources/content";
-import { Mailchimp } from "@/components";
+import { Mailchimp, LogosSection, TestimonialsSection } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { Meta, Schema } from "@/once-ui/modules";
 
@@ -78,7 +78,13 @@ export default function Home() {
         </Column>
       </Column>
       <RevealFx translateY="16" delay={0.6}>
+        <LogosSection />
+      </RevealFx>
+      <RevealFx translateY="16" delay={0.8}>
         <Projects range={[1, 1]} />
+      </RevealFx>
+      <RevealFx translateY="16" delay={1.0}>
+        <TestimonialsSection />
       </RevealFx>
       {routes["/blog"] && (
         <Flex fillWidth gap="24" mobileDirection="column">

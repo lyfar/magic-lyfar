@@ -1,0 +1,33 @@
+.columnWrapper {
+  overflow: hidden;
+  position: relative;
+  min-width: 300px;
+  max-width: 360px;
+}
+
+.testimonialsColumn {
+  display: flex;
+  flex-direction: column;
+  animation: scrollUp linear infinite;
+  will-change: transform;
+}
+
+.testimonialCard {
+  flex-shrink: 0;
+  margin-bottom: 16px;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    /* Move up by exactly 1/3 of the total height since we tripled the content */
+    transform: translateY(-33.333%);
+  }
+}
+
+/* Pause animation on hover */
+.columnWrapper:hover .testimonialsColumn {
+  animation-play-state: paused;
+} 

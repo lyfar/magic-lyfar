@@ -1,0 +1,29 @@
+.testimonialsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  max-height: 740px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+}
+
+.hiddenOnMobile {
+  display: block;
+}
+
+.hiddenOnTablet {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .hiddenOnMobile {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hiddenOnTablet {
+    display: none;
+  }
+} 

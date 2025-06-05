@@ -1,5 +1,5 @@
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL = "https://demo.magic-portfolio.com";
+const baseURL = "https://egorlyfar.com";
 
 const routes = {
   "/": true,
@@ -40,7 +40,7 @@ const font = {
 const style = {
   theme: "dark", // theme is not necessary when using ThemeProvider (default)
   neutral: "gray", // sand | gray | slate
-  brand: "cyan", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+  brand: "green", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
   accent: "red", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
   solid: "contrast", // color | contrast
   solidStyle: "flat", // flat | plastic
@@ -58,19 +58,19 @@ const effects = {
     radius: 100,
   },
   gradient: {
-    display: false,
-    opacity: 100,
+    display: true,
+    opacity: 60,
     x: 50,
     y: 60,
     width: 100,
     height: 50,
     tilt: 0,
     colorStart: "accent-background-strong",
-    colorEnd: "page-background",
+    colorEnd: "brand-background-weak",
   },
   dots: {
     display: true,
-    opacity: 40,
+    opacity: 30,
     size: "2",
     color: "brand-background-strong",
   },
@@ -108,20 +108,20 @@ const mailchimp = {
     },
     gradient: {
       display: true,
-      opacity: 90,
+      opacity: 80,
       x: 50,
       y: 0,
       width: 50,
       height: 50,
       tilt: 0,
-      colorStart: "accent-background-strong",
-      colorEnd: "static-transparent",
+      colorStart: "brand-background-strong",
+      colorEnd: "accent-background-weak",
     },
     dots: {
       display: true,
-      opacity: 20,
+      opacity: 25,
       size: "2",
-      color: "brand-on-background-weak",
+      color: "accent-background-strong",
     },
     grid: {
       display: false,

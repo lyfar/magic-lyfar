@@ -1,13 +1,13 @@
 ---
 title: "Styling your portfolio"
-summary: "Magic Portfolio's styling is based on Once UI's customization through data-attributes."
+summary: "Portfolio styling with custom red and green color scheme for a modern, vibrant look."
 publishedAt: "2025-04-21"
-tag: "Magic Portfolio"
+tag: "Portfolio Design"
 ---
 
 ## Global style
 
-Magic Portfolio's styling is based on Once UI's customization through data-attributes. You can generate a custom color palette for brand, accent and neutral colors on [Once UI](https://once-ui.com/customize) where you'll find instructions on how to apply it.
+This portfolio uses a custom red and green color scheme that creates a modern, vibrant aesthetic. The styling is based on data-attributes for easy customization and theming.
 
 <CodeBlock
     marginBottom="16"
@@ -16,8 +16,8 @@ Magic Portfolio's styling is based on Once UI's customization through data-attri
     code:
 `theme:       'dark',         // dark | light
 neutral:     'gray',         // sand | gray | slate
-brand:       'blue',         // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
-accent:      'indigo',       // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+brand:       'green',        // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+accent:      'red',          // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
 solid:       'contrast',     // color | contrast
 solidStyle:  'flat',         // flat | plastic
 border:      'playful',      // rounded | playful | conservative
@@ -29,9 +29,27 @@ scaling:     '100',          // 90 | 95 | 100 | 105 | 110`,
   }
 ]} />
 
+## Custom Logo Integration
+
+The portfolio features a custom SVG logo with vibrant colors that complement the red and green theme. The logo is integrated as a React component for easy reuse throughout the site.
+
+<CodeBlock
+    marginBottom="16"
+    codeInstances={[
+  {
+    code:
+`import { Logo } from "@/components/Logo";
+
+// Usage in content
+<Logo width={30} height={15} />`,
+    language: "tsx",
+    label: "Logo Component Usage"
+  }
+]} />
+
 ## Background effect
 
-There's a pre-configured background in `layout.tsx` that you can modify in the config file. Set graphic elements such as gradient, dots, lines, and grid and configure their appearance.
+The background features a subtle gradient and dot pattern that enhances the red and green color scheme. You can modify these effects in the config file to customize the visual appearance.
 
 <CodeBlock
     codeHeight={24}
@@ -49,19 +67,19 @@ There's a pre-configured background in `layout.tsx` that you can modify in the c
     gradient: {
       display: true,
       x: 50,
-      y: -25,
+      y: 60,
       width: 100,
-      height: 100,
+      height: 50,
       tilt: 0,
       colorStart: 'accent-background-strong',
-      colorEnd: 'static-transparent',
-      opacity: 50
+      colorEnd: 'brand-background-weak',
+      opacity: 60
     },
     dots: {
       display: true,
       size: 2,
-      color: 'brand-on-background-weak',
-      opacity: 20
+      color: 'brand-background-strong',
+      opacity: 30
     },
     lines: {
       display: false,

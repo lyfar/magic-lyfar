@@ -1,16 +1,16 @@
-import { Logo } from "@/once-ui/components";
+import { Logo } from "@/components/Logo";
 
 const person = {
-  firstName: "Selene",
-  lastName: "Yu",
+  firstName: "Egor",
+  lastName: "Lyfar",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  role: "Full Stack Developer",
+  avatar: "/images/me.png",
+  email: "egor@lyfar.com",
+  location: "Asia/Hong_Kong", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: ["English", "Russian"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter = {
@@ -30,17 +30,17 @@ const social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system/nextjs-starter",
+    link: "https://github.com/egorlyfar",
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/egorlyfar",
   },
   {
     name: "X",
     icon: "x",
-    link: "",
+    link: "https://x.com/egorlyfar",
   },
   {
     name: "Email",
@@ -55,16 +55,16 @@ const home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  headline: <>Creative, Video and Tech Production</>,
   featured: {
     display: true,
-    title: <>Recent project: <strong className="ml-4">Once UI</strong></>,
-    href: "/work/building-once-ui-a-customizable-design-system",
+    title: <>Recent project: <strong className="ml-4">Portfolio Showcase</strong></>,
+    href: "/work",
   },
   subline: (
     <>
-      I'm Selene, a design engineer at <Logo icon={false} style={{ display: "inline-flex", top: "0.25em", marginLeft: "-0.25em" }}/>, where I craft intuitive
-      <br /> user experiences. After hours, I build my own projects.
+      I am Egor, I blend stories, pixels & code to craft compelling digital experiences.
+      <br /> From concept to creation, I transform ideas into immersive realities that captivate and inspire.
     </>
   ),
 };
@@ -90,9 +90,9 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        Egor is a full stack developer with a passion for creating robust, scalable web applications.
+        His expertise spans modern JavaScript frameworks, backend development, and creating
+        seamless user experiences that solve real-world problems.
       </>
     ),
   },
@@ -101,41 +101,41 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
+        company: "Tech Innovations Inc",
         timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        role: "Senior Full Stack Developer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Architected and developed scalable web applications serving over 10,000+ users,
+            resulting in improved performance and user satisfaction.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Led the migration from legacy systems to modern tech stack, reducing loading times
+            by 60% and improving code maintainability.
           </>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
           {
             src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
+            alt: "Project Image",
             width: 16,
             height: 9,
           },
         ],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Digital Solutions Co",
+        timeframe: "2020 - 2022",
+        role: "Frontend Developer",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Developed responsive web applications using React, Next.js, and TypeScript,
+            delivering pixel-perfect designs and seamless user experiences.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Collaborated with design and backend teams to implement features that increased
+            user engagement by 35% and reduced bounce rate by 25%.
           </>,
         ],
         images: [],
@@ -144,49 +144,49 @@ const about = {
   },
   studies: {
     display: true, // set to false to hide this section
-    title: "Studies",
+    title: "Education",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "Computer Science Degree",
+        description: <>Bachelor's in Computer Science with focus on web development and software engineering.</>,
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Continuous Learning",
+        description: <>Self-taught in modern web technologies, cloud computing, and best practices in software development.</>,
       },
     ],
   },
   technical: {
     display: true, // set to false to hide this section
-    title: "Technical skills",
+    title: "Technical Skills",
     skills: [
       {
-        title: "Figma",
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
+        title: "React & Next.js",
+        description: <>Expert in building modern web applications with React ecosystem, server-side rendering, and static site generation.</>,
         // optional: leave the array empty if you don't want to display images
         images: [
           {
             src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
+            alt: "React Project",
             width: 16,
             height: 9,
           },
           {
             src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
+            alt: "Next.js Project",
             width: 16,
             height: 9,
           },
         ],
       },
       {
-        title: "Next.js",
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
+        title: "Full Stack Development",
+        description: <>Proficient in Node.js, TypeScript, databases, and cloud deployment for end-to-end application development.</>,
         // optional: leave the array empty if you don't want to display images
         images: [
           {
             src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
+            alt: "Full Stack Project",
             width: 16,
             height: 9,
           },

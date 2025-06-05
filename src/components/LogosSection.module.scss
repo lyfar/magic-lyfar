@@ -1,0 +1,92 @@
+.scrollContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  
+  // Create fade effect using pseudo-elements - these stay fixed
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  // Left fade (from transparent to theme background)
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, var(--page-background), transparent);
+  }
+  
+  // Right fade (from transparent to theme background)
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, var(--page-background), transparent);
+  }
+}
+
+.clientLogo {
+  position: relative;
+
+  img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 2px;
+    box-shadow: 0 0 0 1px var(--neutral-border-weak);
+    border-radius: inherit;
+    
+    // Universal theming: Force all logos to be dark in light theme
+    filter: brightness(0) saturate(100%);
+    opacity: 0.8;
+  }
+}
+
+// Universal theming for dark mode: Force all logos to be white
+html[data-theme="dark"] .clientLogo img {
+  filter: brightness(0) saturate(100%) invert(1);
+  opacity: 0.8;
+}
+
+.personalLogo {
+  background: var(--brand-alpha-weak);
+  border: 1px solid var(--brand-medium);
+
+  img { 
+    display: block;
+  }
+}
+
+@keyframes scrollHorizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scrollingRow {
+  display: flex;
+  width: fit-content;
+  animation: scrollHorizontal 60s linear infinite;
+  cursor: grab;
+  
+  &:active {
+    cursor: grabbing;
+  }
+  
+  // Pause animation on hover
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+// Class to disable animation when user is manually controlling
+.scrollingRow.dragging {
+  animation: none;
+  transition: none; // Remove transition during drag for immediate response
+} 
