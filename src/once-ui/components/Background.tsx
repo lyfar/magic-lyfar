@@ -11,7 +11,7 @@ function setRef<T>(ref: React.Ref<T> | undefined, value: T | null) {
   if (typeof ref === "function") {
     ref(value);
   } else if (ref && "current" in ref) {
-    (ref as React.RefObject<T | null>).current = value;
+    (ref as any).current = value;
   }
 }
 
