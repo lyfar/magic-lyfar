@@ -19,7 +19,7 @@ export default function Blog() {
   return (
     <Column maxWidth="s">
       <Schema
-        as="WebPage"
+        as="webPage"
         baseURL={baseURL}
         title={blog.title}
         description={blog.description}
