@@ -90,9 +90,9 @@ const FlipFx = forwardRef<HTMLDivElement, FlipFxProps>((props, ref) => {
   return (
     <Flex
       ref={(node) => {
-        cardRef.current = node as HTMLDivElement;
+        (cardRef as any).current = node as HTMLDivElement;
         if (typeof ref === "function") ref(node as HTMLDivElement);
-        else if (ref) (ref as React.RefObject<HTMLDivElement | null>).current = node;
+        else if (ref) (ref as any).current = node;
       }}
       className={className}
       style={{
