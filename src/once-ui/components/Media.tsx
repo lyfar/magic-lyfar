@@ -27,50 +27,38 @@ const Media: React.FC<MediaProps> = ({
   enlarge = false,
   src,
   unoptimized = false,
-  priority,
   sizes = "100vw",
+  priority = false,
   ...rest
 }) => {
   const [isEnlarged, setIsEnlarged] = useState(false);
+  const [showControls, setShowControls] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
     if (enlarge) {
       setIsEnlarged(!isEnlarged);
     }
+    if (isVideo) {
+      setShowControls(!showControls);
+    }
   };
 
   useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isEnlarged) {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
         setIsEnlarged(false);
       }
     };
 
-    const handleWheel = (event: WheelEvent) => {
-      if (isEnlarged) {
-        setIsEnlarged(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    window.addEventListener("wheel", handleWheel, { passive: true });
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [isEnlarged]);
-
-  useEffect(() => {
     if (isEnlarged) {
+      document.addEventListener("keydown", handleEscape);
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
     };
   }, [isEnlarged]);
 
@@ -119,7 +107,7 @@ const Media: React.FC<MediaProps> = ({
         fillWidth
         overflow="hidden"
         zIndex={0}
-        cursor={enlarge ? "interactive" : ""}
+        cursor={enlarge || isVideo ? "interactive" : ""}
         style={{
           outline: "none",
           isolation: "isolate",
@@ -135,6 +123,7 @@ const Media: React.FC<MediaProps> = ({
         {!loading && isVideo && (
           <video
             src={src}
+            controls={showControls}
             autoPlay
             loop
             muted
@@ -204,6 +193,7 @@ const Media: React.FC<MediaProps> = ({
             {isVideo ? (
               <video
                 src={src}
+                controls={showControls}
                 autoPlay
                 loop
                 muted

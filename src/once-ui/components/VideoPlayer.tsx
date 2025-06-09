@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./VideoPlayer.module.scss";
 import { Flex } from "./Flex";
 import classNames from "classnames";
@@ -15,14 +15,26 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   className,
   ...props
 }) => {
+  const [showControls, setShowControls] = useState(false);
+
   return (
     <Flex
       radius="l"
       overflow="hidden"
       fillWidth
       className={classNames(styles.container, className)}
+      onClick={() => setShowControls(!showControls)}
+      style={{ cursor: "pointer" }}
     >
-      <video className={styles.video} controls autoPlay muted loop playsInline {...props}>
+      <video 
+        className={styles.video} 
+        controls={showControls} 
+        autoPlay 
+        muted 
+        loop 
+        playsInline 
+        {...props}
+      >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
