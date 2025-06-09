@@ -83,9 +83,9 @@ const thirdColumn = [...testimonials.slice(7, 11), ...testimonials.slice(0, 3)];
 export const TestimonialsSection: React.FC = () => {
   return (
     <Column fillWidth gap="48" paddingY="64">
-      <Column fillWidth horizontal="center">
-        <RevealFx fillWidth paddingBottom="16">
-          <Flex fillWidth horizontal="center">
+      <Column fillWidth>
+        <RevealFx fillWidth horizontal="start" paddingBottom="16">
+          <Flex fillWidth horizontal="start">
             <Badge 
               background="brand-alpha-weak" 
               paddingX="12" 
