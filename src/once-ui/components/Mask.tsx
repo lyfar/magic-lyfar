@@ -26,7 +26,7 @@ const Mask = forwardRef<HTMLDivElement, MaskProps>(
         if (typeof forwardedRef === "function") {
           forwardedRef(maskRef.current);
         } else if (forwardedRef && "current" in forwardedRef) {
-          (forwardedRef as React.RefObject<HTMLDivElement | null>).current = maskRef.current;
+          (forwardedRef as any).current = maskRef.current;
         }
       }
     }, [forwardedRef]);
