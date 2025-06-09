@@ -65,7 +65,7 @@ const home = {
     <>
   We do Video, Design, and Code.
   <br />
-  Whether it's a film, a product, a pixel-perfect interface, or cutting-edge AI automation — we make it hit.
+  Whether it&apos;s a film, a product, a pixel-perfect interface, or cutting-edge AI automation — we make it hit.
     </>
   ),
 };
@@ -203,7 +203,7 @@ const about = {
     institutions: [
       {
         name: "Computer Science Degree",
-        description: <>Bachelor's in Computer Science with focus on web development and software engineering.</>,
+        description: <>Bachelor&apos;s in Computer Science with focus on web development and software engineering.</>,
       },
       {
         name: "Continuous Learning",
