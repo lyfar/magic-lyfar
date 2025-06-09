@@ -15,7 +15,7 @@ const person = {
 
 const newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
+  title: <>Subscribe to {person.firstName}&apos;s Newsletter</>,
   description: (
     <>
       I occasionally write about design, technology, and share thoughts on the intersection of
@@ -53,7 +53,7 @@ const home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
+  title: `${person.name}&apos;s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: <>Creative & Technical Direction</>,
   featured: {
@@ -151,7 +151,7 @@ const about = {
     display: true,
     title: "Manifesto",
     description: [
-      "We've aligned our vision to extend beyond our Hong Kong video production company to a worldwide audience, encompassing video directing, business analytics, web development, project management, AI automation, and marketing.",
+      "We&apos;ve aligned our vision to extend beyond our Hong Kong video production company to a worldwide audience, encompassing video directing, business analytics, web development, project management, AI automation, and marketing.",
       "We are constantly uncovering better ways of producing digital content and providing the best services to our clients by doing it and helping others do it.",
       "Through this work we have come to value:"
     ],
