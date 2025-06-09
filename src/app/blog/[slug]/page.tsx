@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Button, Column, Heading, HeadingNav, Icon, Row, Text } from "@/once-ui/components";
+import { AvatarGroup, Button, Column, Heading, Icon, Row, Text } from "@/once-ui/components";
 import { about, blog, person, baseURL } from "@/app/resources";
 import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
@@ -90,19 +90,6 @@ export default async function Blog({
           <ScrollToHash />
         </Column>
     </Row>
-    <Column maxWidth={12} paddingLeft="40" fitHeight position="sticky" top="80" gap="16" hide="m">
-      <Row
-        gap="12"
-        paddingLeft="2"
-        vertical="center"
-        onBackground="neutral-medium"
-        textVariant="label-default-s"
-      >
-        <Icon name="document" size="xs" />
-        On this page
-      </Row>
-      <HeadingNav fitHeight/>
-    </Column>
     </Row>
   );
 }
