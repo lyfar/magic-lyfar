@@ -8,12 +8,14 @@ import {
   Heading,
   SmartLink,
   Text,
+  VideoPlayer,
 } from "@/once-ui/components";
 
 interface ProjectCardProps {
   href: string;
   priority?: boolean;
   images: string[];
+  video?: string;
   title: string;
   content: string;
   description: string;
@@ -24,6 +26,7 @@ interface ProjectCardProps {
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   href,
   images = [],
+  video,
   title,
   content,
   description,
@@ -32,13 +35,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <Column fillWidth gap="m">
-      <Carousel
-        sizes="(max-width: 960px) 100vw, 960px"
-        images={images.map((image) => ({
-          src: image,
-          alt: title,
-        }))}
-      />
+      {video ? (
+        <VideoPlayer src={video} />
+      ) : (
+        <Carousel
+          sizes="(max-width: 960px) 100vw, 960px"
+          images={images.map((image) => ({
+            src: image,
+            alt: title,
+          }))}
+        />
+      )}
       <Flex
         mobileDirection="column"
         fillWidth

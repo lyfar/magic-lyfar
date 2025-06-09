@@ -3,13 +3,21 @@ import {
   Button,
   Column,
   Flex,
+  Grid,
   Heading,
+  HoloFx,
   Icon,
   IconButton,
+  RevealFx,
   SmartImage,
   Tag,
   Text,
+  Line,
+  AccordionGroup,
+  Card,
+  OgCard,
 } from "@/once-ui/components";
+import { Logo } from "@/components/Logo";
 import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
@@ -37,7 +45,27 @@ export default function About() {
     {
       title: about.work.title,
       display: about.work.display,
-      items: about.work.experiences.map((experience) => experience.company),
+      items: [],
+    },
+    {
+      title: about.services.title,
+      display: about.services.display,
+      items: [],
+    },
+    {
+      title: about.mission.title,
+      display: about.mission.display,
+      items: [],
+    },
+    {
+      title: about.manifesto.title,
+      display: about.manifesto.display,
+      items: [],
+    },
+    {
+      title: about.principles.title,
+      display: about.principles.display,
+      items: [],
     },
     {
       title: about.studies.title,
@@ -89,7 +117,7 @@ export default function About() {
             flex={3}
             horizontal="center"
           >
-            <Avatar src={person.avatar} size="xl" />
+            <Logo width={120} height={60} />
             <Flex gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
               {person.location}
@@ -105,7 +133,8 @@ export default function About() {
             )}
           </Column>
         )}
-        <Column className={styles.blockAlign} flex={9} maxWidth={40}>
+        <Column flex={9} maxWidth={40}>
+          <RevealFx>
           <Column
             id={about.intro.title}
             fillWidth
@@ -138,18 +167,17 @@ export default function About() {
                 />
               </Flex>
             )}
-            <Heading className={styles.textAlign} variant="display-strong-xl">
+              <Heading variant="display-strong-xl">
               {person.name}
             </Heading>
             <Text
-              className={styles.textAlign}
               variant="display-default-xs"
               onBackground="neutral-weak"
             >
               {person.role}
             </Text>
             {social.length > 0 && (
-              <Flex className={styles.blockAlign} paddingTop="20" paddingBottom="8" gap="8" wrap horizontal="center" fitWidth data-border="rounded">
+                <Flex paddingTop="20" paddingBottom="8" gap="8" wrap horizontal="center" fitWidth data-border="rounded">
                 {social.map(
                   (item) =>
                     item.link && (
@@ -177,73 +205,244 @@ export default function About() {
               </Flex>
             )}
           </Column>
+          </RevealFx>
 
           {about.intro.display && (
+            <RevealFx delay={0.2}>
             <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
               {about.intro.description}
             </Column>
+            </RevealFx>
           )}
 
+          <Line marginBottom="xl" />
+
+          {/* Services Section */}
+          {about.services.display && (
+            <RevealFx delay={0.4}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading as="h2" id={about.services.title} variant="display-strong-s">
+                  {about.services.title}
+                </Heading>
+                <Grid columns="1" mobileColumns="1" gap="24">
+                  {about.services.items.map((service, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction="column"
+                      radius="l"
+                      padding="0"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                    >
+                      <SmartImage
+                        src={service.image}
+                        aspectRatio="16/9"
+                        sizes="600px"
+                        radius="l-4"
+                      />
+                      <Column 
+                        fillWidth 
+                        padding="24" 
+                        gap="12"
+                      >
+                        <Heading
+                          as="h3"
+                          variant="heading-strong-l"
+                          onBackground="neutral-strong"
+                        >
+                          {service.title}
+                        </Heading>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {service.description}
+                        </Text>
+                      </Column>
+                    </Card>
+                  ))}
+                </Grid>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
           {about.work.display && (
-            <>
+            <RevealFx delay={0.4}>
+              <Column>
               <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
                 {about.work.title}
               </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
-                {about.work.experiences.map((experience, index) => (
-                  <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
-                    <Flex fillWidth horizontal="space-between" vertical="end" marginBottom="4">
-                      <Text id={experience.company} variant="heading-strong-l">
-                        {experience.company}
+                {about.work.subline && (
+                  <Text variant="body-default-l" onBackground="brand-weak" marginBottom="m">
+                    {about.work.subline}
                       </Text>
-                      <Text variant="heading-default-xs" onBackground="neutral-weak">
-                        {experience.timeframe}
-                      </Text>
-                    </Flex>
-                    <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
-                      {experience.role}
+                )}
+                <Column gap="24" marginBottom="40">
+                  {about.work.description.map((paragraph, index) => (
+                    <Text key={index} variant="body-default-m">
+                      {paragraph}
                     </Text>
-                    <Column as="ul" gap="16">
-                      {experience.achievements.map((achievement: JSX.Element, index: number) => (
-                        <Text
-                          as="li"
-                          variant="body-default-m"
-                          key={`${experience.company}-${index}`}
-                        >
-                          {achievement}
-                        </Text>
-                      ))}
-                    </Column>
-                    {experience.images.length > 0 && (
-                      <Flex fillWidth paddingTop="m" paddingLeft="40" wrap>
-                        {experience.images.map((image, index) => (
-                          <Flex
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            //@ts-ignore
-                            minWidth={image.width}
-                            //@ts-ignore
-                            height={image.height}
-                          >
-                            <SmartImage
-                              enlarge
-                              radius="m"
-                              //@ts-ignore
-                              sizes={image.width.toString()}
-                              //@ts-ignore
-                              alt={image.alt}
-                              //@ts-ignore
-                              src={image.src}
-                            />
-                          </Flex>
-                        ))}
-                      </Flex>
-                    )}
-                  </Column>
-                ))}
+                  ))}
+                </Column>
               </Column>
-            </>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {/* Mission Section */}
+          {about.mission.display && (
+            <RevealFx delay={0.6}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading as="h2" id={about.mission.title} variant="display-strong-s">
+                  {about.mission.title}
+                </Heading>
+                <Column gap="24">
+                  {about.mission.parts.map((part, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction={index % 2 === 0 ? "row" : "row-reverse"}
+                      radius="l"
+                      padding="0"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                    >
+                      <Flex flex={1} style={{ minHeight: "200px" }}>
+                        <SmartImage
+                          src={part.image}
+                          alt={part.title}
+                          fill
+                          sizes="50vw"
+                          style={{ objectFit: "cover" }}
+                        />
+                      </Flex>
+                      <Column 
+                        flex={1}
+                        padding="32" 
+                        gap="16"
+                        vertical="center"
+                      >
+                        <Heading
+                          as="h3"
+                          variant="heading-strong-l"
+                          onBackground="neutral-strong"
+                        >
+                          {part.title}
+                        </Heading>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {part.description}
+                        </Text>
+                      </Column>
+                    </Card>
+                  ))}
+                </Column>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {/* Manifesto Section */}
+          {about.manifesto.display && (
+            <RevealFx delay={0.8}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading
+                  as="h2"
+                  id={about.manifesto.title}
+                  variant="display-strong-s"
+                  marginBottom="m"
+                >
+                  {about.manifesto.title}
+                </Heading>
+                <Column gap="m" marginBottom="m">
+                  {about.manifesto.description.map((paragraph, index) => (
+                    <Text key={index}>{paragraph}</Text>
+                  ))}
+                </Column>
+                <Grid columns="2" mobileColumns="1" gap="24">
+                  {about.manifesto.values.map((value, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction="column"
+                      radius="l"
+                      padding="0"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                    >
+                      <SmartImage
+                        src={value.image}
+                        aspectRatio="16/9"
+                        sizes="600px"
+                        radius="l-4"
+                      />
+                      <Column 
+                        fillWidth 
+                        padding="24" 
+                        gap="12"
+                      >
+                        <Heading
+                          as="h3"
+                          variant="heading-strong-l"
+                          onBackground="neutral-strong"
+                        >
+                          {value.title}
+                        </Heading>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {value.subline}
+                        </Text>
+                      </Column>
+                    </Card>
+                  ))}
+                </Grid>
+                <Text
+                  variant="label-default-s"
+                  align="center"
+                  onBackground="neutral-weak"
+                  marginTop="m"
+                  style={{ textTransform: "uppercase" }}
+                >
+                  {about.manifesto.conclusion}
+                </Text>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {/* Principles Section */}
+          {about.principles.display && (
+            <RevealFx delay={1.0}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading
+                  as="h2"
+                  id={about.principles.title}
+                  variant="display-strong-s"
+                  marginBottom="m"
+                >
+                  {about.principles.title}
+                </Heading>
+                <AccordionGroup
+                  items={about.principles.points.map((principle: string, index: number) => ({
+                    title: `Principle #${index + 1}`,
+                    content: <Text>{principle}</Text>,
+                  }))}
+                />
+              </Column>
+            </RevealFx>
           )}
 
           {about.studies.display && (

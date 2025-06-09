@@ -108,7 +108,7 @@ const mailchimp = {
     },
     gradient: {
       display: true,
-      opacity: 80,
+      opacity: 40,
       x: 50,
       y: 0,
       width: 50,
@@ -119,7 +119,7 @@ const mailchimp = {
     },
     dots: {
       display: true,
-      opacity: 25,
+      opacity: 15,
       size: "2",
       color: "accent-background-strong",
     },

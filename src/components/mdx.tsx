@@ -1,10 +1,10 @@
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import React, { ReactNode } from "react";
 import dynamic from "next/dynamic";
+import remarkGfm from "remark-gfm";
 
 import { 
   Heading,
-  HeadingLink,
   SmartImage,
   SmartLink,
   Text,
@@ -78,14 +78,14 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
   const CustomHeading = ({ children, ...props }: TextProps<typeof as>) => {
     const slug = slugify(children as string);
     return (
-      <HeadingLink
+      <Heading
         style={{ marginTop: "var(--static-space-24)", marginBottom: "var(--static-space-12)" }}
         as={as}
         id={slug}
-        {...props}
+        {...props as any}
       >
         {children}
-      </HeadingLink>
+      </Heading>
     );
   };
 
@@ -125,7 +125,7 @@ function createCodeBlock(props: any) {
       <CodeBlock
         marginTop="8"
         marginBottom="16"
-        codeInstances={[
+        codes={[
           {
             code: children,
             language,
@@ -177,6 +177,14 @@ type CustomMDXProps = MDXRemoteProps & {
 
 export function CustomMDX(props: CustomMDXProps) {
   return (
-    <MDXRemote {...props} components={{ ...components, ...(props.components || {}) }} />
+    <MDXRemote
+      {...props}
+      components={{ ...components, ...(props.components || {}) }}
+      options={{
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+        },
+      }}
+    />
   );
 }

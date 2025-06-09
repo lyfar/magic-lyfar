@@ -268,7 +268,7 @@ export const LogosSection: React.FC = () => {
           >
             <Logo width={40} height={20} />
             <Text variant="label-default-s" onBackground="brand-strong">
-              Egor Lyfar
+              Lyfar Studio
             </Text>
           </Flex>
           

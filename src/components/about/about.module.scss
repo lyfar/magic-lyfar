@@ -14,14 +14,6 @@
 
 @media (--s) {
     .avatar {
-        top: auto;
-    }
-
-    .textAlign {
-        text-align: center;
-    }
-
-    .blockAlign {
-        align-self: center;
+        position: static;
     }
 }

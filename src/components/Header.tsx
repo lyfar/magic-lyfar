@@ -49,7 +49,7 @@ export const Header = () => {
   return (
     <>
       <Fade hide="s" fillWidth position="fixed" height="80" zIndex={9} />
-      <Fade show="s" fillWidth position="fixed" bottom="0" to="top" height="80" zIndex={9} />
+      <Fade show="s" fillWidth position="fixed" bottom="0" to="top" height="160" zIndex={9} />
       <Flex
         fitHeight
         position="unset"
@@ -57,7 +57,8 @@ export const Header = () => {
         as="header"
         zIndex={9}
         fillWidth
-        padding="8"
+        paddingX="8"
+        paddingY="16"
         horizontal="center"
         data-border="rounded"
       >

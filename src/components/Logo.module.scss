@@ -1,0 +1,14 @@
+.logoSvg {
+  // Target the path with class 'd' within the SVG
+  .d {
+    fill: #020202; // Default: Black for light theme
+  }
+}
+
+// Override for dark theme
+// Assuming your dark theme is applied to the html element like html[data-theme="dark"]
+html[data-theme="dark"] .logoSvg {
+  .d {
+    fill: #ffffff; // White for dark theme
+  }
+} 

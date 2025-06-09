@@ -1,50 +1,38 @@
-.container {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+.marqueeWrapper {
+  animation: marquee 20s linear infinite;
+  will-change: transform;
 }
 
-.scroller {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    
-    &::-webkit-scrollbar {
-        display: none;
-    }
+.marqueeContent {
+  display: flex;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 100%;
+  
+  &:nth-child(2) {
+    position: absolute;
+    left: 100%; 
+  }
 }
 
-.horizontal {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    width: 100%;
-    
-    .content {
-        display: flex;
-        flex-direction: row;
-        width: fit-content;
-        gap: inherit;
-    }
+/* Speed variations */
+.slow {
+  animation-duration: 40s;
 }
 
-.vertical {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 100%;
-    
-    .content {
-        display: flex;
-        flex-direction: column;
-        height: fit-content;
-    }
-    
-    + .container {
-        mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
-    }
+.medium {
+  animation-duration: 20s;
 }
 
-.content {
-    gap: inherit;
-} 
+.fast {
+  animation-duration: 10s;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}

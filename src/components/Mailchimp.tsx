@@ -64,9 +64,14 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
       align="center"
       background="surface"
       border="neutral-alpha-weak"
+      position="relative"
     >
       <Background
             position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            bottom="0"
             mask={{
               x: mailchimp.effects.mask.x,
               y: mailchimp.effects.mask.y,
@@ -106,12 +111,13 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
               color: mailchimp.effects.lines.color,
             }}
           />
-      <Heading style={{ position: "relative" }} marginBottom="s" variant="display-strong-xs">
+      <Heading style={{ position: "relative", zIndex: 1 }} marginBottom="s" variant="display-strong-xs">
         {newsletter.title}
       </Heading>
       <Text
         style={{
           position: "relative",
+          zIndex: 1,
           maxWidth: "var(--responsive-width-xs)",
         }}
         wrap="balance"
@@ -125,6 +131,8 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
           width: "100%",
           display: "flex",
           justifyContent: "center",
+          position: "relative",
+          zIndex: 1,
         }}
         action={mailchimp.action}
         method="post"
@@ -134,11 +142,11 @@ export const Mailchimp = ({ newsletter }: { newsletter: NewsletterProps }) => {
         <Flex id="mc_embed_signup_scroll" fillWidth maxWidth={24} mobileDirection="column" gap="8">
           <Input
             formNoValidate
-            labelAsPlaceholder
             id="mce-EMAIL"
             name="EMAIL"
             type="email"
             label="Email"
+            placeholder="Email"
             required
             onChange={(e) => {
               if (error) {

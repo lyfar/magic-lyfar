@@ -19,7 +19,7 @@ interface DialogProps extends Omit<React.ComponentProps<typeof Flex>, "title"> {
   onClose: () => void;
   title: ReactNode | string;
   description?: ReactNode;
-  children: ReactNode;
+  children?: ReactNode;
   footer?: ReactNode;
   base?: boolean;
   stack?: boolean;
@@ -189,17 +189,24 @@ const Dialog: React.FC<DialogProps> = forwardRef<HTMLDivElement, DialogProps>(
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
+        // Only handle left clicks (button 0), ignore right clicks
+        if (event.button !== 0) return;
+
+        event.stopPropagation();
+
         if (!dialogRef.current?.contains(event.target as Node)) {
           if (stack || !base) {
+            // Prevent default to avoid triggering any links behind the dialog
+            event.preventDefault();
             onClose();
           }
         }
       };
 
       if (isVisible) {
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside, { capture: true });
         return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
+          document.removeEventListener("mousedown", handleClickOutside, { capture: true });
         };
       }
     }, [isVisible, onClose, stack, base]);
@@ -235,6 +242,7 @@ const Dialog: React.FC<DialogProps> = forwardRef<HTMLDivElement, DialogProps>(
           }}
         >
           <Flex
+            position="unset"
             className={classNames(styles.dialog, {
               [styles.open]: isAnimating,
             })}

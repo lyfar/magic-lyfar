@@ -1,4 +1,5 @@
 import { Flex } from "@/once-ui/components";
+import styles from './Logo.module.scss';
 
 interface LogoProps {
   width?: number;
@@ -22,10 +23,11 @@ export const Logo = ({ width = 43, height = 21, className }: LogoProps) => {
         viewBox="0 0 43.17 21.3"
         width="100%"
         height="100%"
+        className={styles.logoSvg}
       >
         <defs>
           <style>
-            {`.d{fill:#020202;}.e{fill:#ef4726;}.f{fill:#6652a3;}.g{fill:#08753c;}`}
+            {`.e{fill:#ef4726;}.f{fill:#6652a3;}.g{fill:#08753c;}`}
           </style>
         </defs>
         <g id="a"/>

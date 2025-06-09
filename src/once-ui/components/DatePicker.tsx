@@ -206,11 +206,18 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         days.push(
           <Flex
             paddingY="2"
-            width="40"
-            height="40"
+            width={size === "s" ? "32" : size === "m" ? "40" : "48"}
+            height={size === "s" ? "32" : size === "m" ? "40" : "48"}
             key={`prev-${currentYear}-${currentMonth}-${i}`}
           >
-            <Button fillWidth weight="default" variant="tertiary" size="m" type="button" disabled>
+            <Button
+              fillWidth
+              weight="default"
+              variant="tertiary"
+              size={size}
+              type="button"
+              disabled
+            >
               {prevMonthDay}
             </Button>
           </Flex>,
@@ -238,8 +245,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         days.push(
           <Flex paddingY="2" key={`day-${currentYear}-${currentMonth}-${day}`}>
             <Flex
-              width="40"
-              height="40"
+              width={size === "s" ? "32" : size === "m" ? "40" : "48"}
+              height={size === "s" ? "32" : size === "m" ? "40" : "48"}
               background={isInRange(currentDate) ? "neutral-alpha-weak" : undefined}
               borderTop={isInRange(currentDate) ? "neutral-alpha-weak" : "transparent"}
               borderBottom={isInRange(currentDate) ? "neutral-alpha-weak" : "transparent"}
@@ -250,8 +257,16 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 fillWidth
                 weight={isSelected ? "strong" : "default"}
                 variant={isSelected ? "primary" : "tertiary"}
-                size="m"
-                onClick={() => !isDisabled && handleDateSelect(currentDate)}
+                size={size}
+                onClick={(e: React.MouseEvent) => {
+                  if (!isDisabled) {
+                    if (timePicker) {
+                      // Stop propagation to prevent DropdownWrapper from closing
+                      e.stopPropagation();
+                    }
+                    handleDateSelect(currentDate);
+                  }
+                }}
                 onMouseEnter={() => onHover?.(currentDate)}
                 onMouseLeave={() => onHover?.(null)}
                 disabled={isDisabled}
@@ -269,11 +284,18 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         days.push(
           <Flex
             marginTop="2"
-            width="40"
-            height="40"
+            width={size === "s" ? "32" : size === "m" ? "40" : "48"}
+            height={size === "s" ? "32" : size === "m" ? "40" : "48"}
             key={`next-${currentYear}-${currentMonth}-${i}`}
           >
-            <Button fillWidth weight="default" variant="tertiary" size="m" type="button" disabled>
+            <Button
+              fillWidth
+              weight="default"
+              variant="tertiary"
+              size={size}
+              type="button"
+              disabled
+            >
               {i}
             </Button>
           </Flex>,
@@ -314,7 +336,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               {previousMonth && (
                 <IconButton
                   variant="tertiary"
-                  size={size === "l" ? "l" : "m"}
+                  size={size}
                   icon="chevronLeft"
                   onClick={(event: any) => {
                     event.preventDefault();
@@ -336,7 +358,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               {nextMonth && (
                 <IconButton
                   variant="tertiary"
-                  size={size === "l" ? "l" : "m"}
+                  size={size}
                   icon="chevronRight"
                   onClick={(event: any) => {
                     event.preventDefault();
@@ -389,8 +411,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <Flex fillWidth gap="16" vertical="center" data-scaling="110">
                 <NumberInput
                   id="hours"
-                  label="Hours"
-                  labelAsPlaceholder
+                  placeholder="Hours"
                   min={1}
                   max={12}
                   value={selectedTime?.hours ? convert24to12(selectedTime.hours) : 12}
@@ -404,8 +425,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 :
                 <NumberInput
                   id="minutes"
-                  label="Minutes"
-                  labelAsPlaceholder
+                  placeholder="Minutes"
                   min={0}
                   max={59}
                   padStart={2}
