@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Fade, Flex, Line, ToggleButton } from "@/once-ui/components";
 import styles from "@/components/Header.module.scss";
+import { Logo } from "@/components/Logo";
 
 import { routes, display } from "@/app/resources";
 import { person, about, blog, work, gallery } from "@/app/resources/content";
@@ -63,7 +64,11 @@ export const Header = () => {
         data-border="rounded"
       >
         <Flex paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
-          {display.location && <Flex hide="s">{person.location}</Flex>}
+          {display.location && (
+            <Flex hide="s" vertical="center">
+              <Logo width={48} height={24} />
+            </Flex>
+          )}
         </Flex>
         <Flex fillWidth horizontal="center">
           <Flex
@@ -75,11 +80,24 @@ export const Header = () => {
             horizontal="center"
             zIndex={1}
           >
-            <Flex gap="4" vertical="center" textVariant="body-default-s">
+            <Flex gap="4" horizontal="center" vertical="center" textVariant="body-default-s">
               {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
+                <>
+                  <ToggleButton
+                    className="s-flex-hide"
+                    prefixIcon="home"
+                    href="/"
+                    label="Home"
+                    selected={pathname === "/"}
+                  />
+                  <ToggleButton
+                    className="s-flex-show"
+                    prefixIcon="home"
+                    href="/"
+                    selected={pathname === "/"}
+                  />
+                </>
               )}
-              <Line background="neutral-alpha-medium" vert maxHeight="24" />
               {routes["/about"] && (
                 <>
                   <ToggleButton
@@ -87,13 +105,13 @@ export const Header = () => {
                     prefixIcon="person"
                     href="/about"
                     label={about.label}
-                    selected={pathname === "/about"}
+                    selected={pathname.startsWith("/about")}
                   />
                   <ToggleButton
                     className="s-flex-show"
                     prefixIcon="person"
                     href="/about"
-                    selected={pathname === "/about"}
+                    selected={pathname.startsWith("/about")}
                   />
                 </>
               )}

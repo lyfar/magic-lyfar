@@ -64,9 +64,9 @@ const clientLogos: ClientLogoProps[] = [
     alt: "English Logo",
   },
   {
-    name: "Lagoon",
-    logoPath: "/images/companies-logos/lagoon-logo-white.png",
-    alt: "Lagoon Logo",
+    name: "Boiler Room",
+    logoPath: "/images/companies-logos/boilerroom.png",
+    alt: "Boiler Room Logo",
   },
   {
     name: "MFVD",

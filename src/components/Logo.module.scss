@@ -1,14 +1,19 @@
 .logoSvg {
-  // Target the path with class 'd' within the SVG
-  .d {
+  // Target the path with class 'd' (triangle) within the SVG
+  :global(.d) {
     fill: #020202; // Default: Black for light theme
+    transition: fill 0.2s ease; // Smooth transition when theme changes
   }
 }
 
-// Override for dark theme
-// Assuming your dark theme is applied to the html element like html[data-theme="dark"]
-html[data-theme="dark"] .logoSvg {
-  .d {
-    fill: #ffffff; // White for dark theme
+// Override for dark theme using global() to escape CSS Modules
+:global(html[data-theme="dark"]) .logoSvg :global(.d) {
+  fill: #ffffff !important; // White for dark theme
+}
+
+// Fallback for dark mode preference
+@media (prefers-color-scheme: dark) {
+  :global(html:not([data-theme="light"])) .logoSvg :global(.d) {
+    fill: #ffffff !important;
   }
 } 

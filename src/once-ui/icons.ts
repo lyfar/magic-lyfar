@@ -38,6 +38,10 @@ import {
   HiOutlineEnvelope,
   HiOutlineArrowRight,
   HiOutlineArrowUpRight as HiOutlineArrowUpRightFromSquare,
+  HiPlay,
+  HiPause,
+  HiSpeakerWave,
+  HiSpeakerXMark,
 } from "react-icons/hi2";
 
 import {
@@ -89,6 +93,10 @@ export const iconLibrary: Record<string, IconType> = {
   github: FaGithub,
   linkedin: FaLinkedin,
   x: FaXTwitter,
+  play: HiPlay,
+  pause: HiPause,
+  volumeOn: HiSpeakerWave,
+  volumeOff: HiSpeakerXMark,
 };
 
 export type IconLibrary = typeof iconLibrary;

@@ -2,6 +2,7 @@ import React from "react";
 
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row } from "@/once-ui/components";
 import { Projects } from "@/components/work/Projects";
+import { Logo } from "@/components/Logo";
 
 import { baseURL, routes } from "@/app/resources";
 import { home, about, person, newsletter } from "@/app/resources/content";
@@ -35,6 +36,11 @@ export default function Home() {
         }}
       />
       <Column fillWidth paddingY="24" gap="m">
+        {/* Mobile Logo */}
+        <RevealFx show="s" fillWidth horizontal="center" paddingBottom="24">
+          <Logo width={80} height={40} />
+        </RevealFx>
+        
         <Column maxWidth="s">
           {home.featured && (
           <RevealFx fillWidth horizontal="start" paddingTop="16" paddingBottom="32" paddingLeft="12">

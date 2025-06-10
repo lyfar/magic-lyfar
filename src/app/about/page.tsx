@@ -120,7 +120,7 @@ export default function About() {
             <Logo width={120} height={60} />
             <Flex gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
-              {person.location}
+              <Logo width={60} height={30} />
             </Flex>
             {person.languages.length > 0 && (
               <Flex wrap gap="8">

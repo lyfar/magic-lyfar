@@ -3,13 +3,219 @@
   width: 100%;
   height: 0;
   padding-bottom: 56.25%; /* 16:9 aspect ratio */
-}
+  border-radius: 12px;
+  overflow: hidden;
+  
+  // Ensure clean clipping during animations
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: transparent;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 5;
+  }
+  
+  .video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-.video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  .clickOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  .playIconOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover .playIconButton {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .playIconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    
+    // Ensure perfect centering of the icon
+    svg {
+      margin-left: 2px; // Slight offset to optically center the play triangle
+    }
+    
+    // Subtle glow effect
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: xor;
+      -webkit-mask-composite: xor;
+      pointer-events: none;
+    }
+  }
+
+  .controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(8px);
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    
+    // Ensure controls never extend beyond container
+    max-height: 100%;
+    
+    // Initial hidden state - slide down completely out of view
+    transform: translateY(calc(100% + 12px));
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    // Apple TV-style easing
+    &.controlsVisible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .controlButton {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .progressBar {
+    position: relative;
+    flex: 1;
+    height: 4px;
+    background: var(--neutral-alpha-weak);
+    border-radius: 2px;
+    cursor: pointer;
+    
+    &:hover {
+      background: var(--neutral-alpha-medium);
+    }
+  }
+
+  .volumeSlider {
+    width: 60px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      &:hover {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+      }
+    }
+    
+    &::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      &:hover {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  .speedButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: var(--font-family);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
 } 
