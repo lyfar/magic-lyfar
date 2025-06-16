@@ -149,7 +149,7 @@ export const Header = () => {
                   />
                 </>
               )}
-              {routes["/gallery"] && (
+              {routes.hasOwnProperty("/gallery") && routes["/gallery"] && (
                 <>
                   <ToggleButton
                     className="s-flex-hide"
