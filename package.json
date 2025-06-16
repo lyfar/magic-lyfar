@@ -6,7 +6,7 @@
     "dev": "next dev",
     "prebuild": "if [ -d .next/cache ]; then rm -rf .next/cache; fi",
     "build": "next build",
-    "build-vercel": "NODE_OPTIONS='--no-warnings' NEXT_TELEMETRY_DISABLED=1 next build && rm -rf .next/cache",
+    "build-vercel": "./build.sh",
     "start": "next start",
     "lint": "next lint"
   },
