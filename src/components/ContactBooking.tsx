@@ -113,26 +113,26 @@ export const ContactBooking = ({ contact }: { contact: ContactBookingProps }) =>
         </Button>
         
         <Flex gap="12" fillWidth horizontal="center">
-          <Button
-            href={`mailto:${contact.email}`}
-            size="m"
-            variant="secondary"
-            prefixIcon="email"
+            <Button
+              href={`mailto:${contact.email}`}
+              size="m"
+              variant="secondary"
+              prefixIcon="email"
             style={{ flex: 1 }}
-          >
-            {contact.email}
-          </Button>
+            >
+              {contact.email}
+            </Button>
           
           {contact.phone && (
-            <Button
-              href={`tel:+852${contact.phone}`}
-              size="m"
-              variant="tertiary"
-              prefixIcon="phone"
+              <Button
+                href={`tel:+852${contact.phone}`}
+                size="m"
+                variant="tertiary"
+                prefixIcon="phone"
               style={{ flex: 1 }}
-            >
-              +852 {contact.phone}
-            </Button>
+              >
+                +852 {contact.phone}
+              </Button>
           )}
         </Flex>
       </Flex>
