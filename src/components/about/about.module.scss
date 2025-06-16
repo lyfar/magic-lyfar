@@ -15,5 +15,6 @@
 @media (--s) {
     .avatar {
         position: static;
+        margin-bottom: var(--static-space-32);
     }
 }
