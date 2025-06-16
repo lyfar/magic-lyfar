@@ -114,7 +114,6 @@ export default function About() {
         {about.avatar.display && about.team.display && (
           <Column
             className={styles.avatar}
-            position="sticky"
             minWidth="160"
             paddingX="l"
             paddingBottom="xl"
