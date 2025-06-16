@@ -1,4 +1,11 @@
 .git
 .next/cache
 .next/cache/webpack
-node_modules/.cache 
+node_modules/.cache
+README.md
+.github
+.vscode
+*.log
+.env*
+!.env.example
+.DS_Store 
