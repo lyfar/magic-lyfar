@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "if [ -d .next/cache ]; then rm -rf .next/cache; fi",
+    "prebuild": "if [ -d .next/cache/webpack ]; then rm -rf .next/cache/webpack; fi",
     "build": "next build",
     "build-vercel": "./build.sh",
     "start": "next start",

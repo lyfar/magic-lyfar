@@ -1,5 +1,4 @@
 .git
-.next/cache
 .next/cache/webpack
 node_modules/.cache
 README.md
