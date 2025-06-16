@@ -2,11 +2,12 @@ import React from "react";
 
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row } from "@/once-ui/components";
 import { Projects } from "@/components/work/Projects";
+import { FeaturedWorks } from "@/components/work/FeaturedWorks";
 import { Logo } from "@/components/Logo";
 
 import { baseURL, routes } from "@/app/resources";
-import { home, about, person, newsletter } from "@/app/resources/content";
-import { Mailchimp, LogosSection, TestimonialsSection } from "@/components";
+import { home, about, person, contact } from "@/app/resources/content";
+import { ContactBooking, LogosSection, TestimonialsSection } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { Meta, Schema } from "@/once-ui/modules";
 
@@ -92,20 +93,24 @@ export default function Home() {
       <RevealFx translateY="16" delay={1.0}>
         <TestimonialsSection />
       </RevealFx>
+      <RevealFx translateY="16" delay={1.2}>
+        <FeaturedWorks />
+      </RevealFx>
       {routes["/blog"] && (
-        <Flex fillWidth gap="24" mobileDirection="column">
-          <Flex flex={1} paddingLeft="l" paddingTop="24">
-            <Heading as="h2" variant="display-strong-xs" wrap="balance">
-              Latest from the blog
-            </Heading>
+        <RevealFx translateY="16" delay={1.4}>
+          <Flex fillWidth gap="24" mobileDirection="column">
+            <Flex flex={1} paddingLeft="l" paddingTop="24">
+              <Heading as="h2" variant="display-strong-xs" wrap="balance">
+                Latest from the blog
+              </Heading>
+            </Flex>
+            <Flex flex={3} paddingX="20">
+              <Posts range={[1, 2]} columns="2" />
+            </Flex>
           </Flex>
-          <Flex flex={3} paddingX="20">
-            <Posts range={[1, 2]} columns="2" />
-          </Flex>
-        </Flex>
+        </RevealFx>
       )}
-      <Projects range={[2]} />
-      {newsletter.display && <Mailchimp newsletter={newsletter} />}
+      {contact.display && <ContactBooking contact={contact} />}
     </Column>
   );
 }

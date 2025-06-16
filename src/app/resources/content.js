@@ -13,34 +13,31 @@ const person = {
   languages: ["English", "Russian"], // optional: Leave the array empty if you don't want to display languages
 };
 
-const newsletter = {
+const contact = {
   display: true,
-  title: <>Subscribe to {person.firstName}&apos;s Newsletter</>,
+  title: <>Let's Work Together</>,
   description: (
     <>
-      I occasionally write about design, technology, and share thoughts on the intersection of
-      creativity and engineering.
+      Ready for your next film, design project, or AI automation? Book a consultation to discuss how we can bring your vision to life.
     </>
   ),
+  bookingUrl: "https://meet.egor.lol/lyfar/15min?layout=mobile",
+  email: "egor@lyfar.com",
+  phone: "5726 0632",
 };
 
 const social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
   {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/egorlyfar",
+    name: "Instagram",
+    icon: "instagram",
+    link: "https://www.instagram.com/egor.lyfar/",
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/in/egorlyfar",
-  },
-  {
-    name: "X",
-    icon: "x",
-    link: "https://x.com/egorlyfar",
+    link: "https://www.linkedin.com/in/lyfar/",
   },
   {
     name: "Email",
@@ -53,21 +50,21 @@ const home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}&apos;s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
+  title: `${person.name}'s Portfolio`,
+  description: `${person.name} - Video Production, Web Development & AI Automation in Hong Kong`,
   headline: <>Creative & Technical Direction</>,
+  subline: (
+    <>
+  We do Video, Design, and Code.
+  <br />
+  Whether it's a film, a product, a pixel-perfect interface, or cutting-edge AI automation — we make it hit.
+    </>
+  ),
   featured: {
     display: true,
     title: <>Recent project: <strong className="ml-4">Portfolio Showcase</strong></>,
     href: "/work",
   },
-  subline: (
-    <>
-  We do Video, Design, and Code.
-  <br />
-  Whether it&apos;s a film, a product, a pixel-perfect interface, or cutting-edge AI automation — we make it hit.
-    </>
-  ),
 };
 
 const about = {
@@ -114,18 +111,18 @@ const about = {
     items: [
       {
         title: "Content",
-        description: "Cinematic videos, social media content, fashion films, product showcases, corporate storytelling, complete post-production, and tailored distribution strategies.",
-        image: "/images/gallery/horizontal-1.jpg"
+        icon: "video",
+        description: "Cinematic videos, social media content, fashion films, product showcases, corporate storytelling, complete post-production, and tailored distribution strategies."
       },
       {
         title: "Development",
-        description: "Websites, web apps, internal tools, intuitive UI/UX design, e-commerce solutions, real-time dashboards, and efficient tech-team integrations.",
-        image: "/images/gallery/horizontal-2.jpg"
+        icon: "code",
+        description: "Websites, web apps, internal tools, intuitive UI/UX design, e-commerce solutions, real-time dashboards, and efficient tech-team integrations."
       },
       {
         title: "AI",
-        description: "Practical automations, advanced LLM integrations, custom self-hosted AI models, and fine-tuning solutions built specifically for your data, tech stack, and business goals.",
-        image: "/images/gallery/horizontal-3.jpg"
+        icon: "cpu",
+        description: "Practical automations, advanced LLM integrations, custom self-hosted AI models, and fine-tuning solutions built specifically for your data, tech stack, and business goals."
       }
     ]
   },
@@ -135,15 +132,13 @@ const about = {
     parts: [
       {
         icon: "sparkle",
-        image: "/images/gallery/horizontal-1.jpg",
         title: "For Our Studio",
         description: "Operate an autonomous creative hub where AI manages administration and logistics, freeing our artists to fully engage in their craft."
       },
       {
         icon: "rocket",
-        image: "/images/gallery/horizontal-2.jpg",
         title: "For Our Partners",
-        description: "Eliminate busywork and embed smart tools into your workflow, empowering you to concentrate on meaningful work that grows your business."
+        description: "We uncover a brand's purpose, shape it into clear stories, build the digital tools to deliver those stories, and add AI that frees teams to focus on creating new value."
       }
     ]
   },
@@ -151,30 +146,38 @@ const about = {
     display: true,
     title: "Manifesto",
     description: [
-      "We&apos;ve aligned our vision to extend beyond our Hong Kong video production company to a worldwide audience, encompassing video directing, business analytics, web development, project management, AI automation, and marketing.",
-      "We are constantly uncovering better ways of producing digital content and providing the best services to our clients by doing it and helping others do it.",
-      "Through this work we have come to value:"
+      "From Hong Kong roots, we've grown into a global crew—directing, analysing, coding, managing, automating and marketing. We constantly refine digital-content workflows and pass those gains to our clients, which leads us to value:"
     ],
     values: [
       {
+        title: "Mindful Discovery",
+        subline: "over rushed assumptions and template thinking",
+        icon: "search"
+      },
+      {
+        title: "Continuous Experimentation",
+        subline: "over big-bang launches and fear of failure",
+        icon: "refresh"
+      },
+      {
+        title: "Right-Sized Solutions",
+        subline: "over bloated suites and tech for its own sake",
+        icon: "checkCircle"
+      },
+      {
         title: "Individuals and Interactions",
         subline: "Over processes and long-read communication",
-        image: "/images/gallery/horizontal-1.jpg",
+        icon: "users"
       },
       {
         title: "Finished Project",
         subline: "Over comprehensive briefs and story boards",
-        image: "/images/gallery/horizontal-2.jpg",
+        icon: "check"
       },
       {
         title: "Customer Collaboration",
         subline: "Over contract negotiation",
-        image: "/images/gallery/horizontal-3.jpg",
-      },
-      {
-        title: "Responding to Change",
-        subline: "Over following a plan",
-        image: "/images/gallery/horizontal-4.jpg",
+        icon: "handshake"
       },
     ],
     conclusion: "That is, while there is value in the items on the bottom, we value the items on top more."
@@ -203,7 +206,7 @@ const about = {
     institutions: [
       {
         name: "Computer Science Degree",
-        description: <>Bachelor&apos;s in Computer Science with focus on web development and software engineering.</>,
+        description: <>Bachelor's in Computer Science with focus on web development and software engineering.</>,
       },
       {
         name: "Continuous Learning",
@@ -238,16 +241,22 @@ const about = {
         title: "Full Stack Development",
         description: <>Proficient in Node.js, TypeScript, databases, and cloud deployment for end-to-end application development.</>,
         // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Full Stack Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
     ],
+  },
+  team: {
+    display: true,
+    title: "Team",
+    members: [
+      {
+        name: "Egor Lyfar",
+        role: person.role,
+        image: person.avatar,
+        description: "Creative director and technical lead, bringing together different partners who produce bespoke content, AI automation, development, and more."
+      },
+      // Add more team members here as needed
+    ]
   },
 };
 
@@ -320,4 +329,4 @@ const gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+export { person, social, contact, home, about, blog, work, gallery };

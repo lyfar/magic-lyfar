@@ -9,11 +9,15 @@ import classNames from "classnames";
 interface VideoPlayerProps extends React.ComponentProps<typeof ReactPlayer> {
   src: string;
   className?: string;
+  poster?: string;
+  preload?: "none" | "metadata" | "auto";
 }
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   src,
   className,
+  poster,
+  preload = "metadata",
   ...props
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -104,6 +108,14 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         onProgress={handleProgress}
         onDuration={handleDuration}
         style={{ position: "absolute", top: 0, left: 0 }}
+        config={{
+          file: {
+            attributes: {
+              poster: poster,
+              preload: preload,
+            }
+          }
+        }}
         {...props}
       />
       

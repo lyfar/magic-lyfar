@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Button, Column, Flex, Heading, SmartImage, Text, VideoPlayer } from "@/once-ui/components";
+import { AvatarGroup, Button, Column, Flex, Heading, SmartImage, Tag, Text, VideoPlayer } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import { about, person, work } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
@@ -98,6 +98,13 @@ export default async function Project({
             {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
           </Text>
         </Flex>
+        {post.metadata.tags && post.metadata.tags.length > 0 && (
+          <Flex gap="8" wrap marginBottom="24">
+            {post.metadata.tags.map((tag, index) => (
+              <Tag key={index} variant="neutral" size="s" label={tag} />
+            ))}
+          </Flex>
+        )}
         <CustomMDX source={post.content} />
       </Column>
       <ScrollToHash />

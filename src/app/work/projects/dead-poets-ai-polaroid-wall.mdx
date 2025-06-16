@@ -1,0 +1,122 @@
+---
+title: "Dead Poets AI Polaroid Wall"
+publishedAt: "2024-02-01"
+summary: "Created an innovative AI-powered art installation for Dead Poet's cocktail bar that reimagines legendary artists in the afterlife. Built a Telegram bot using Replicate API to generate AI polaroid-style images of famous actors and celebrities. Developed an immersive website featuring 3D scroll-triggered animations to showcase the physical installation, creating a unique blend of digital interaction and physical art in the bar's space."
+tags: ["ai", "dev"]
+images:
+  - "https://portfolio.lyfar.com/toilet.png"
+link: "https://toilet.egor.lol"
+team:
+  - name: "Lyfar Studio"
+    role: "Creative Direction & Development"
+    avatar: "/images/me.png"
+    linkedIn: "https://www.linkedin.com/in/egorlyfar"
+---
+
+## Project Overview
+
+From the beginning, we've been supporting Dead Poets with creative direction and development for their most ambitious project yet - an AI-powered art installation that reimagines legendary artists in the afterlife. Through AI-generated polaroids, we created a glimpse into the afterlife where Grace Kelly, Bruce Lee, Chadwick Boseman, and other iconic figures enjoy heavenly drinks and, yes, even use the bathroom.
+
+### Creative Vision
+
+The Dead Poets AI Polaroid Wall represents a unique intersection of artificial intelligence, physical art installation, and interactive digital experience. The concept explores the whimsical idea of deceased celebrities and artists continuing their existence in an afterlife setting, complete with celestial cocktails and mundane human activities.
+
+**Featured Legends:**
+- Grace Kelly
+- Bruce Lee  
+- Chadwick Boseman
+- Paul Walker
+- Matthew Perry
+- Heath Ledger
+- Elizabeth Taylor
+- Helen McCrory
+- Robin Williams
+- Marilyn Monroe
+- Marlon Brando
+- Audrey Hepburn
+
+### Technical Innovation
+
+**AI Image Generation System**
+Built a comprehensive pipeline using Replicate API and Stable Diffusion to generate high-quality, polaroid-style images of deceased celebrities in afterlife scenarios.
+
+```typescript
+// AI Image Generation Pipeline
+const generatePolaroid = async (celebrity: string, scenario: string) => {
+  const prompt = `polaroid photo of ${celebrity} in heavenly bar setting, ${scenario}, vintage aesthetic, soft lighting`
+  
+  return await replicate.run("stability-ai/stable-diffusion", {
+    input: {
+      prompt,
+      image_dimensions: "512x512",
+      num_outputs: 1,
+      guidance_scale: 7.5,
+      scheduler: "K_EULER"
+    }
+  })
+}
+```
+
+**Telegram Bot Integration**
+Developed a custom Telegram bot that allows real-time generation and curation of new polaroid images, enabling the art installation to evolve continuously.
+
+**Immersive Web Experience**
+Created a 3D interactive website that serves as both a digital gallery and a virtual representation of the physical installation at Dead Poet's bar.
+
+### Technical Architecture
+
+| Component | Technology | Purpose |
+| :--- | :--- | :--- |
+| **AI Generation** | Replicate API + Stable Diffusion | High-quality polaroid-style image creation |
+| **Bot Interface** | Telegram Bot API | Real-time generation and curation tools |
+| **Frontend** | Next.js + TypeScript | Server-side rendered web application |
+| **3D Graphics** | Three.js | Immersive 3D gallery experience |
+| **Animations** | GSAP + Scroll Triggers | Smooth, scroll-triggered 3D interactions |
+| **Styling** | TailwindCSS | Responsive, utility-first design system |
+
+### Key Features
+
+**3D Scroll-Triggered Gallery**
+The website features a Three.js-powered 3D environment where users can scroll through the polaroid collection with smooth, physics-based animations that mirror the physical installation.
+
+**Dynamic Content Generation**
+The Telegram bot allows for continuous expansion of the collection, with new AI-generated polaroids being added to both the physical wall and digital gallery.
+
+**Immersive Storytelling**
+Each polaroid tells a story of these legendary figures enjoying their afterlife, creating an emotional connection between the viewer and the deceased artists.
+
+**Physical-Digital Bridge**
+The website serves as a companion to the physical installation at Dead Poet's bar, allowing visitors to explore the full collection and understand the creative process.
+
+### Creative Process
+
+**Conceptual Development**
+Working closely with Dead Poets, we developed the creative framework for how each celebrity would be portrayed in their afterlife scenarios, balancing humor with respect for their legacies.
+
+**AI Prompt Engineering**
+Crafted sophisticated prompts to achieve consistent polaroid aesthetics while capturing the unique essence of each celebrity in various heavenly scenarios.
+
+**Installation Design**
+Collaborated on the physical layout and presentation of the polaroids within Dead Poet's space, ensuring the digital and physical experiences complement each other.
+
+### Technical Challenges & Solutions
+
+**Consistent Visual Style**
+- **Challenge**: Maintaining polaroid aesthetic across different celebrity generations
+- **Solution**: Custom prompt templates and post-processing filters
+
+**Performance Optimization**
+- **Challenge**: Loading multiple 3D elements without performance degradation  
+- **Solution**: Lazy loading, texture compression, and level-of-detail systems
+
+**Content Moderation**
+- **Challenge**: Ensuring appropriate content generation
+- **Solution**: Multi-stage filtering and human curation via Telegram bot
+
+### Results & Impact
+
+The AI Polaroid Wall has become a signature attraction at Dead Poet's, sparking conversations about AI, art, and the afterlife. The project demonstrates how artificial intelligence can be used to create meaningful, emotionally resonant art installations that bridge the digital and physical worlds.
+
+**Experience the installation**: [toilet.egor.lol](https://toilet.egor.lol)
+
+*"Through AI-generated polaroids, we reimagined Dead Poet's cocktail menu as a glimpse into the afterlife - where legendary artists enjoy heavenly drinks and, yes, even use the bathroom."* 

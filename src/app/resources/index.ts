@@ -12,7 +12,7 @@ export {
 export {
   person,
   social,
-  newsletter,
+  contact,
   home,
   about,
   blog,

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from "react";
-import { Column, Flex, Text, Row, SmartImage } from "@/once-ui/components";
+import { Column, Flex, Text, SmartImage, IconButton, Fade } from "@/once-ui/components";
 import { Logo } from "@/components/Logo";
 import styles from './LogosSection.module.scss';
 
@@ -15,8 +15,8 @@ const ClientLogo: React.FC<ClientLogoProps> = ({ name, logoPath, alt }) => {
   return (
     <Flex
       className={styles.clientLogo}
-      paddingX="20"
-      paddingY="16"
+      paddingX="16"
+      paddingY="12"
       radius="m"
       background="surface"
       border="neutral-medium"
@@ -24,7 +24,7 @@ const ClientLogo: React.FC<ClientLogoProps> = ({ name, logoPath, alt }) => {
       horizontal="center"
       style={{ 
         flexShrink: 0, 
-        minWidth: "160px",
+        width: "160px",
         height: "80px",
       }}
     >
@@ -116,122 +116,85 @@ const clientLogos: ClientLogoProps[] = [
 ];
 
 export const LogosSection: React.FC = () => {
-  const scrollingRowRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [currentTranslate, setCurrentTranslate] = useState(0);
-  const [startTranslate, setStartTranslate] = useState(0);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [showPrevButton, setShowPrevButton] = useState(false);
+  const [showNextButton, setShowNextButton] = useState(false);
+
+  // Duplicate logos for seamless infinite scroll
+  const duplicatedLogos = [...clientLogos, ...clientLogos];
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!isAutoScrolling) return;
+
+    const interval = setInterval(() => {
+      const scroller = scrollerRef.current;
+      if (scroller) {
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        const currentScroll = scroller.scrollLeft;
+        
+        // If we've reached the end, reset to beginning smoothly
+        if (currentScroll >= maxScroll - 1) {
+          scroller.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scroller.scrollBy({ left: 1, behavior: 'smooth' });
+        }
+      }
+    }, 50); // Adjust speed as needed
+
+    return () => clearInterval(interval);
+  }, [isAutoScrolling]);
+
+  // Check scroll button visibility
+  const updateScrollButtonsVisibility = () => {
+    const scroller = scrollerRef.current;
+    if (scroller) {
+      const scrollPosition = scroller.scrollLeft;
+      const maxScrollPosition = scroller.scrollWidth - scroller.clientWidth;
+      const isScrollable = scroller.scrollWidth > scroller.clientWidth;
+
+      setShowPrevButton(isScrollable && scrollPosition > 0);
+      setShowNextButton(isScrollable && scrollPosition < maxScrollPosition - 1);
+    }
+  };
 
   useEffect(() => {
-    const row = scrollingRowRef.current;
-    if (!row) return;
+    const scroller = scrollerRef.current;
+    if (scroller) {
+      updateScrollButtonsVisibility();
+      scroller.addEventListener("scroll", updateScrollButtonsVisibility);
+      return () => scroller.removeEventListener("scroll", updateScrollButtonsVisibility);
+    }
+  }, []);
 
-    let resumeTimer: NodeJS.Timeout;
+  const handleScrollNext = () => {
+    const scroller = scrollerRef.current;
+    if (scroller) {
+      setIsAutoScrolling(false);
+      scroller.scrollBy({ left: scroller.clientWidth / 2, behavior: "smooth" });
+      // Resume auto-scroll after 3 seconds
+      setTimeout(() => setIsAutoScrolling(true), 3000);
+    }
+  };
 
-    const resumeAnimation = () => {
-      if (row) {
-        row.classList.remove('dragging');
-        // Reset transform to let CSS animation take over
-        row.style.transform = '';
-      }
-    };
+  const handleScrollPrev = () => {
+    const scroller = scrollerRef.current;
+    if (scroller) {
+      setIsAutoScrolling(false);
+      scroller.scrollBy({ left: -scroller.clientWidth / 2, behavior: "smooth" });
+      // Resume auto-scroll after 3 seconds
+      setTimeout(() => setIsAutoScrolling(true), 3000);
+    }
+  };
 
-    const handleMouseDown = (e: MouseEvent) => {
-      e.preventDefault();
-      setIsDragging(true);
-      setStartX(e.clientX);
-      
-      // Get current transform value
-      const computedStyle = window.getComputedStyle(row);
-      const matrix = new DOMMatrix(computedStyle.transform);
-      setCurrentTranslate(matrix.m41); // m41 is translateX
-      setStartTranslate(matrix.m41);
-      
-      row.classList.add('dragging');
-      clearTimeout(resumeTimer);
-    };
+  const handleMouseEnter = () => {
+    setIsAutoScrolling(false);
+  };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      
-      const deltaX = e.clientX - startX;
-      const newTranslate = startTranslate + deltaX;
-      setCurrentTranslate(newTranslate);
-      
-      if (row) {
-        row.style.transform = `translateX(${newTranslate}px)`;
-      }
-    };
-
-    const handleMouseUp = () => {
-      setIsDragging(false);
-      // Resume animation after 2 seconds of inactivity
-      resumeTimer = setTimeout(resumeAnimation, 2000);
-    };
-
-    const handleMouseLeave = () => {
-      if (isDragging) {
-        setIsDragging(false);
-        resumeTimer = setTimeout(resumeAnimation, 2000);
-      }
-    };
-
-    // Touch events for mobile
-    const handleTouchStart = (e: TouchEvent) => {
-      setIsDragging(true);
-      setStartX(e.touches[0].clientX);
-      
-      const computedStyle = window.getComputedStyle(row);
-      const matrix = new DOMMatrix(computedStyle.transform);
-      setCurrentTranslate(matrix.m41);
-      setStartTranslate(matrix.m41);
-      
-      row.classList.add('dragging');
-      clearTimeout(resumeTimer);
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      
-      const deltaX = e.touches[0].clientX - startX;
-      const newTranslate = startTranslate + deltaX;
-      setCurrentTranslate(newTranslate);
-      
-      if (row) {
-        row.style.transform = `translateX(${newTranslate}px)`;
-      }
-    };
-
-    const handleTouchEnd = () => {
-      setIsDragging(false);
-      resumeTimer = setTimeout(resumeAnimation, 2000);
-    };
-
-    // Add event listeners
-    row.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    row.addEventListener('mouseleave', handleMouseLeave);
-    
-    row.addEventListener('touchstart', handleTouchStart, { passive: false });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleTouchEnd);
-
-    return () => {
-      row.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      row.removeEventListener('mouseleave', handleMouseLeave);
-      row.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleTouchEnd);
-      clearTimeout(resumeTimer);
-    };
-  }, [isDragging, startX, startTranslate]);
-
-  const duplicatedLogos = [...clientLogos, ...clientLogos];
+  const handleMouseLeave = () => {
+    setIsAutoScrolling(true);
+  };
 
   return (
     <Column fillWidth gap="24" paddingY="32">
@@ -245,24 +208,56 @@ export const LogosSection: React.FC = () => {
         </Text>
       </Flex>
       
-      <div className={styles.scrollContainer}>
-        <Row 
-          ref={scrollingRowRef}
+      <Flex fillWidth className={styles.scrollContainer} style={{ position: 'relative' }}>
+        {showPrevButton && (
+          <Fade
+            base="page"
+            position="absolute"
+            padding="4"
+            vertical="center"
+            to="right"
+            width={4}
+            fillHeight
+            left="0"
+            zIndex={1}
+          >
+            <IconButton
+              icon="chevronLeft"
+              onClick={handleScrollPrev}
+              size="s"
+              variant="secondary"
+              aria-label="Scroll Previous"
+            />
+          </Fade>
+        )}
+        
+        <Flex
+          ref={scrollerRef}
           className={styles.scrollingRow}
-          gap="24" 
+          gap="16"
           paddingX="20"
+          direction="row"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            height: '120px',
+            alignItems: 'center',
+          }}
         >
           <Flex
             className={styles.personalLogo}
-            paddingX="20"
-            paddingY="16"
+            paddingX="16"
+            paddingY="12"
             radius="m"
             gap="8"
             vertical="center"
             horizontal="center"
             style={{ 
               flexShrink: 0, 
-              minWidth: "160px",
+              width: "160px",
               height: "80px"
             }}
           >
@@ -280,8 +275,31 @@ export const LogosSection: React.FC = () => {
               alt={logo.alt}
             />
           ))}
-        </Row>
-      </div>
+        </Flex>
+
+        {showNextButton && (
+          <Fade
+            base="page"
+            position="absolute"
+            padding="4"
+            vertical="center"
+            horizontal="end"
+            to="left"
+            width={4}
+            fillHeight
+            right="0"
+            zIndex={1}
+          >
+            <IconButton
+              icon="chevronRight"
+              onClick={handleScrollNext}
+              size="s"
+              variant="secondary"
+              aria-label="Scroll Next"
+            />
+          </Fade>
+        )}
+      </Flex>
     </Column>
   );
 }; 

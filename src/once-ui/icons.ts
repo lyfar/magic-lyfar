@@ -42,12 +42,20 @@ import {
   HiPause,
   HiSpeakerWave,
   HiSpeakerXMark,
+  HiOutlinePhone,
+  HiOutlineVideoCamera,
+  HiOutlineCodeBracket,
+  HiOutlineCpuChip,
+  HiOutlineUsers,
+  HiOutlineHandRaised,
+  HiOutlineRocketLaunch,
 } from "react-icons/hi2";
 
 import {
   FaGithub,
   FaLinkedin,
   FaXTwitter,
+  FaInstagram,
 } from "react-icons/fa6";
 
 export const iconLibrary: Record<string, IconType> = {
@@ -66,6 +74,7 @@ export const iconLibrary: Record<string, IconType> = {
   danger: HiOutlineExclamationCircle,
   checkbox: HiOutlineCheckBadge,
   check: HiOutlineCheckCircle,
+  checkCircle: HiOutlineCheckCircle,
   copy: HiOutlineDocumentDuplicate,
   eyeDropper: HiOutlineEyeDropper,
   clipboard: HiOutlineClipboard,
@@ -97,6 +106,14 @@ export const iconLibrary: Record<string, IconType> = {
   pause: HiPause,
   volumeOn: HiSpeakerWave,
   volumeOff: HiSpeakerXMark,
+  phone: HiOutlinePhone,
+  instagram: FaInstagram,
+  video: HiOutlineVideoCamera,
+  code: HiOutlineCodeBracket,
+  cpu: HiOutlineCpuChip,
+  users: HiOutlineUsers,
+  handshake: HiOutlineHandRaised,
+  rocket: HiOutlineRocketLaunch,
 };
 
 export type IconLibrary = typeof iconLibrary;

@@ -106,31 +106,41 @@ export default function About() {
         </Column>
       )}
       <Flex fillWidth mobileDirection="column" horizontal="center">
-        {about.avatar.display && (
+        {/* Mobile Logo */}
+        <RevealFx show="s" fillWidth horizontal="center" paddingBottom="24">
+          <Logo width={80} height={40} />
+        </RevealFx>
+        
+        {about.avatar.display && about.team.display && (
           <Column
             className={styles.avatar}
             position="sticky"
             minWidth="160"
             paddingX="l"
             paddingBottom="xl"
-            gap="m"
+            gap="l"
             flex={3}
             horizontal="center"
           >
-            <Logo width={120} height={60} />
-            <Flex gap="8" vertical="center">
-              <Icon onBackground="accent-weak" name="globe" />
-              <Logo width={60} height={30} />
-            </Flex>
-            {person.languages.length > 0 && (
-              <Flex wrap gap="8">
-                {person.languages.map((language, index) => (
-                  <Tag key={language} size="l">
-                    {language}
-                  </Tag>
-                ))}
-              </Flex>
-            )}
+            {about.team.members.map((member, index) => (
+              <Column key={index} gap="m" horizontal="center" align="center">
+                <Avatar
+                  src={member.image}
+                  size="l"
+                />
+                <Column gap="4" align="center">
+                  <Text variant="heading-strong-s" align="center">
+                    {member.name}
+                  </Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak" align="center">
+                    {member.role}
+                  </Text>
+                  <Text variant="body-default-xs" onBackground="neutral-medium" align="center" style={{ textAlign: "center", lineHeight: "1.4" }}>
+                    {member.description}
+                  </Text>
+                </Column>
+              </Column>
+            ))}
           </Column>
         )}
         <Column flex={9} maxWidth={40}>
@@ -231,29 +241,22 @@ export default function About() {
                       fillWidth
                       direction="column"
                       radius="l"
-                      padding="0"
+                      padding="32"
                       background="surface"
                       border="neutral-medium"
                       shadow="l"
                     >
-                      <SmartImage
-                        src={service.image}
-                        aspectRatio="16/9"
-                        sizes="600px"
-                        radius="l-4"
-                      />
-                      <Column 
-                        fillWidth 
-                        padding="24" 
-                        gap="12"
-                      >
-                        <Heading
-                          as="h3"
-                          variant="heading-strong-l"
-                          onBackground="neutral-strong"
-                        >
-                          {service.title}
-                        </Heading>
+                      <Column gap="16">
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={service.icon} />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {service.title}
+                          </Heading>
+                        </Flex>
                         <Text
                           variant="body-default-m"
                           onBackground="neutral-weak"
@@ -268,8 +271,7 @@ export default function About() {
             </RevealFx>
           )}
 
-          <Line marginBottom="xl" />
-
+          {/* Work Section */}
           {about.work.display && (
             <RevealFx delay={0.4}>
               <Column>
@@ -301,40 +303,29 @@ export default function About() {
                 <Heading as="h2" id={about.mission.title} variant="display-strong-s">
                   {about.mission.title}
                 </Heading>
-                <Column gap="24">
+                <Grid columns="1" mobileColumns="1" gap="24">
                   {about.mission.parts.map((part, index) => (
                     <Card
                       key={index}
                       fillWidth
-                      direction={index % 2 === 0 ? "row" : "row-reverse"}
+                      direction="column"
                       radius="l"
-                      padding="0"
+                      padding="32"
                       background="surface"
                       border="neutral-medium"
                       shadow="l"
                     >
-                      <Flex flex={1} style={{ minHeight: "200px" }}>
-                        <SmartImage
-                          src={part.image}
-                          alt={part.title}
-                          fill
-                          sizes="50vw"
-                          style={{ objectFit: "cover" }}
-                        />
-                      </Flex>
-                      <Column 
-                        flex={1}
-                        padding="32" 
-                        gap="16"
-                        vertical="center"
-                      >
-                        <Heading
-                          as="h3"
-                          variant="heading-strong-l"
-                          onBackground="neutral-strong"
-                        >
-                          {part.title}
-                        </Heading>
+                      <Column gap="16">
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={part.icon} />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {part.title}
+                          </Heading>
+                        </Flex>
                         <Text
                           variant="body-default-m"
                           onBackground="neutral-weak"
@@ -344,7 +335,7 @@ export default function About() {
                       </Column>
                     </Card>
                   ))}
-                </Column>
+                </Grid>
               </Column>
             </RevealFx>
           )}
@@ -355,17 +346,18 @@ export default function About() {
           {about.manifesto.display && (
             <RevealFx delay={0.8}>
               <Column fillWidth gap="m" marginBottom="xl">
-                <Heading
-                  as="h2"
-                  id={about.manifesto.title}
-                  variant="display-strong-s"
-                  marginBottom="m"
-                >
+                <Heading as="h2" id={about.manifesto.title} variant="display-strong-s">
                   {about.manifesto.title}
                 </Heading>
-                <Column gap="m" marginBottom="m">
-                  {about.manifesto.description.map((paragraph, index) => (
-                    <Text key={index}>{paragraph}</Text>
+                <Column gap="24" marginBottom="32">
+                  {about.manifesto.description.map((desc, index) => (
+                    <Text
+                      key={index}
+                      variant="body-default-l"
+                      onBackground="neutral-medium"
+                    >
+                      {desc}
+                    </Text>
                   ))}
                 </Column>
                 <Grid columns="2" mobileColumns="1" gap="24">
@@ -375,29 +367,22 @@ export default function About() {
                       fillWidth
                       direction="column"
                       radius="l"
-                      padding="0"
+                      padding="32"
                       background="surface"
                       border="neutral-medium"
                       shadow="l"
                     >
-                      <SmartImage
-                        src={value.image}
-                        aspectRatio="16/9"
-                        sizes="600px"
-                        radius="l-4"
-                      />
-                      <Column 
-                        fillWidth 
-                        padding="24" 
-                        gap="12"
-                      >
-                        <Heading
-                          as="h3"
-                          variant="heading-strong-l"
-                          onBackground="neutral-strong"
-                        >
-                          {value.title}
-                        </Heading>
+                      <Column gap="12">
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={value.icon} />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {value.title}
+                          </Heading>
+                        </Flex>
                         <Text
                           variant="body-default-m"
                           onBackground="neutral-weak"

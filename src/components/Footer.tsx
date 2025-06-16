@@ -22,13 +22,19 @@ export const Footer = () => {
         horizontal="space-between"
         vertical="center"
       >
-        <Text variant="body-default-s" onBackground="neutral-strong">
-          <Text onBackground="neutral-weak">© {currentYear} /</Text>
-          <Text paddingX="4">{person.name}</Text>
-          <Text onBackground="neutral-weak">
-            / Full Stack Developer
+        <Flex fillWidth mobileDirection="column" gap="16" horizontal="center" vertical="center">
+          <Text 
+            variant="body-default-s" 
+            onBackground="neutral-medium"
+            wrap="balance"
+            style={{ textAlign: "center", maxWidth: "32rem" }}
+          >
+            We bring ideas to life through film, sharp design, and smart code. From cinematic storytelling to pixel-perfect apps and seamless AI workflows, our projects turn attention into action.
           </Text>
-        </Text>
+          <Text variant="body-default-xs" onBackground="neutral-weak" style={{ textAlign: "center" }}>
+            All Rights Reserved. ©{currentYear} Lyfar Studio | Located in Hong Kong | Business registration Certificate 41163988-000-07-21-A
+          </Text>
+        </Flex>
         <Flex gap="16">
           {social.map(
             (item) =>

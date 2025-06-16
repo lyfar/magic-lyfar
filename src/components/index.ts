@@ -1,5 +1,6 @@
 export { Header } from "@/components/Header";
 export { Footer } from "@/components/Footer";
+export { ContactBooking } from "@/components/ContactBooking";
 export { Mailchimp } from "@/components/Mailchimp";
 export { ProjectCard } from "@/components/ProjectCard";
 export { HeadingLink } from "@/components/HeadingLink";
@@ -7,3 +8,4 @@ export { RouteGuard } from "@/components/RouteGuard";
 export { LogosSection } from "@/components/LogosSection";
 export { TestimonialsSection } from "@/components/TestimonialsSection";
 export { TestimonialsColumn } from "@/components/TestimonialsColumn";
+export { FeaturedWorks } from "@/components/work/FeaturedWorks";

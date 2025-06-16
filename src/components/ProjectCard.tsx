@@ -8,7 +8,8 @@ import {
   Heading,
   SmartLink,
   Text,
-  VideoPlayer,
+  Tag,
+  OptimizedVideoPlayer,
 } from "@/once-ui/components";
 
 interface ProjectCardProps {
@@ -16,27 +17,35 @@ interface ProjectCardProps {
   priority?: boolean;
   images: string[];
   video?: string;
+  poster?: string;
   title: string;
   content: string;
   description: string;
   avatars: { src: string }[];
   link: string;
+  tags?: string[];
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   href,
   images = [],
   video,
+  poster,
   title,
   content,
   description,
   avatars,
   link,
+  tags = [],
 }) => {
   return (
     <Column fillWidth gap="m">
       {video ? (
-        <VideoPlayer src={video} />
+        <OptimizedVideoPlayer 
+          src={video} 
+          lazy={true}
+          quality="auto"
+        />
       ) : (
         <Carousel
           sizes="(max-width: 960px) 100vw, 960px"
@@ -61,9 +70,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </Heading>
           </Flex>
         )}
-        {(avatars?.length > 0 || description?.trim() || content?.trim()) && (
+        {(avatars?.length > 0 || description?.trim() || content?.trim() || tags.length > 0) && (
           <Column flex={7} gap="16">
             {avatars?.length > 0 && <AvatarGroup avatars={avatars} size="m" reverse />}
+            {tags.length > 0 && (
+              <Flex gap="8" wrap>
+                {tags.map((tag, index) => (
+                  <Tag key={index} variant="neutral" size="s" label={tag} />
+                ))}
+              </Flex>
+            )}
             {description?.trim() && (
               <Text wrap="balance" variant="body-default-s" onBackground="neutral-weak">
                 {description}
