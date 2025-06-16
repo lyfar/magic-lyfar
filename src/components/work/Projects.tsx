@@ -1,21 +1,28 @@
-import { getPosts } from "@/app/utils/utils";
 import { Column } from "@/once-ui/components";
 import { ProjectCard } from "@/components";
+import { Post } from "@/app/utils/utils";
 
 interface ProjectsProps {
   range?: [number, number?];
+  selectedTags?: string[];
+  initialProjects: Post[];
 }
 
-export function Projects({ range }: ProjectsProps) {
-  let allProjects = getPosts(["src", "app", "work", "projects"]);
-
-  const sortedProjects = allProjects.sort((a, b) => {
+export function Projects({ range, selectedTags = [], initialProjects }: ProjectsProps) {
+  const sortedProjects = initialProjects.sort((a, b) => {
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 
-  const displayedProjects = range
+  let displayedProjects = range
     ? sortedProjects.slice(range[0] - 1, range[1] ?? sortedProjects.length)
     : sortedProjects;
+
+  // Filter projects by selected tags
+  if (selectedTags.length > 0) {
+    displayedProjects = displayedProjects.filter(project => 
+      project.metadata.tags?.some(tag => selectedTags.includes(tag))
+    );
+  }
 
   return (
     <Column fillWidth gap="xl" marginBottom="40" paddingX="l">

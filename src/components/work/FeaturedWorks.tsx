@@ -1,12 +1,14 @@
-import { getPosts } from "@/app/utils/utils";
 import { Column, Text, Button, Flex, Badge, RevealFx } from "@/once-ui/components";
 import { ProjectCard } from "@/components";
+import { Post } from "@/app/utils/utils";
 
-export function FeaturedWorks() {
-  const allProjects = getPosts(["src", "app", "work", "projects"]);
+interface FeaturedWorksProps {
+  initialProjects: Post[];
+}
 
+export function FeaturedWorks({ initialProjects }: FeaturedWorksProps) {
   // Sort by publish date
-  const sortedProjects = allProjects.sort((a, b) => {
+  const sortedProjects = initialProjects.sort((a, b) => {
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 

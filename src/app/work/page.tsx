@@ -1,8 +1,8 @@
-import { Column } from "@/once-ui/components";
+import { WorkPage } from "./WorkPage";
 import { baseURL } from "@/app/resources";
-import { about, person, work } from "@/app/resources/content";
-import { Meta, Schema } from "@/once-ui/modules";
-import { Projects } from "@/components/work/Projects";
+import { work } from "@/app/resources/content";
+import { Meta } from "@/once-ui/modules";
+import { getPosts } from "@/app/utils/utils";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -15,22 +15,7 @@ export async function generateMetadata() {
 }
 
 export default function Work() {
-  return (
-    <Column maxWidth="m">
-      <Schema
-        as="webPage"
-        baseURL={baseURL}
-        path={work.path}
-        title={work.title}
-        description={work.description}
-        image={`${baseURL}/og?title=${encodeURIComponent(work.title)}`}
-        author={{
-          name: person.name,
-          url: `${baseURL}${about.path}`,
-          image: `${baseURL}${person.avatar}`,
-        }}
-      />
-      <Projects />
-    </Column>
-  );
+  const allProjects = getPosts(["src", "app", "work", "projects"]);
+  
+  return <WorkPage initialProjects={allProjects} />;
 }

@@ -36,15 +36,32 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
         "{testimonial.text}"
       </Text>
       <Flex gap="12" vertical="center">
-        <SmartImage
-          src={testimonial.image}
-          alt={testimonial.name}
-          aspectRatio="1"
-          objectFit="cover"
-          radius="full"
-          style={{ width: '40px', height: '40px' }}
-          sizes="40px"
-        />
+        <Flex 
+          style={{ 
+            width: '40px', 
+            height: '40px',
+            minWidth: '40px',
+            minHeight: '40px',
+            position: 'relative',
+            overflow: 'hidden',
+            borderRadius: '50%'
+          }}
+        >
+          <SmartImage
+            src={testimonial.image}
+            alt={testimonial.name}
+            objectFit="cover"
+            style={{ 
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '100%',
+              height: '100%'
+            }}
+            sizes="40px"
+          />
+        </Flex>
         <Column gap="2">
           <Text variant="label-default-s" onBackground="neutral-strong">
             {testimonial.name}

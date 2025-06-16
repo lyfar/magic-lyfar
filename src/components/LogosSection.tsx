@@ -113,6 +113,11 @@ const clientLogos: ClientLogoProps[] = [
     logoPath: "/images/companies-logos/egis_company_white.png",
     alt: "Egis Company Logo",
   },
+  {
+    name: "Baileys",
+    logoPath: "/images/companies-logos/Baileys-Symbol.png",
+    alt: "Baileys Logo",
+  },
 ];
 
 export const LogosSection: React.FC = () => {
@@ -243,7 +248,7 @@ export const LogosSection: React.FC = () => {
             overflowX: 'auto',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
-            height: '120px',
+            height: '104px',
             alignItems: 'center',
           }}
         >

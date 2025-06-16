@@ -15,6 +15,16 @@
 .testimonialCard {
   flex-shrink: 0;
   margin-bottom: 16px;
+
+  img {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+    object-fit: cover !important;
+  }
+
+  &:hover img {
+    filter: grayscale(0%);
+  }
 }
 
 @keyframes scrollUp {

@@ -10,6 +10,7 @@ import { home, about, person, contact } from "@/app/resources/content";
 import { ContactBooking, LogosSection, TestimonialsSection } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { Meta, Schema } from "@/once-ui/modules";
+import { getPosts } from "@/app/utils/utils";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -21,6 +22,8 @@ export async function generateMetadata() {
 }
 
 export default function Home() {
+  const allProjects = getPosts(["src", "app", "work", "projects"]);
+
   return (
     <Column maxWidth="m" gap="xl" horizontal="center">
       <Schema
@@ -88,13 +91,13 @@ export default function Home() {
         <LogosSection />
       </RevealFx>
       <RevealFx translateY="16" delay={0.8}>
-        <Projects range={[1, 1]} />
+        <Projects initialProjects={allProjects} range={[1, 1]} />
       </RevealFx>
       <RevealFx translateY="16" delay={1.0}>
         <TestimonialsSection />
       </RevealFx>
       <RevealFx translateY="16" delay={1.2}>
-        <FeaturedWorks />
+        <FeaturedWorks initialProjects={allProjects} />
       </RevealFx>
       {routes["/blog"] && (
         <RevealFx translateY="16" delay={1.4}>

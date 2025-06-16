@@ -2,75 +2,51 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-type Team = {
-  name: string;
-  role: string;
-  avatar: string;
-  linkedIn: string;
-};
-
-type Metadata = {
-  title: string;
-  publishedAt: string;
-  summary: string;
-  image?: string;
-  images: string[];
-  video?: string;
-  tag?: string;
-  tags?: string[];
-  team: Team[];
-  link?: string;
-};
-
-import { notFound } from 'next/navigation';
-
-function getMDXFiles(dir: string) {
-  if (!fs.existsSync(dir)) {
-    notFound();
-  }
-
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-}
-
-function readMDXFile(filePath: string) {
-    if (!fs.existsSync(filePath)) {
-        notFound();
-    }
-
-  const rawContent = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(rawContent);
-
-  const metadata: Metadata = {
-    title: data.title || "",
-    publishedAt: data.publishedAt,
-    summary: data.summary || "",
-    image: data.image || "",
-    images: data.images || [],
-    video: data.video,
-    tag: data.tag || [],
-    tags: data.tags || [],
-    team: data.team || [],
-    link: data.link || "",
+export interface Post {
+  slug: string;
+  content: string;
+  metadata: {
+    title: string;
+    publishedAt: string;
+    summary: string;
+    tags?: string[];
+    images: string[];
+    video?: string;
+    team?: {
+      name: string;
+      role: string;
+      avatar: string;
+      linkedIn: string;
+    }[];
+    link?: string;
   };
-
-  return { metadata, content };
 }
 
-function getMDXData(dir: string) {
-  const mdxFiles = getMDXFiles(dir);
-  return mdxFiles.map((file) => {
-    const { metadata, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
+export function getPosts(pathSegments: string[]): Post[] {
+  const postsDirectory = path.join(process.cwd(), ...pathSegments);
+  const fileNames = fs.readdirSync(postsDirectory);
 
-    return {
-      metadata,
-      slug,
-      content,
-    };
-  });
-}
+  return fileNames
+    .filter((fileName) => fileName.endsWith(".mdx"))
+    .map((fileName) => {
+      const slug = fileName.replace(/\.mdx$/, "");
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const { data, content } = matter(fileContents);
 
-export function getPosts(customPath = ["", "", "", ""]) {
-  const postsDir = path.join(process.cwd(), ...customPath);
-  return getMDXData(postsDir);
+      return {
+        slug,
+        content,
+        metadata: {
+          title: data.title || "",
+          publishedAt: data.publishedAt || "",
+          summary: data.summary || "",
+          tags: data.tags || [],
+          images: data.images || [],
+          video: data.video,
+          team: data.team || [],
+          link: data.link || "",
+        },
+      };
+    });
 }

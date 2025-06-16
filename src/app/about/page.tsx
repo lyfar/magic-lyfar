@@ -128,7 +128,7 @@ export default function About() {
                   src={member.image}
                   size="l"
                 />
-                <Column gap="4" align="center">
+                <Column gap="4" align="center" maxWidth={320}>
                   <Text variant="heading-strong-s" align="center">
                     {member.name}
                   </Text>
