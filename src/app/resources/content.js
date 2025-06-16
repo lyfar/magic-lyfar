@@ -206,7 +206,7 @@ const about = {
     institutions: [
       {
         name: "Computer Science Degree",
-        description: <>Bachelor's in Computer Science with focus on web development and software engineering.</>,
+        description: <>Bachelor&apos;s in Computer Science with focus on web development and software engineering.</>,
       },
       {
         name: "Continuous Learning",
