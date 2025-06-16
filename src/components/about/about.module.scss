@@ -12,7 +12,7 @@
     top: var(--static-space-64);
 }
 
-@media (--s) {
+@media (max-width: 768px) {
     .avatar {
         position: static;
     }
