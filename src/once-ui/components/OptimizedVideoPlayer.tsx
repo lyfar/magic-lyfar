@@ -45,6 +45,7 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
   const [isMuted, setIsMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [selectedQuality, setSelectedQuality] = useState(quality);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   
   const playerRef = useRef<ReactPlayer>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -161,6 +162,20 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
   const togglePlay = () => setIsPlaying(!isPlaying);
   const toggleMute = () => setIsMuted(!isMuted);
 
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      if (containerRef.current?.requestFullscreen) {
+        containerRef.current.requestFullscreen()
+          .then(() => setIsFullscreen(true))
+          .catch(err => console.error('Error attempting to enable fullscreen:', err));
+      }
+    } else {
+      document.exitFullscreen()
+        .then(() => setIsFullscreen(false))
+        .catch(err => console.error('Error attempting to exit fullscreen:', err));
+    }
+  };
+
   const changeQuality = () => {
     const qualities = ["auto", "hd", "md", "sd"].filter(q => {
       if (q === "auto") return true;
@@ -256,6 +271,16 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
           file: {
             attributes: {
               preload: "metadata",
+            }
+          },
+          youtube: {
+            playerVars: {
+              fs: 0 // Disable fullscreen button in YouTube player
+            }
+          },
+          vimeo: {
+            playerOptions: {
+              fullscreen: false // Disable fullscreen button in Vimeo player
             }
           }
         }}
@@ -397,6 +422,13 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <button onClick={changeQuality} className={styles.speedButton}>
               {selectedQuality.toUpperCase()}
+            </button>
+            <button
+              onClick={toggleFullscreen}
+              className={styles.controlButton}
+              aria-label="Toggle fullscreen"
+            >
+              <Icon name={isFullscreen ? "minimize" : "maximize"} size="m" />
             </button>
           </div>
         </div>

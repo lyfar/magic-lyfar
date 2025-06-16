@@ -49,6 +49,8 @@ import {
   HiOutlineUsers,
   HiOutlineHandRaised,
   HiOutlineRocketLaunch,
+  HiOutlineArrowsPointingIn,
+  HiOutlineArrowsPointingOut,
 } from "react-icons/hi2";
 
 import {
@@ -114,6 +116,8 @@ export const iconLibrary: Record<string, IconType> = {
   users: HiOutlineUsers,
   handshake: HiOutlineHandRaised,
   rocket: HiOutlineRocketLaunch,
+  maximize: HiOutlineArrowsPointingOut,
+  minimize: HiOutlineArrowsPointingIn,
 };
 
 export type IconLibrary = typeof iconLibrary;

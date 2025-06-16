@@ -29,8 +29,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [volume, setVolume] = useState(0.8);
   const [isMuted, setIsMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   
   const playerRef = useRef<ReactPlayer>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -75,6 +77,20 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     setIsMuted(!isMuted);
   };
 
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      if (containerRef.current?.requestFullscreen) {
+        containerRef.current.requestFullscreen()
+          .then(() => setIsFullscreen(true))
+          .catch(err => console.error('Error attempting to enable fullscreen:', err));
+      }
+    } else {
+      document.exitFullscreen()
+        .then(() => setIsFullscreen(false))
+        .catch(err => console.error('Error attempting to exit fullscreen:', err));
+    }
+  };
+
   const changePlaybackRate = () => {
     const rates = [0.5, 1, 1.25, 1.5, 2];
     const currentIndex = rates.indexOf(playbackRate);
@@ -90,6 +106,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   return (
     <div
+      ref={containerRef}
       className={classNames(styles.container, className)}
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
@@ -113,6 +130,16 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
             attributes: {
               poster: poster,
               preload: preload,
+            }
+          },
+          youtube: {
+            playerVars: {
+              fs: 0 // Disable fullscreen button in YouTube player
+            }
+          },
+          vimeo: {
+            playerOptions: {
+              fullscreen: false // Disable fullscreen button in Vimeo player
             }
           }
         }}
@@ -247,6 +274,13 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
               className={styles.speedButton}
             >
               {playbackRate}x
+            </button>
+            <button
+              onClick={toggleFullscreen}
+              className={styles.controlButton}
+              aria-label="Toggle fullscreen"
+            >
+              <Icon name={isFullscreen ? "minimize" : "maximize"} size="m" />
             </button>
           </div>
         </div>
