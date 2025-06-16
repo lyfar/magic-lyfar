@@ -15,7 +15,7 @@ const person = {
 
 const contact = {
   display: true,
-  title: <>Let's Work Together</>,
+  title: <>Let&apos;s Work Together</>,
   description: (
     <>
       Ready for your next film, design project, or AI automation? Book a consultation to discuss how we can bring your vision to life.
@@ -50,14 +50,14 @@ const home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
+  title: `${person.name}&apos;s Portfolio`,
   description: `${person.name} - Video Production, Web Development & AI Automation in Hong Kong`,
   headline: <>Creative & Technical Direction</>,
   subline: (
     <>
   We do Video, Design, and Code.
   <br />
-  Whether it's a film, a product, a pixel-perfect interface, or cutting-edge AI automation — we make it hit.
+  Whether it&apos;s a film, a product, a pixel-perfect interface, or cutting-edge AI automation — we make it hit.
     </>
   ),
   featured: {
@@ -138,7 +138,7 @@ const about = {
       {
         icon: "rocket",
         title: "For Our Partners",
-        description: "We uncover a brand's purpose, shape it into clear stories, build the digital tools to deliver those stories, and add AI that frees teams to focus on creating new value."
+        description: "We uncover a brand&apos;s purpose, shape it into clear stories, build the digital tools to deliver those stories, and add AI that frees teams to focus on creating new value."
       }
     ]
   },
@@ -187,7 +187,7 @@ const about = {
     title: "Principles",
     points: [
       "Our highest priority is to satisfy the client through early and continuous delivery of valuable work, from video production to software development.",
-      "Welcome changing requirements, even late in the process. We harness change for the client's competitive advantage.",
+      "Welcome changing requirements, even late in the process. We harness change for the client&apos;s competitive advantage.",
       "Deliver working results frequently, from a couple of days to a couple of weeks, whether rough cuts or software builds.",
       "Business stakeholders, project managers, creatives, and developers must work together daily throughout the project.",
       "Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.",

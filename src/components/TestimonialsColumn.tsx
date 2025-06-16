@@ -33,7 +33,7 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
         onBackground="neutral-medium"
         style={{ lineHeight: '1.6' }}
       >
-        "{testimonial.text}"
+        &ldquo;{testimonial.text}&rdquo;
       </Text>
       <Flex gap="12" vertical="center">
         <Flex 
