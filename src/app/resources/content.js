@@ -6,7 +6,7 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Creative & Technical Production Studio",
+  role: "Technical Lead and Creative Director",
   avatar: "/images/me.png",
   email: "egor@lyfar.com",
   location: "Asia/Hong_Kong", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
@@ -52,12 +52,12 @@ const home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `${person.name} - Video Production, Web Development & AI Automation in Hong Kong`,
-  headline: <>Creative & Technical Direction</>,
+  headline: <>Technical & Creative Direction</>,
   subline: (
     <>
-  We do Video, Design, and Code.
+  We do code, design and content.
   <br />
-  Whether it's a film, a product, a pixel-perfect interface, or cutting-edge AI automation — we make it hit.
+  Whether it's cutting-edge AI automation, a pixel-perfect product interface or a film — we make it hit.
     </>
   ),
   featured: {
@@ -88,7 +88,7 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        We bring ideas to life through film, sharp design, and smart code. From cinematic storytelling to pixel-perfect apps and seamless AI workflows, our projects turn attention into action.
+        We bring ideas to life through smart code, cutting-edge AI automation, and then cinematic storytelling and sharp design. From technical solutions to creative execution, our projects turn attention into action.
       </>
     ),
   },
@@ -110,11 +110,6 @@ const about = {
     title: "Services",
     items: [
       {
-        title: "Content",
-        icon: "video",
-        description: "Cinematic videos, social media content, fashion films, product showcases, corporate storytelling, complete post-production, and tailored distribution strategies."
-      },
-      {
         title: "Development",
         icon: "code",
         description: "Websites, web apps, internal tools, intuitive UI/UX design, e-commerce solutions, real-time dashboards, and efficient tech-team integrations."
@@ -123,6 +118,11 @@ const about = {
         title: "AI",
         icon: "cpu",
         description: "Practical automations, advanced LLM integrations, custom self-hosted AI models, and fine-tuning solutions built specifically for your data, tech stack, and business goals."
+      },
+      {
+        title: "Content",
+        icon: "video",
+        description: "Cinematic videos, social media content, fashion films, product showcases, corporate storytelling, complete post-production, and tailored distribution strategies."
       }
     ]
   },
