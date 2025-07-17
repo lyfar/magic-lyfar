@@ -17,17 +17,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'portfolio.lyfar.com',
         port: '',
         pathname: '/**',
       },
     ],
+    unoptimized: false,
   },
   async redirects() {
     return [
