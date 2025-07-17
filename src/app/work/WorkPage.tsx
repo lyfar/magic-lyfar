@@ -6,7 +6,8 @@ import { about, person, work } from "@/app/resources/content";
 import { Schema } from "@/once-ui/modules";
 import { Projects } from "@/components/work/Projects";
 import { Logo } from "@/components/Logo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Post } from "@/app/utils/utils";
 
 interface WorkPageProps {
@@ -15,7 +16,36 @@ interface WorkPageProps {
 
 export function WorkPage({ initialProjects }: WorkPageProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const router = useRouter();
   const availableTags = ["video", "dev", "ai"];
+
+  // Parse hash from URL to get initial tags
+  const parseHashTags = (hash: string): string[] => {
+    if (!hash || hash === '#') return [];
+    const tagString = hash.replace('#', '');
+    return tagString.split(',').filter(tag => availableTags.includes(tag));
+  };
+
+  // Update URL hash when tags change
+  const updateUrlHash = (tags: string[]) => {
+    const hashValue = tags.length > 0 ? `#${tags.join(',')}` : '';
+    const newUrl = `${window.location.pathname}${hashValue}`;
+    window.history.replaceState(null, '', newUrl);
+  };
+
+  // Initialize tags from URL hash on component mount
+  useEffect(() => {
+    const hash = window.location.hash;
+    const initialTags = parseHashTags(hash);
+    if (initialTags.length > 0) {
+      setSelectedTags(initialTags);
+    }
+  }, []);
+
+  // Update URL hash whenever selectedTags changes
+  useEffect(() => {
+    updateUrlHash(selectedTags);
+  }, [selectedTags]);
 
   // Calculate project counts for each tag
   const tagsWithCounts = availableTags.map(tag => ({
@@ -27,10 +57,9 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
 
   const handleTagClick = (tag: string) => {
     setSelectedTags(prev => {
-      if (prev.includes(tag)) {
-        return prev.filter(t => t !== tag);
-      }
-      return [...prev, tag];
+      return prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag];
     });
   };
 
