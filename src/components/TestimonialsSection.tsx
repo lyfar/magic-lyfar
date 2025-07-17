@@ -68,7 +68,7 @@ const testimonials = [
   },
   {
     text: "It was always a pleasure to work and collaborate with Egor. A very artistic vision and we could achieve amazing project and really cool video that people still talking about. Can't wait always for the next project.",
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&h=150&fit=crop&crop=face",
+    image: "/images/testimonials/PIERRE.jpg",
     name: "Gaël Majchrzak",
     role: "Chef, Sweet Fashion House",
   },
