@@ -17,6 +17,10 @@ interface ProjectCardProps {
   priority?: boolean;
   images: string[];
   video?: string;
+  videoWebm?: string;
+  videoHD?: string;
+  videoMD?: string;
+  videoSD?: string;
   poster?: string;
   title: string;
   content: string;
@@ -30,6 +34,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   href,
   images = [],
   video,
+  videoWebm,
+  videoHD,
+  videoMD,
+  videoSD,
   poster,
   title,
   content,
@@ -42,7 +50,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     <Column fillWidth gap="m">
       {video ? (
         <OptimizedVideoPlayer 
-          src={video} 
+          src={video}
+          webmSrc={videoWebm}
+          hdSrc={videoHD}
+          mdSrc={videoMD}
+          sdSrc={videoSD}
+          poster={poster}
           lazy={true}
           quality="auto"
         />

@@ -12,6 +12,11 @@ export interface Post {
     tags?: string[];
     images: string[];
     video?: string;
+    videoWebm?: string;
+    videoHD?: string;
+    videoMD?: string;
+    videoSD?: string;
+    poster?: string;
     team?: {
       name: string;
       role: string;
@@ -44,6 +49,11 @@ export function getPosts(pathSegments: string[]): Post[] {
           tags: data.tags || [],
           images: data.images || [],
           video: data.video,
+          videoWebm: data.videoWebm,
+          videoHD: data.videoHD,
+          videoMD: data.videoMD,
+          videoSD: data.videoSD,
+          poster: data.poster,
           team: data.team || [],
           link: data.link || "",
         },

@@ -16,6 +16,8 @@ interface OptimizedVideoPlayerProps extends React.ComponentProps<typeof ReactPla
   className?: string;
   lazy?: boolean;
   quality?: "auto" | "hd" | "md" | "sd";
+  preload?: "none" | "metadata" | "auto";
+  progressive?: boolean; // Enable progressive loading
 }
 
 export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
@@ -28,6 +30,8 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
   className,
   lazy = true,
   quality = "auto",
+  preload = "metadata",
+  progressive = true,
   ...props
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -45,6 +49,8 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
   const [isMuted, setIsMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [selectedQuality, setSelectedQuality] = useState(quality);
+  const [currentQuality, setCurrentQuality] = useState<"auto" | "hd" | "md" | "sd">("sd"); // Start with SD for progressive loading
+  const [isUpgrading, setIsUpgrading] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   
   const playerRef = useRef<ReactPlayer>(null);
@@ -82,16 +88,49 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
     const connection = (navigator as any).connection;
     if (connection) {
       const effectiveType = connection.effectiveType;
+      const downlink = connection.downlink; // Mbps
       
-      if (effectiveType === "4g" && hdSrc) {
+      // More aggressive quality reduction for better performance
+      if (effectiveType === "4g" && downlink > 10 && hdSrc) {
         setSelectedQuality("hd");
-      } else if (effectiveType === "3g" && mdSrc) {
+      } else if ((effectiveType === "4g" || effectiveType === "3g") && downlink > 5 && mdSrc) {
         setSelectedQuality("md");
       } else if (sdSrc) {
         setSelectedQuality("sd");
+      } else {
+        // For large files without quality options, prefer SD-like behavior
+        setSelectedQuality("sd");
+      }
+    } else {
+      // Fallback: assume slower connection for better performance
+      if (sdSrc) {
+        setSelectedQuality("sd");
+      } else if (mdSrc) {
+        setSelectedQuality("md");
       }
     }
   }, [quality, hdSrc, mdSrc, sdSrc]);
+
+  // Progressive loading: start with SD, upgrade when ready
+  useEffect(() => {
+    if (!progressive || !shouldLoad) return;
+
+    // Start with SD quality for fast initial loading
+    if (sdSrc && currentQuality !== "sd") {
+      setCurrentQuality("sd");
+    }
+
+    // Upgrade to selected quality after initial load
+    const upgradeTimer = setTimeout(() => {
+      if (selectedQuality !== "sd" && selectedQuality !== currentQuality) {
+        setIsUpgrading(true);
+        setCurrentQuality(selectedQuality);
+        setTimeout(() => setIsUpgrading(false), 1000);
+      }
+    }, 2000); // Wait 2 seconds before upgrading
+
+    return () => clearTimeout(upgradeTimer);
+  }, [progressive, shouldLoad, selectedQuality, currentQuality, sdSrc]);
 
   const getOptimizedSrc = () => {
     // Prefer WebM if supported
@@ -102,8 +141,10 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
       }
     }
 
-    // Select quality source
-    switch (selectedQuality) {
+    // Select quality source based on current quality (for progressive loading)
+    const targetQuality = progressive ? currentQuality : selectedQuality;
+    
+    switch (targetQuality) {
       case "hd":
         return hdSrc || src;
       case "md":
@@ -270,7 +311,11 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
         config={{
           file: {
             attributes: {
-              preload: "metadata",
+              preload: preload,
+              // For large files, enable buffering optimizations
+              'x-webkit-airplay': 'allow',
+              'webkit-playsinline': '',
+              playsInline: true,
             }
           },
           youtube: {
@@ -341,6 +386,58 @@ export const OptimizedVideoPlayer: React.FC<OptimizedVideoPlayerProps> = ({
           <div className={styles.playIconButton}>
             <Icon name="play" size="m" />
           </div>
+        </div>
+      )}
+
+      {/* Quality upgrade indicator */}
+      {progressive && isUpgrading && (
+        <div
+          style={{
+            position: "absolute",
+            top: "16px",
+            right: "16px",
+            background: "rgba(0, 0, 0, 0.8)",
+            color: "white",
+            padding: "8px 12px",
+            borderRadius: "6px",
+            fontSize: "12px",
+            zIndex: 3,
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+          }}
+        >
+          <div
+            style={{
+              width: "12px",
+              height: "12px",
+              border: "2px solid rgba(255, 255, 255, 0.3)",
+              borderTop: "2px solid white",
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+            }}
+          />
+          Upgrading quality...
+        </div>
+      )}
+
+      {/* Progressive loading info */}
+      {progressive && currentQuality !== selectedQuality && !isUpgrading && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: showControls ? "90px" : "16px",
+            left: "16px",
+            background: "rgba(0, 0, 0, 0.7)",
+            color: "rgba(255, 255, 255, 0.8)",
+            padding: "6px 10px",
+            borderRadius: "4px",
+            fontSize: "11px",
+            zIndex: 2,
+            transition: "bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        >
+          Quality: {currentQuality.toUpperCase()}
         </div>
       )}
 
