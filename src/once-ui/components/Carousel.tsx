@@ -19,7 +19,7 @@ interface CarouselProps extends React.ComponentProps<typeof Flex> {
 const Carousel: React.FC<CarouselProps> = ({
   images = [],
   indicator = "line",
-  aspectRatio = "16 / 9",
+  aspectRatio,
   sizes,
   revealedByDefault = false,
   ...rest
@@ -84,8 +84,11 @@ const Carousel: React.FC<CarouselProps> = ({
         fillWidth
         trigger={isTransitioning}
         translateY="16"
-        aspectRatio={aspectRatio}
+        aspectRatio={aspectRatio || "auto"}
         speed="fast"
+        style={{
+          minHeight: !aspectRatio ? "20rem" : undefined,
+        }}
       >
         <Media
           sizes={sizes}
@@ -93,7 +96,7 @@ const Carousel: React.FC<CarouselProps> = ({
           radius="l"
           border="neutral-alpha-weak"
           alt={images[activeIndex]?.alt}
-          aspectRatio={aspectRatio}
+          aspectRatio={aspectRatio || "auto"}
           src={images[activeIndex]?.src}
           style={{
             ...(images.length > 1 && {

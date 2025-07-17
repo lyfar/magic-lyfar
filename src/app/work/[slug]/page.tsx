@@ -88,7 +88,6 @@ export default async function Project({
         post.metadata.images.length > 0 && (
           <SmartImage
             priority
-            aspectRatio="16 / 9"
             radius="m"
             alt="image"
             src={post.metadata.images[0]}
