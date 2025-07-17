@@ -9,7 +9,7 @@ import {
   SmartLink,
   Text,
   Tag,
-  OptimizedVideoPlayer,
+  VideoPlayer,
 } from "@/once-ui/components";
 
 interface ProjectCardProps {
@@ -49,15 +49,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <Column fillWidth gap="m">
       {video ? (
-        <OptimizedVideoPlayer 
+        <VideoPlayer 
           src={video}
-          webmSrc={videoWebm}
-          hdSrc={videoHD}
-          mdSrc={videoMD}
-          sdSrc={videoSD}
           poster={poster}
-          lazy={true}
-          quality="auto"
+          preload="metadata"
         />
       ) : (
         <Carousel

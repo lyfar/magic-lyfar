@@ -162,8 +162,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         }}
       />
 
-      {/* Central Play Icon */}
-      {!isPlaying && isReady && (
+      {/* Central Play Icon - Always visible when not playing */}
+      {!isPlaying && (
         <div
           className={styles.playIconOverlay}
           onClick={togglePlay}

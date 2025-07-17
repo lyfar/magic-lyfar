@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Button, Column, Flex, Heading, SmartImage, Tag, Text, OptimizedVideoPlayer } from "@/once-ui/components";
+import { AvatarGroup, Button, Column, Flex, Heading, SmartImage, Tag, Text, VideoPlayer } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import { about, person, work } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
@@ -79,15 +79,9 @@ export default async function Project({
         <Heading variant="display-strong-s">{post.metadata.title}</Heading>
       </Column>
       {post.metadata.video ? (
-        <OptimizedVideoPlayer 
+        <VideoPlayer 
           src={post.metadata.video}
-          webmSrc={post.metadata.videoWebm}
-          hdSrc={post.metadata.videoHD}
-          mdSrc={post.metadata.videoMD}
-          sdSrc={post.metadata.videoSD}
           poster={post.metadata.poster}
-          lazy={false}
-          quality="auto"
           preload="auto"
         />
       ) : (

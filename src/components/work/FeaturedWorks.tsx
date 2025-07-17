@@ -86,6 +86,11 @@ export function FeaturedWorks({ initialProjects }: FeaturedWorksProps) {
             href={`work/${post.slug}`}
             images={post.metadata.images}
             video={post.metadata.video}
+            videoWebm={post.metadata.videoWebm}
+            videoHD={post.metadata.videoHD}
+            videoMD={post.metadata.videoMD}
+            videoSD={post.metadata.videoSD}
+            poster={post.metadata.poster}
             title={post.metadata.title}
             description={post.metadata.summary}
             content={post.content}
