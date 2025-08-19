@@ -65,4 +65,4 @@ Add a new .mdx file to src/app/blog/posts or src/app/work/projects
 
 ## **License**
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and available under the [MIT License](LICENSE).# Updated for GitHub Pages deployment
