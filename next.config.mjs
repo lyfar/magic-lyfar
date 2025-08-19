@@ -23,6 +23,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'new.lyfar.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
     unoptimized: true,
   },

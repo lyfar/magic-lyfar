@@ -30,7 +30,7 @@ export function Projects({ range, selectedTags = [], initialProjects }: Projects
         <ProjectCard
           priority={index < 2}
           key={post.slug}
-          href={`work/${post.slug}`}
+          href={`/work/${post.slug}`}
           images={post.metadata.images}
           video={post.metadata.video}
           videoWebm={post.metadata.videoWebm}
