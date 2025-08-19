@@ -64,8 +64,8 @@ const Logo: React.FC<LogoProps> = ({
           }}
           alt="Trademark"
           src={iconSrc}
-          width={sizeMap[size]}
-          height={sizeMap[size]}
+          width={parseInt(sizeMap[size])}
+          height={parseInt(sizeMap[size])}
           unoptimized
         />
       )}
@@ -85,8 +85,8 @@ const Logo: React.FC<LogoProps> = ({
           }}
           alt="Trademark"
           src={wordmarkSrc}
-          width={sizeMap[size]}
-          height={sizeMap[size]}
+          width={parseInt(sizeMap[size])}
+          height={parseInt(sizeMap[size])}
           unoptimized
         />
       )}

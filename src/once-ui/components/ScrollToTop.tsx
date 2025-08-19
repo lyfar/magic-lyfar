@@ -12,10 +12,6 @@ interface ScrollToTopProps extends React.ComponentProps<typeof Flex> {
 export const ScrollToTop = ({ children, offset = 300, className, ...rest }: ScrollToTopProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleScroll = () => {
-    setIsVisible(window.scrollY > offset);
-  };
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -24,9 +20,13 @@ export const ScrollToTop = ({ children, offset = 300, className, ...rest }: Scro
   };
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsVisible(window.scrollY > offset);
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, [offset]);
 
   return (
     <Flex

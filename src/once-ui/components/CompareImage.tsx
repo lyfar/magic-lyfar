@@ -59,15 +59,15 @@ const CompareImage = ({ leftContent, rightContent, ...rest }: CompareImageProps)
     setPosition(newPosition);
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    updatePosition(e.clientX);
-  };
-
-  const handleTouchMove = (e: TouchEvent) => {
-    updatePosition(e.touches[0].clientX);
-  };
-
   useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      updatePosition(e.clientX);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      updatePosition(e.touches[0].clientX);
+    };
+
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("touchmove", handleTouchMove);
@@ -79,7 +79,7 @@ const CompareImage = ({ leftContent, rightContent, ...rest }: CompareImageProps)
       document.removeEventListener("touchmove", handleTouchMove);
       document.removeEventListener("touchend", handleMouseUp);
     };
-  }, [handleMouseMove, handleMouseUp, handleTouchMove]);
+  }, []);
 
   return (
     <Flex ref={containerRef} aspectRatio="16/9" fillWidth style={{ touchAction: "none" }} {...rest}>

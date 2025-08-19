@@ -27,22 +27,22 @@ function InfiniteScroll<T>({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const lastItemRef = useRef<HTMLDivElement | null>(null);
 
-  const handleLoadMore = async () => {
-    if (isLoading || !hasMore) return;
-
-    setIsLoading(true);
-    try {
-      const hasMoreItems = await loadMore();
-      setHasMore(hasMoreItems);
-    } catch (error) {
-      console.error("Error loading more items:", error);
-      setHasMore(false);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const handleLoadMore = async () => {
+      if (isLoading || !hasMore) return;
+
+      setIsLoading(true);
+      try {
+        const hasMoreItems = await loadMore();
+        setHasMore(hasMoreItems);
+      } catch (error) {
+        console.error("Error loading more items:", error);
+        setHasMore(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     if (!hasMore || isLoading) return;
 
     if (observerRef.current) {
@@ -72,7 +72,7 @@ function InfiniteScroll<T>({
         observerRef.current.disconnect();
       }
     };
-  }, [items, hasMore, isLoading, handleLoadMore, threshold]);
+  }, [items, hasMore, isLoading, loadMore, threshold]);
 
   return (
     <>

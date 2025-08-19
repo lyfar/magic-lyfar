@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Column, Flex, Tag, Text, RevealFx, Button } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import { about, person, work } from "@/app/resources/content";
@@ -17,14 +18,22 @@ interface WorkPageProps {
 export function WorkPage({ initialProjects }: WorkPageProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const router = useRouter();
-  const availableTags = ["video", "dev", "ai"];
+  const availableTags = React.useMemo(() => ["video", "dev", "ai"], []);
 
-  // Parse hash from URL to get initial tags
-  const parseHashTags = (hash: string): string[] => {
-    if (!hash || hash === '#') return [];
-    const tagString = hash.replace('#', '');
-    return tagString.split(',').filter(tag => availableTags.includes(tag));
-  };
+  // Initialize tags from URL hash on component mount
+  useEffect(() => {
+    const parseHashTags = (hash: string): string[] => {
+      if (!hash || hash === '#') return [];
+      const tagString = hash.replace('#', '');
+      return tagString.split(',').filter(tag => availableTags.includes(tag));
+    };
+
+    const hash = window.location.hash;
+    const initialTags = parseHashTags(hash);
+    if (initialTags.length > 0) {
+      setSelectedTags(initialTags);
+    }
+  }, [availableTags]);
 
   // Update URL hash when tags change
   const updateUrlHash = (tags: string[]) => {
@@ -32,15 +41,6 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
     const newUrl = `${window.location.pathname}${hashValue}`;
     window.history.replaceState(null, '', newUrl);
   };
-
-  // Initialize tags from URL hash on component mount
-  useEffect(() => {
-    const hash = window.location.hash;
-    const initialTags = parseHashTags(hash);
-    if (initialTags.length > 0) {
-      setSelectedTags(initialTags);
-    }
-  }, [parseHashTags]);
 
   // Update URL hash whenever selectedTags changes
   useEffect(() => {

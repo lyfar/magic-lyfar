@@ -35,25 +35,20 @@ const RevealFx = forwardRef<HTMLDivElement, RevealFxProps>(
     const [maskRemoved, setMaskRemoved] = useState(false);
     const transitionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    const getSpeedDurationMs = () => {
-      switch (speed) {
-        case "fast":
-          return 1000;
-        case "medium":
-          return 2000;
-        case "slow":
-          return 3000;
-        default:
-          return 2000;
-      }
-    };
-
-    const getSpeedDuration = () => {
-      const ms = getSpeedDurationMs();
-      return `${ms / 1000}s`;
-    };
-
     useEffect(() => {
+      const getSpeedDurationMs = () => {
+        switch (speed) {
+          case "fast":
+            return 1000;
+          case "medium":
+            return 2000;
+          case "slow":
+            return 3000;
+          default:
+            return 2000;
+        }
+      };
+
       const timer = setTimeout(() => {
         setIsRevealed(true);
 
@@ -69,9 +64,22 @@ const RevealFx = forwardRef<HTMLDivElement, RevealFxProps>(
           clearTimeout(transitionTimeoutRef.current);
         }
       };
-    }, [delay, getSpeedDurationMs]);
+    }, [delay, speed]);
 
     useEffect(() => {
+      const getSpeedDurationMs = () => {
+        switch (speed) {
+          case "fast":
+            return 1000;
+          case "medium":
+            return 2000;
+          case "slow":
+            return 3000;
+          default:
+            return 2000;
+        }
+      };
+
       if (trigger !== undefined) {
         setIsRevealed(trigger);
 
@@ -89,7 +97,7 @@ const RevealFx = forwardRef<HTMLDivElement, RevealFxProps>(
           }, getSpeedDurationMs());
         }
       }
-    }, [trigger, getSpeedDurationMs]);
+    }, [trigger, speed]);
 
     const getTranslateYValue = () => {
       if (typeof translateY === "number") {
@@ -101,6 +109,19 @@ const RevealFx = forwardRef<HTMLDivElement, RevealFxProps>(
     };
 
     const translateValue = getTranslateYValue();
+
+    const getSpeedDuration = () => {
+      switch (speed) {
+        case "fast":
+          return "1s";
+        case "medium":
+          return "2s";
+        case "slow":
+          return "3s";
+        default:
+          return "2s";
+      }
+    };
 
     const revealStyle: React.CSSProperties = {
       transitionDuration: getSpeedDuration(),
