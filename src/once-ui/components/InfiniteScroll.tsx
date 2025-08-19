@@ -72,7 +72,7 @@ function InfiniteScroll<T>({
         observerRef.current.disconnect();
       }
     };
-  }, [items, hasMore, isLoading]);
+  }, [items, hasMore, isLoading, handleLoadMore, threshold]);
 
   return (
     <>

@@ -69,7 +69,7 @@ const RevealFx = forwardRef<HTMLDivElement, RevealFxProps>(
           clearTimeout(transitionTimeoutRef.current);
         }
       };
-    }, [delay]);
+    }, [delay, getSpeedDurationMs]);
 
     useEffect(() => {
       if (trigger !== undefined) {
@@ -89,7 +89,7 @@ const RevealFx = forwardRef<HTMLDivElement, RevealFxProps>(
           }, getSpeedDurationMs());
         }
       }
-    }, [trigger]);
+    }, [trigger, getSpeedDurationMs]);
 
     const getTranslateYValue = () => {
       if (typeof translateY === "number") {

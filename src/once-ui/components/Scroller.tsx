@@ -72,7 +72,7 @@ const Scroller: React.FC<ScrollerProps> = ({
     }, 100);
 
     return () => clearTimeout(timer);
-  }, [children]);
+  }, [children, updateScrollButtonsVisibility]);
 
   const handleScrollNext = () => {
     const scroller = scrollerRef.current;

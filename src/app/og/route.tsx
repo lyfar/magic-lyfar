@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 import { baseURL } from "@/app/resources";
 import { person } from "@/app/resources/content";
 
-export const dynamic = "force-static";
 export const runtime = "edge";
 
 export async function GET(request: Request) {
@@ -54,15 +53,16 @@ export async function GET(request: Request) {
             gap: "5rem",
           }}
         >
-          <img
-            src={baseURL + person.avatar}
-            style={{
-              width: "12rem",
-              height: "12rem",
-              objectFit: "cover",
-              borderRadius: "100%",
-            }}
-          />
+                     <img
+             src={baseURL + person.avatar}
+             alt={`${person.name} avatar`}
+             style={{
+               width: "12rem",
+               height: "12rem",
+               objectFit: "cover",
+               borderRadius: "100%",
+             }}
+           />
           <div
             style={{
               display: "flex",

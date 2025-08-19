@@ -40,7 +40,7 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
     if (initialTags.length > 0) {
       setSelectedTags(initialTags);
     }
-  }, []);
+  }, [parseHashTags]);
 
   // Update URL hash whenever selectedTags changes
   useEffect(() => {

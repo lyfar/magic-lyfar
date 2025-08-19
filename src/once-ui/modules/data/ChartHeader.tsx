@@ -161,14 +161,14 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
     | "Last month"
     | "Last week";
 
-  const dateRangePresets: Record<PresetName, DateRangePreset> = {
+  const dateRangePresets: Record<PresetName, DateRangePreset> = React.useMemo(() => ({
     "This year": { getRange: () => ({ startDate: startOfYear(new Date()), endDate: endOfYear(new Date()) }) },
     "This month": { getRange: () => ({ startDate: startOfMonth(new Date()), endDate: endOfMonth(new Date()) }) },
     "This week": { getRange: () => ({ startDate: startOfWeek(new Date()), endDate: endOfWeek(new Date()) }) },
     "Last year": { getRange: () => { const l = subYears(new Date(), 1); return { startDate: startOfYear(l), endDate: endOfYear(l) }; } },
     "Last month": { getRange: () => { const l = subMonths(new Date(), 1); return { startDate: startOfMonth(l), endDate: endOfMonth(l) }; } },
     "Last week": { getRange: () => { const l = subWeeks(new Date(), 1); return { startDate: startOfWeek(l), endDate: endOfWeek(l) }; } },
-  };
+  }), []);
 
   useEffect(() => {
     if (dateRange) {
