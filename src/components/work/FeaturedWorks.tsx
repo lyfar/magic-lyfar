@@ -78,26 +78,27 @@ export function FeaturedWorks({ initialProjects }: FeaturedWorksProps) {
           </RevealFx>
         </Column>
       
-      <Column fillWidth gap="xl" paddingX="l">
+      <Column fillWidth gap="xl" paddingX="l" horizontal="center">
         {featuredProjects.map((post, index) => (
-          <ProjectCard
-            priority={index < 2}
-            key={post.slug}
-            href={`work/${post.slug}`}
-            images={post.metadata.images}
-            video={post.metadata.video}
-            videoWebm={post.metadata.videoWebm}
-            videoHD={post.metadata.videoHD}
-            videoMD={post.metadata.videoMD}
-            videoSD={post.metadata.videoSD}
-            poster={post.metadata.poster}
-            title={post.metadata.title}
-            description={post.metadata.summary}
-            content={post.content}
-            avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
-            link={post.metadata.link || ""}
-            tags={post.metadata.tags || []}
-          />
+          <Column key={post.slug} fillWidth maxWidth="l" horizontal="center">
+            <ProjectCard
+              priority={index < 2}
+              href={`work/${post.slug}`}
+              images={post.metadata.images}
+              video={post.metadata.video}
+              videoWebm={post.metadata.videoWebm}
+              videoHD={post.metadata.videoHD}
+              videoMD={post.metadata.videoMD}
+              videoSD={post.metadata.videoSD}
+              poster={post.metadata.poster}
+              title={post.metadata.title}
+              description={post.metadata.summary}
+              content={post.content}
+              avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
+              link={post.metadata.link || ""}
+              tags={post.metadata.tags || []}
+            />
+          </Column>
         ))}
       </Column>
     </Column>

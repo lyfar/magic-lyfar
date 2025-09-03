@@ -70,6 +70,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         paddingTop="12"
         paddingBottom="24"
         gap="l"
+        horizontal="center"
       >
         {title && (
           <Flex flex={5}>

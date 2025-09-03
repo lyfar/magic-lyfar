@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from "react";
-import { Column, Flex, Text, SmartImage, IconButton, Fade } from "@/once-ui/components";
+import React, { useState, useRef, useEffect } from "react";
+import { Column, Flex, Text, SmartImage, Button, useTheme } from "@/once-ui/components";
 import { Logo } from "@/components/Logo";
-import styles from './LogosSection.module.scss';
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ClientLogoProps {
   name: string;
@@ -12,9 +12,15 @@ interface ClientLogoProps {
 }
 
 const ClientLogo: React.FC<ClientLogoProps> = ({ name, logoPath, alt }) => {
+  const { resolvedTheme } = useTheme();
+  
+  // Proper theme-responsive colors: black in light, white in dark
+  const logoFilter = resolvedTheme === 'dark' 
+    ? 'brightness(0) invert(1)' // Pure white #FFF in dark theme
+    : 'brightness(0)'; // Pure black #000 in light theme
+  
   return (
     <Flex
-      className={styles.clientLogo}
       paddingX="16"
       paddingY="12"
       radius="m"
@@ -22,13 +28,14 @@ const ClientLogo: React.FC<ClientLogoProps> = ({ name, logoPath, alt }) => {
       border="neutral-medium"
       vertical="center"
       horizontal="center"
-      style={{ 
-        flexShrink: 0, 
+      style={{
+        flexShrink: 0,
         width: "160px",
         height: "80px",
       }}
     >
       <SmartImage
+        key={`${logoPath}-${resolvedTheme}`} // Force re-render on theme change
         src={logoPath}
         alt={alt}
         objectFit="contain"
@@ -36,6 +43,15 @@ const ClientLogo: React.FC<ClientLogoProps> = ({ name, logoPath, alt }) => {
         style={{
           width: '100%',
           height: '100%',
+          filter: logoFilter,
+          opacity: '0.8',
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.opacity = '1';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.opacity = '0.8';
         }}
       />
     </Flex>
@@ -121,84 +137,73 @@ const clientLogos: ClientLogoProps[] = [
 ];
 
 export const LogosSection: React.FC = () => {
-  const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const [showPrevButton, setShowPrevButton] = useState(false);
-  const [showNextButton, setShowNextButton] = useState(false);
 
-  // Duplicate logos for seamless infinite scroll
-  const duplicatedLogos = [...clientLogos, ...clientLogos];
-
-  // Auto-scroll functionality
+  // Auto-scroll effect with smooth looping
   useEffect(() => {
-    if (!isAutoScrolling) return;
+    if (!isAutoScrolling || !scrollContainerRef.current) return;
 
-    const interval = setInterval(() => {
-      const scroller = scrollerRef.current;
-      if (scroller) {
-        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
-        const currentScroll = scroller.scrollLeft;
-        
-        // If we've reached the end, reset to beginning smoothly
-        if (currentScroll >= maxScroll - 1) {
-          scroller.scrollTo({ left: 0, behavior: 'smooth' });
+    const container = scrollContainerRef.current;
+    const scrollSpeed = 1.5; // Slightly faster, smoother speed
+    let animationId: number;
+
+    const animate = () => {
+      if (container) {
+        const { scrollLeft, scrollWidth, clientWidth } = container;
+
+        // Check if we're near the end (leave some buffer for smooth transition)
+        const threshold = scrollWidth - clientWidth - 200; // 200px buffer
+
+        if (scrollLeft >= threshold) {
+          // Instead of instant reset, smoothly scroll back to start
+          container.scrollTo({
+            left: scrollLeft - (scrollWidth / 2), // Jump back halfway to maintain momentum
+            behavior: 'instant' // Instant for seamless loop
+          });
         } else {
-          scroller.scrollBy({ left: 1, behavior: 'smooth' });
+          // Normal scroll
+          container.scrollBy({ left: scrollSpeed, behavior: 'auto' });
         }
       }
-    }, 50); // Adjust speed as needed
+      animationId = requestAnimationFrame(animate);
+    };
 
-    return () => clearInterval(interval);
+    animationId = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
   }, [isAutoScrolling]);
 
-  // Check scroll button visibility
-  const updateScrollButtonsVisibility = () => {
-    const scroller = scrollerRef.current;
-    if (scroller) {
-      const scrollPosition = scroller.scrollLeft;
-      const maxScrollPosition = scroller.scrollWidth - scroller.clientWidth;
-      const isScrollable = scroller.scrollWidth > scroller.clientWidth;
-
-      setShowPrevButton(isScrollable && scrollPosition > 0);
-      setShowNextButton(isScrollable && scrollPosition < maxScrollPosition - 1);
-    }
-  };
-
-  useEffect(() => {
-    const scroller = scrollerRef.current;
-    if (scroller) {
-      updateScrollButtonsVisibility();
-      scroller.addEventListener("scroll", updateScrollButtonsVisibility);
-      return () => scroller.removeEventListener("scroll", updateScrollButtonsVisibility);
-    }
-  }, []);
-
-  const handleScrollNext = () => {
-    const scroller = scrollerRef.current;
-    if (scroller) {
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
       setIsAutoScrolling(false);
-      scroller.scrollBy({ left: scroller.clientWidth / 2, behavior: "smooth" });
-      // Resume auto-scroll after 3 seconds
-      setTimeout(() => setIsAutoScrolling(true), 3000);
+      scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+      // Resume auto-scroll after manual interaction with longer delay
+      setTimeout(() => setIsAutoScrolling(true), 5000);
     }
   };
 
-  const handleScrollPrev = () => {
-    const scroller = scrollerRef.current;
-    if (scroller) {
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
       setIsAutoScrolling(false);
-      scroller.scrollBy({ left: -scroller.clientWidth / 2, behavior: "smooth" });
-      // Resume auto-scroll after 3 seconds
-      setTimeout(() => setIsAutoScrolling(true), 3000);
+      scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+      // Resume auto-scroll after manual interaction with longer delay
+      setTimeout(() => setIsAutoScrolling(true), 5000);
     }
   };
 
-  const handleMouseEnter = () => {
-    setIsAutoScrolling(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsAutoScrolling(true);
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
   };
 
   return (
@@ -213,50 +218,81 @@ export const LogosSection: React.FC = () => {
         </Text>
       </Flex>
       
-      <Flex fillWidth className={styles.scrollContainer} style={{ position: 'relative' }}>
-        {showPrevButton && (
-          <Fade
-            base="page"
-            position="absolute"
-            padding="4"
-            vertical="center"
-            to="right"
-            width={4}
-            fillHeight
-            left="0"
-            zIndex={1}
-          >
-            <IconButton
-              icon="chevronLeft"
-              onClick={handleScrollPrev}
-              size="s"
-              variant="secondary"
-              aria-label="Scroll Previous"
-            />
-          </Fade>
-        )}
-        
-        <Flex
-          ref={scrollerRef}
-          className={styles.scrollingRow}
-          gap="16"
-          paddingX="20"
-          direction="row"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+      <div style={{ 
+        width: '100%', 
+        position: 'relative'
+      }}>
+        {/* Left Arrow */}
+        <Button
+          variant="tertiary"
+          size="m"
+          onClick={scrollLeft}
           style={{
+            position: 'absolute',
+            left: '8px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            zIndex: 10,
+            opacity: canScrollLeft ? 1 : 0.3,
+            pointerEvents: canScrollLeft ? 'auto' : 'none',
+            borderRadius: '50%',
+            width: '48px',
+            height: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <ChevronLeft size={20} />
+        </Button>
+
+        {/* Right Arrow */}
+        <Button
+          variant="tertiary"
+          size="m"
+          onClick={scrollRight}
+          style={{
+            position: 'absolute',
+            right: '8px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            zIndex: 10,
+            opacity: canScrollRight ? 1 : 0.3,
+            pointerEvents: canScrollRight ? 'auto' : 'none',
+            borderRadius: '50%',
+            width: '48px',
+            height: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <ChevronRight size={20} />
+        </Button>
+
+        <div 
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+          onMouseEnter={() => setIsAutoScrolling(false)}
+          onMouseLeave={() => setIsAutoScrolling(true)}
+          style={{ 
+            display: 'flex',
+            gap: '2rem',
+            alignItems: 'center',
             overflowX: 'auto',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
-            height: '104px',
-            alignItems: 'center',
+            padding: '0 60px'
           }}
+          className="scrollbar-hide"
         >
+          {/* First set of logos */}
           <Flex
-            className={styles.personalLogo}
             paddingX="16"
             paddingY="12"
             radius="m"
+            background="surface"
+            border="neutral-medium"
             gap="8"
             vertical="center"
             horizontal="center"
@@ -272,7 +308,7 @@ export const LogosSection: React.FC = () => {
             </Text>
           </Flex>
           
-          {duplicatedLogos.map((logo, index) => (
+                    {clientLogos.map((logo, index) => (
             <ClientLogo
               key={`${logo.name}-${index}`}
               name={logo.name}
@@ -280,31 +316,39 @@ export const LogosSection: React.FC = () => {
               alt={logo.alt}
             />
           ))}
-        </Flex>
 
-        {showNextButton && (
-          <Fade
-            base="page"
-            position="absolute"
-            padding="4"
+          {/* Duplicate set for seamless auto-scroll */}
+          <Flex
+            paddingX="16"
+            paddingY="12"
+            radius="m"
+            background="surface"
+            border="neutral-medium"
+            gap="8"
             vertical="center"
-            horizontal="end"
-            to="left"
-            width={4}
-            fillHeight
-            right="0"
-            zIndex={1}
+            horizontal="center"
+            style={{
+              flexShrink: 0,
+              width: "160px",
+              height: "80px"
+            }}
           >
-            <IconButton
-              icon="chevronRight"
-              onClick={handleScrollNext}
-              size="s"
-              variant="secondary"
-              aria-label="Scroll Next"
+            <Logo width={40} height={20} />
+            <Text variant="label-default-s" onBackground="brand-strong">
+              Lyfar Studio
+            </Text>
+          </Flex>
+
+          {clientLogos.map((logo, index) => (
+            <ClientLogo
+              key={`duplicate-${logo.name}-${index}`}
+              name={logo.name}
+              logoPath={logo.logoPath}
+              alt={logo.alt}
             />
-          </Fade>
-        )}
-      </Flex>
+          ))}
+        </div>
+      </div>
     </Column>
   );
 }; 

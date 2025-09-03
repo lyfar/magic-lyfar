@@ -10,6 +10,7 @@ import { Logo } from "@/components/Logo";
 import { routes, display } from "@/app/resources";
 import { person, about, blog, work } from "@/app/resources/content";
 import { ThemeToggle } from "./ThemeToggle";
+import WeatherDisplay from "./WeatherDisplay";
 
 type TimeDisplayProps = {
   timeZone: string;
@@ -167,7 +168,17 @@ export const Header = () => {
             textVariant="body-default-s"
             gap="20"
           >
-            <Flex hide="s">{display.time && <TimeDisplay timeZone={person.location} />}</Flex>
+            <Flex hide="s">
+              {display.time && (
+                <Flex gap="12" vertical="center">
+                  <span>Hong Kong</span>
+                  <span>•</span>
+                  <TimeDisplay timeZone={person.location} />
+                  <span>•</span>
+                  <WeatherDisplay />
+                </Flex>
+              )}
+            </Flex>
           </Flex>
         </Flex>
       </Flex>

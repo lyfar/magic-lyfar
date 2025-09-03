@@ -51,19 +51,17 @@ const home = {
   image: "/images/og/home.jpg",
   label: "Home",
   title: `${person.name}'s Portfolio`,
-  description: `${person.name} - Video Production, Web Development & AI Automation in Hong Kong`,
-  headline: <>Technical & Creative Direction</>,
+  description: `${person.name} - Creative Technology Studio: AI, Product & Content`,
+  headline: <>AI, Product & Content</>,
   subline: (
     <>
-  We do code, design and content.
-  <br />
-  Whether it's cutting-edge AI automation, a pixel-perfect product interface or a film — we make it hit.
+      We deliver automation that scales your business, product interfaces that convert, and content that drives attention.
     </>
   ),
   featured: {
     display: true,
-    title: <>Recent project: <strong className="ml-4">Portfolio Showcase</strong></>,
-    href: "/work",
+    title: <><strong className="ml-4">Creative Technology Studio</strong></>,
+    href: "/about",
   },
 };
 
