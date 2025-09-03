@@ -18,7 +18,15 @@ interface WorkPageProps {
 export function WorkPage({ initialProjects }: WorkPageProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const router = useRouter();
-  const availableTags = React.useMemo(() => ["video", "dev", "ai"], []);
+
+  // Category mapping for display names
+  const categoryMapping = {
+    "ai": "Automation & AI",
+    "dev": "Product & Design",
+    "video": "Video & Content"
+  };
+
+  const availableTags = React.useMemo(() => ["ai", "dev", "video"], []);
 
   // Initialize tags from URL hash on component mount
   useEffect(() => {
@@ -49,17 +57,18 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
 
   // Calculate project counts for each tag
   const tagsWithCounts = availableTags.map(tag => ({
-    label: tag,
-    count: initialProjects.filter(project => 
+    label: categoryMapping[tag as keyof typeof categoryMapping],
+    rawTag: tag,
+    count: initialProjects.filter(project =>
       project.metadata.tags?.includes(tag)
     ).length
   }));
 
-  const handleTagClick = (tag: string) => {
+  const handleTagClick = (rawTag: string) => {
     setSelectedTags(prev => {
-      return prev.includes(tag) 
-        ? prev.filter(t => t !== tag)
-        : [...prev, tag];
+      return prev.includes(rawTag)
+        ? prev.filter(t => t !== rawTag)
+        : [...prev, rawTag];
     });
   };
 
@@ -115,12 +124,12 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
           <Text variant="label-default-s" onBackground="neutral-weak">Filter:</Text>
           {tagsWithCounts.map((tag) => (
             <Tag
-              key={tag.label}
-              variant={selectedTags.includes(tag.label) ? "brand" : "neutral"}
+              key={tag.rawTag}
+              variant={selectedTags.includes(tag.rawTag) ? "brand" : "neutral"}
               size="s"
               label={`${tag.label} (${tag.count})`}
-              onClick={() => handleTagClick(tag.label)}
-              style={{ 
+              onClick={() => handleTagClick(tag.rawTag)}
+              style={{
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
