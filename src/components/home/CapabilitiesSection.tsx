@@ -1,45 +1,39 @@
 "use client";
 
 import React from "react";
-import { Heading, Text, Column, Row, Card, Flex, Icon } from "@/once-ui/components";
+import { Heading, Text, Column, Flex, Tag } from "@/once-ui/components";
 import { RevealFx } from "@/once-ui/components";
 import { useRouter } from "next/navigation";
 
 const CapabilitiesSection = () => {
   const router = useRouter();
 
-  // Project counts by category (removed from display)
+  // Project counts by category
+  const projectCounts = {
+    "Automation&AI": 2,
+    "Product&Design": 2,
+    "Video&Content": 16
+  };
 
   const capabilities = [
     {
       title: "Automation & AI",
-      description: "From CRM integrations and chatbots to workflow pipelines, we design automation that saves time and scales your business.",
-      icon: "cpu",
-      features: ["CRM Integration", "Chatbots", "Workflow Pipelines"]
+      filterTag: "Automation&AI",
+      count: projectCounts["Automation&AI"]
     },
     {
       title: "Product & Design",
-      description: "Websites, mobile apps, and rapid prototypes. We combine UX design with technical execution to take ideas from sketch to production.",
-      icon: "computer",
-      features: ["Websites", "Mobile Apps", "Rapid Prototypes"]
+      filterTag: "Product&Design",
+      count: projectCounts["Product&Design"]
     },
     {
       title: "Video & Content",
-      description: "Brand films, interviews, and social campaigns. We craft stories that resonate and drive attention with high-end video production.",
-      icon: "video",
-      features: ["Brand Films", "Interviews", "Social Campaigns"]
+      filterTag: "Video&Content",
+      count: projectCounts["Video&Content"]
     }
   ];
 
-  const handleCapabilityClick = (capabilityTitle: string) => {
-    let filterTag = '';
-    if (capabilityTitle === "Automation & AI") {
-      filterTag = "Automation&AI";
-    } else if (capabilityTitle === "Product & Design") {
-      filterTag = "Product&Design";
-    } else if (capabilityTitle === "Video & Content") {
-      filterTag = "Video&Content";
-    }
+  const handleCapabilityClick = (filterTag: string) => {
     router.push(`/work#${filterTag}`);
   };
 
@@ -55,68 +49,29 @@ const CapabilitiesSection = () => {
         </Column>
 
         <Column maxWidth="m">
-          <Row gap="m" mobileDirection="column">
-            {capabilities.map((capability, index) => (
-              <Card
-                key={index}
-                fillWidth
-                direction="column"
-                radius="l"
-                padding="32"
-                background="surface"
-                border="neutral-medium"
-                shadow="l"
-                style={{
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  minHeight: '240px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  position: 'relative'
-                }}
-                onClick={() => handleCapabilityClick(capability.title)}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '';
-                }}
-              >
-                <Column gap="16" fillWidth style={{ flexGrow: 1 }}>
-                  <Flex gap="12" vertical="center">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-neutral-alpha-weak">
-                      <Icon name={capability.icon} size="xl" onBackground="neutral-strong" />
-                    </div>
-                    <Heading
-                      as="h3"
-                      variant="heading-strong-l"
-                      onBackground="neutral-strong"
-                    >
-                      {capability.title}
-                    </Heading>
-                  </Flex>
-                  <Text
-                    variant="body-default-m"
-                    onBackground="neutral-weak"
-                  >
-                    {capability.description}
-                  </Text>
-                  <Column gap="12" style={{ marginTop: 'auto' }}>
-                    {capability.features.map((feature, featureIndex) => (
-                      <Text key={featureIndex} variant="body-default-m" onBackground="neutral-weak">
-                        • {feature}
-                      </Text>
-                    ))}
-                  </Column>
-                  <Flex fillWidth horizontal="end" paddingTop="16" style={{ position: 'absolute', top: '12px', right: '24px' }}>
-                    <Icon name="arrowRight" size="l" onBackground="brand-strong" />
-                  </Flex>
-                </Column>
-              </Card>
-            ))}
-          </Row>
+          <Column fillWidth gap="16">
+            <Flex fillWidth horizontal="center">
+              <Text variant="heading-strong-l" onBackground="neutral-strong">
+                See Case Studies
+              </Text>
+            </Flex>
+            <Flex gap="8" wrap vertical="center" horizontal="center">
+              <Text variant="label-default-s" onBackground="neutral-weak">Filter:</Text>
+              {capabilities.map((capability) => (
+                <Tag
+                  key={capability.filterTag}
+                  variant="neutral"
+                  size="l"
+                  label={`${capability.title} (${capability.count})`}
+                  onClick={() => handleCapabilityClick(capability.filterTag)}
+                  style={{
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                />
+              ))}
+            </Flex>
+          </Column>
         </Column>
       </Column>
     </RevealFx>
