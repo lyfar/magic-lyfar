@@ -15,37 +15,26 @@ import { useRouter } from "next/navigation";
 const CapabilitiesSection = () => {
   const router = useRouter();
 
-  // Project counts by category
-  const projectCounts = {
-    "Automation & AI": 2, // Dead Poets AI, Gweilo App
-    "Product & Design": 2, // HSBC Digital, Sauce Barbershop
-    "Video & Content": 16 // All video projects
-  };
+  // Project counts by category (removed from display)
 
   const capabilities = [
     {
       title: "Automation & AI",
       description: "From CRM integrations and chatbots to workflow pipelines, we design automation that saves time and scales your business.",
       icon: <Bot className="w-6 h-6" />,
-      features: ["CRM Integration", "Chatbots", "Workflow Pipelines"],
-      projectCount: projectCounts["Automation & AI"],
-      filterTags: ["ai"]
+      features: ["CRM Integration", "Chatbots", "Workflow Pipelines"]
     },
     {
       title: "Product & Design",
       description: "Websites, mobile apps, and rapid prototypes. We combine UX design with technical execution to take ideas from sketch to production.",
       icon: <Code className="w-6 h-6" />,
-      features: ["Websites", "Mobile Apps", "Rapid Prototypes"],
-      projectCount: projectCounts["Product & Design"],
-      filterTags: ["dev"]
+      features: ["Websites", "Mobile Apps", "Rapid Prototypes"]
     },
     {
       title: "Video & Content",
       description: "Brand films, interviews, and social campaigns. With a background in high-end video production, we craft stories that resonate and drive attention.",
       icon: <Video className="w-6 h-6" />,
-      features: ["Brand Films", "Interviews", "Social Campaigns"],
-      projectCount: projectCounts["Video & Content"],
-      filterTags: ["video"]
+      features: ["Brand Films", "Interviews", "Social Campaigns"]
     }
   ];
 
@@ -84,7 +73,13 @@ const CapabilitiesSection = () => {
                 background="surface"
                 border="neutral-medium"
                 shadow="l"
-                style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}
+                style={{
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  minHeight: '280px',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
                 onClick={() => handleCapabilityClick(capability.title)}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
@@ -95,25 +90,20 @@ const CapabilitiesSection = () => {
                   e.currentTarget.style.boxShadow = '';
                 }}
               >
-                <Column gap="16">
+                <Column gap="16" fillWidth style={{ flexGrow: 1 }}>
                   <Flex gap="12" vertical="center">
                     <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-neutral-alpha-weak">
                       <div className="text-neutral-strong">
                         {capability.icon}
                       </div>
                     </div>
-                    <Flex fillWidth horizontal="space-between" vertical="center">
-                      <Heading
-                        as="h3"
-                        variant="heading-strong-l"
-                        onBackground="neutral-strong"
-                      >
-                        {capability.title}
-                      </Heading>
-                      <Text variant="label-default-s" onBackground="neutral-weak">
-                        {capability.projectCount} projects
-                      </Text>
-                    </Flex>
+                    <Heading
+                      as="h3"
+                      variant="heading-strong-l"
+                      onBackground="neutral-strong"
+                    >
+                      {capability.title}
+                    </Heading>
                   </Flex>
                   <Text
                     variant="body-default-m"
@@ -121,7 +111,7 @@ const CapabilitiesSection = () => {
                   >
                     {capability.description}
                   </Text>
-                  <Column gap="12">
+                  <Column gap="12" style={{ marginTop: 'auto' }}>
                     {capability.features.map((feature, featureIndex) => (
                       <Text key={featureIndex} variant="body-default-m" onBackground="neutral-weak">
                         • {feature}
