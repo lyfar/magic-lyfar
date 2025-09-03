@@ -114,29 +114,45 @@ function AboutClient() {
           <TableOfContents structure={structure} about={about} />
         </Column>
       )}
-      {/* Mobile Layout */}
-      <Flex fillWidth mobileDirection="column" horizontal="center" show="s">
+      <Flex fillWidth mobileDirection="column" horizontal="center">
         {/* Mobile Logo */}
         <RevealFx show="s" fillWidth horizontal="center" paddingBottom="24">
           <Logo width={80} height={40} />
         </RevealFx>
-
-        {/* Title and Subtitle for Mobile */}
-        <Column fillWidth paddingX="l" marginBottom="xl">
-          <RevealFx>
-            <Column gap="m" horizontal="center" align="center">
-              <Heading as="h1" variant="display-strong-l">
-                {person.name}
-              </Heading>
-              <Text variant="heading-strong-m" onBackground="neutral-weak">
-                {person.role}
-              </Text>
-            </Column>
-          </RevealFx>
-        </Column>
-
-        {/* Company Description - After title on mobile */}
-        <Column fillWidth paddingX="l" marginBottom="xl">
+        
+        {about.avatar.display && about.team.display && (
+          <Column
+            className={styles.avatar}
+            minWidth="160"
+            paddingX="l"
+            paddingBottom="xl"
+            gap="l"
+            flex={3}
+            horizontal="center"
+            hide="s"
+          >
+            {about.team.members.map((member, index) => (
+              <Column key={index} gap="m" horizontal="center" align="center" className={styles["team-member-container"]}>
+                <Avatar
+                  src={member.image}
+                  size="l"
+                />
+                <Column gap="4" maxWidth={320} className={styles["team-member-info"]}>
+                  <Text variant="heading-strong-s" className={styles["team-member-name"]}>
+                    {member.name}
+                  </Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak" className={styles["team-member-role"]}>
+                    {member.role}
+                  </Text>
+                  <Text variant="body-default-xs" onBackground="neutral-medium" className={styles["team-member-description"]} style={{ lineHeight: "1.4" }}>
+                    {member.description}
+                  </Text>
+                </Column>
+              </Column>
+            ))}
+          </Column>
+        )}
+        <Column flex={9} maxWidth={40}>
           <RevealFx>
           <Column
             id={about.intro.title}
@@ -209,138 +225,11 @@ function AboutClient() {
 
           {about.intro.display && (
             <RevealFx delay={0.2}>
-            <Column textVariant="body-default-l" fillWidth gap="m">
+            <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
               {about.intro.description}
             </Column>
             </RevealFx>
           )}
-        </Column>
-
-        {/* Bio Section - After company description on mobile */}
-        {about.avatar.display && about.team.display && (
-          <Column
-            className={styles.avatar}
-            minWidth="160"
-            paddingX="l"
-            paddingBottom="xl"
-            gap="l"
-            horizontal="center"
-          >
-            {about.team.members.map((member, index) => (
-              <Column key={index} gap="m" horizontal="center" align="center">
-                <Avatar
-                  src={member.image}
-                  size="l"
-                />
-                <Column gap="4" align="center" maxWidth={320}>
-                  <Text variant="heading-strong-s" align="center">
-                    {member.name}
-                  </Text>
-                  <Text variant="label-default-s" onBackground="neutral-weak" align="center">
-                    {member.role}
-                  </Text>
-                  <Text variant="body-default-xs" onBackground="neutral-medium" align="center" style={{ textAlign: "center", lineHeight: "1.4" }}>
-                    {member.description}
-                  </Text>
-                </Column>
-              </Column>
-            ))}
-          </Column>
-        )}
-
-        <Line marginBottom="xl" />
-      </Flex>
-
-      {/* Desktop Layout */}
-      <Flex fillWidth horizontal="center" hide="s">
-        {/* Sticky Bio Section */}
-        {about.avatar.display && about.team.display && (
-          <Column
-            className={styles.avatar}
-            minWidth="160"
-            paddingX="l"
-            gap="l"
-            flex={3}
-            horizontal="center"
-            style={{
-              position: 'sticky',
-              top: '100px',
-              height: 'fit-content'
-            }}
-          >
-            {about.team.members.map((member, index) => (
-              <Column key={index} gap="m" horizontal="center" align="center">
-                <Avatar
-                  src={member.image}
-                  size="l"
-                />
-                <Column gap="4" align="center" maxWidth={320}>
-                  <Text variant="heading-strong-s" align="center">
-                    {member.name}
-                  </Text>
-                  <Text variant="label-default-s" onBackground="neutral-weak" align="center">
-                    {member.role}
-                  </Text>
-                  <Text variant="body-default-xs" onBackground="neutral-medium" align="center" style={{ textAlign: "center", lineHeight: "1.4" }}>
-                    {member.description}
-                  </Text>
-                </Column>
-              </Column>
-            ))}
-          </Column>
-        )}
-
-        {/* Company Content */}
-        <Column flex={9} maxWidth={40}>
-          {/* Title and Subtitle in Right Column */}
-          <RevealFx>
-            <Column gap="m" horizontal="start" marginBottom="xl">
-              <Heading as="h1" variant="display-strong-l">
-                {person.name}
-              </Heading>
-              <Text variant="heading-strong-m" onBackground="neutral-weak">
-                {person.role}
-              </Text>
-            </Column>
-          </RevealFx>
-
-          <RevealFx>
-          <Column
-            id={about.intro.title}
-            fillWidth
-            minHeight="160"
-            vertical="center"
-            marginBottom="32"
-          >
-            {about.calendar.display && (
-              <a
-                href={about.calendar.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: 'none' }}
-                className={styles.scheduleButton}
-              >
-                <div className={styles.scheduleButtonInner}>
-                  <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-                  <Flex paddingX="8">Schedule a call</Flex>
-                  <IconButton
-                    data-border="rounded"
-                    variant="secondary"
-                    icon="chevronRight"
-                    style={{ pointerEvents: 'none' }}
-                  />
-                </div>
-              </a>
-            )}
-            {about.intro.display && (
-              <RevealFx delay={0.2}>
-              <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
-                {about.intro.description}
-              </Column>
-              </RevealFx>
-            )}
-          </Column>
-          </RevealFx>
 
           <Line marginBottom="xl" />
 

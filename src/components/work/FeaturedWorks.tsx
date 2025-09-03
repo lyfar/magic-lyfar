@@ -16,7 +16,7 @@ export function FeaturedWorks({ initialProjects }: FeaturedWorksProps) {
   const latestProject = sortedProjects[0];
 
   // Get one project per category, excluding the latest project
-  const categories = ["video", "dev", "ai"];
+  const categories = ["Video&Content", "Product&Design", "Automation&AI"];
   let availableProjects = sortedProjects.filter(project => project.slug !== latestProject?.slug);
   
   const featuredProjects: typeof sortedProjects = [];

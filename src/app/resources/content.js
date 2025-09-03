@@ -51,7 +51,7 @@ const home = {
   image: "/images/og/home.jpg",
   label: "Home",
   title: `${person.name}'s Portfolio`,
-  description: `${person.name} - Creative Technology Studio: AI, Product & Content`,
+  description: `${person.name} - ${person.role}: AI, Product & Content`,
   headline: <>AI, Product & Content</>,
   subline: (
     <>
@@ -249,7 +249,7 @@ const about = {
     members: [
       {
         name: "Egor Lyfar",
-        role: person.role,
+        role: "Technical Product Manager & Creative Director",
         image: person.avatar,
         description: "Creative director and technical lead, bringing together different partners who produce bespoke content, AI automation, development, and more."
       },

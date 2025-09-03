@@ -8,8 +8,10 @@
 
 .avatar {
     position: sticky;
+    top: var(--static-space-32);
     height: fit-content;
-    top: var(--static-space-64);
+    z-index: 5;
+    align-self: flex-start;
 }
 
 .scheduleButton {
@@ -36,9 +38,52 @@
     min-width: fit-content;
 }
 
+// Default desktop styles
+.team-member-container {
+    justify-content: center;
+    align-items: center;
+}
+
+.team-member-info {
+    text-align: center;
+}
+
+.team-member-name {
+    text-align: center;
+}
+
+.team-member-role {
+    text-align: center;
+}
+
+.team-member-description {
+    text-align: center;
+}
+
 @media (--s) {
     .avatar {
         position: static;
         margin-bottom: var(--static-space-32);
+    }
+
+    .team-member-container {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+    }
+
+    .team-member-info {
+        text-align: left !important;
+    }
+
+    .team-member-name {
+        text-align: left !important;
+    }
+
+    .team-member-role {
+        text-align: left !important;
+    }
+
+    .team-member-description {
+        text-align: left !important;
     }
 }

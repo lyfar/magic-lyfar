@@ -118,9 +118,9 @@ export const TestimonialsSection: React.FC = () => {
       </Column>
 
       <div className={styles.testimonialsContainer}>
-        <TestimonialsColumn testimonials={firstColumn} duration={25} />
-        <TestimonialsColumn testimonials={secondColumn} className={styles.hiddenOnMobile} duration={30} />
-        <TestimonialsColumn testimonials={thirdColumn} className={styles.hiddenOnTablet} duration={28} />
+        <TestimonialsColumn testimonials={firstColumn} duration={45} />
+        <TestimonialsColumn testimonials={secondColumn} className={styles.hiddenOnMobile} duration={50} />
+        <TestimonialsColumn testimonials={thirdColumn} className={styles.hiddenOnTablet} duration={48} />
       </div>
     </Column>
   );
