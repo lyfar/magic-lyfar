@@ -110,7 +110,7 @@ const CapabilitiesSection = () => {
                       </Text>
                     ))}
                   </Column>
-                  <Flex fillWidth horizontal="end" paddingTop="16" style={{ position: 'absolute', top: '24px', right: '24px' }}>
+                  <Flex fillWidth horizontal="end" paddingTop="16" style={{ position: 'absolute', top: '32px', right: '24px' }}>
                     <Icon name="arrowRight" size="l" onBackground="brand-strong" />
                   </Flex>
                 </Column>
