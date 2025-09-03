@@ -285,7 +285,7 @@ function AboutClient() {
                         >
                           {service.description}
                         </Text>
-                        <Flex fillWidth horizontal="end" paddingTop="16" style={{ position: 'absolute', top: '16px', right: '24px' }}>
+                        <Flex fillWidth horizontal="end" paddingTop="16" style={{ position: 'absolute', top: '12px', right: '24px' }}>
                           <Icon name="arrowRight" size="l" onBackground="brand-strong" />
                         </Flex>
                       </Column>
