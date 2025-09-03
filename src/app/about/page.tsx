@@ -1,3 +1,17 @@
+import { baseURL } from "@/app/resources";
+import { person, about, social } from "@/app/resources/content";
+import { Meta } from "@/once-ui/modules";
+
+export async function generateMetadata() {
+  return Meta.generate({
+    title: about.title,
+    description: about.description,
+    baseURL: baseURL,
+    image: `${baseURL}/og?title=${encodeURIComponent(about.title)}`,
+    path: about.path,
+  });
+}
+
 "use client";
 
 import {
@@ -21,24 +35,12 @@ import {
 } from "@/once-ui/components";
 import { Logo } from "@/components/Logo";
 import { useRouter } from "next/navigation";
-import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
-import { person, about, social } from "@/app/resources/content";
 import React from "react";
-import { Meta, Schema } from "@/once-ui/modules";
+import { Schema } from "@/once-ui/modules";
 
-export async function generateMetadata() {
-  return Meta.generate({
-    title: about.title,
-    description: about.description,
-    baseURL: baseURL,
-    image: `${baseURL}/og?title=${encodeURIComponent(about.title)}`,
-    path: about.path,
-  });
-}
-
-export default function About() {
+function AboutClient() {
   const router = useRouter();
 
   const handleServiceClick = (serviceTitle: string) => {
@@ -538,3 +540,5 @@ export default function About() {
     </Column>
   );
 }
+
+export default AboutClient;
