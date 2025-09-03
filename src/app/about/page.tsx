@@ -402,8 +402,6 @@ export default function About() {
             </RevealFx>
           )}
 
-          <Line marginBottom="xl" />
-
           {/* Principles Section */}
           {about.principles.display && (
             <RevealFx delay={1.0}>
