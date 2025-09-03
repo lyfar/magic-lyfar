@@ -253,7 +253,6 @@ function AboutClient() {
                       style={{
                         cursor: 'pointer',
                         transition: 'all 0.3s ease',
-                        minHeight: '240px',
                         display: 'flex',
                         flexDirection: 'column',
                         position: 'relative'

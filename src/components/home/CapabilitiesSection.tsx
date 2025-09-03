@@ -67,7 +67,6 @@ const CapabilitiesSection = () => {
                 style={{
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
-                  minHeight: '280px',
                   display: 'flex',
                   flexDirection: 'column',
                   position: 'relative'
