@@ -65,7 +65,12 @@ function createImage({ alt, src, ...props }: SmartImageProps & { src: string }) 
   );
 }
 
-function slugify(str: string): string {
+function slugify(str: any): string {
+  // Handle cases where str might be undefined, null, or not a string
+  if (!str || typeof str !== 'string') {
+    return '';
+  }
+
   return str
     .toLowerCase()
     .replace(/\s+/g, "-") // Replace spaces with -
@@ -76,7 +81,7 @@ function slugify(str: string): string {
 
 function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
   const CustomHeading = ({ children, ...props }: TextProps<typeof as>) => {
-    const slug = slugify(children as string);
+    const slug = slugify(children);
     return (
       <Heading
         style={{ marginTop: "var(--static-space-24)", marginBottom: "var(--static-space-12)" }}
