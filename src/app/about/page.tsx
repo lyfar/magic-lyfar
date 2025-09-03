@@ -157,28 +157,10 @@ export default function About() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: 'none' }}
+                className={styles.scheduleButton}
               >
-                <Flex
-                  fitWidth
-                  border="brand-alpha-medium"
-                  className={styles.blockAlign}
-                  style={{
-                    backdropFilter: "blur(var(--static-space-1))",
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                  }}
-                  background="brand-alpha-weak"
-                  radius="full"
-                  padding="4"
-                  gap="8"
-                  marginBottom="m"
-                  vertical="center"
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.02)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
+                <div
+                  className={styles.scheduleButtonInner}
                 >
                   <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
                   <Flex paddingX="8">Schedule a call</Flex>
@@ -188,7 +170,7 @@ export default function About() {
                     icon="chevronRight"
                     style={{ pointerEvents: 'none' }}
                   />
-                </Flex>
+                </div>
               </a>
             )}
               <Heading variant="display-strong-xl">

@@ -91,7 +91,7 @@ const about = {
     ),
   },
   work: {
-    display: false, // set to false to hide this section
+    display: false,
     title: "About",
     subline: "Video Production Hong Kong",
     description: [
@@ -104,7 +104,7 @@ const about = {
     ]
   },
   services: {
-    display: true,
+    display: false,
     title: "Services",
     items: [
       {
@@ -125,7 +125,7 @@ const about = {
     ]
   },
   mission: {
-    display: true,
+    display: false,
     title: "Mission",
     parts: [
       {
@@ -141,7 +141,7 @@ const about = {
     ]
   },
   manifesto: {
-    display: true,
+    display: false,
     title: "Manifesto",
     description: [
       "From Hong Kong roots, we've grown into a global crew—directing, analysing, coding, managing, automating and marketing. We constantly refine digital-content workflows and pass those gains to our clients, which leads us to value:"
@@ -199,7 +199,7 @@ const about = {
     ]
   },
   studies: {
-    display: false, // set to false to hide this section
+    display: false,
     title: "Education",
     institutions: [
       {
@@ -213,7 +213,7 @@ const about = {
     ],
   },
   technical: {
-    display: false, // set to false to hide this section
+    display: false,
     title: "Technical Skills",
     skills: [
       {

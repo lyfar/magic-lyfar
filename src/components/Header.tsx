@@ -8,7 +8,7 @@ import styles from "@/components/Header.module.scss";
 import { Logo } from "@/components/Logo";
 
 import { routes, display } from "@/app/resources";
-import { person, about, blog, work } from "@/app/resources/content";
+import { person, about, work } from "@/app/resources/content";
 import { ThemeToggle } from "./ThemeToggle";
 import WeatherDisplay from "./WeatherDisplay";
 
@@ -133,23 +133,7 @@ export const Header = () => {
                   />
                 </>
               )}
-              {routes["/blog"] && (
-                <>
-                  <ToggleButton
-                    className="s-flex-hide"
-                    prefixIcon="book"
-                    href="/blog"
-                    label={blog.label}
-                    selected={pathname.startsWith("/blog")}
-                  />
-                  <ToggleButton
-                    className="s-flex-show"
-                    prefixIcon="book"
-                    href="/blog"
-                    selected={pathname.startsWith("/blog")}
-                  />
-                </>
-              )}
+
 
               {display.themeSwitcher && (
                 <>

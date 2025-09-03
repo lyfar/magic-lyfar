@@ -12,6 +12,30 @@
     top: var(--static-space-64);
 }
 
+.scheduleButton {
+    display: inline-block;
+    border: 1px solid rgba(var(--brand-rgb), 0.3);
+    border-radius: var(--border-radius-full);
+    background: rgba(var(--brand-rgb), 0.1);
+    backdrop-filter: blur(var(--static-space-1));
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.02);
+        background: rgba(var(--brand-rgb), 0.15);
+        border-color: rgba(var(--brand-rgb), 0.4);
+    }
+}
+
+.scheduleButtonInner {
+    display: flex;
+    align-items: center;
+    padding: var(--static-space-4);
+    gap: var(--static-space-8);
+    min-width: fit-content;
+}
+
 @media (--s) {
     .avatar {
         position: static;
