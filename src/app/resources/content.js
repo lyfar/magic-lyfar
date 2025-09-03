@@ -181,7 +181,7 @@ const about = {
     conclusion: "That is, while there is value in the items on the bottom, we value the items on top more."
   },
   principles: {
-    display: true,
+    display: false,
     title: "Principles",
     points: [
       "Our highest priority is to satisfy the client through early and continuous delivery of valuable work, from video production to software development.",
