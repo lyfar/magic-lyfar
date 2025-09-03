@@ -1,8 +1,8 @@
 ---
-title: "HSBC: Digital Currencies Mobile App Prototype"
+title: "HSBC Digital (Flutter) – 4-hour Prototype [Not Affiliated with HSBC]"
 publishedAt: "2025-04-01"
-summary: "Developed a functional Flutter-based prototype for HSBC Digital, demonstrating how digital currencies could be integrated into HSBC's existing investment platform."
-tags: ["dev"]
+summary: "A fast, end-to-end prototype of an HSBC-style digital assets experience built with Flutter during a job application process. Demonstrates adaptive Material/Cupertino design, market browsing, asset details with charts, buy flow, and portfolio view."
+tags: ["dev", "flutter", "prototype"]
 images:
   - "https://portfolio.lyfar.com/hsbc-poster.jpg"
 link: "https://hsbc-digital.vercel.app"
@@ -15,112 +15,178 @@ team:
 
 ## Project Overview
 
-In collaboration with HSBC Digital's director in Hong Kong, we developed a prototype demonstrating how digital currencies could be seamlessly integrated into HSBC's investment platform. The prototype was built using Flutter to ensure rapid development and cross-platform compatibility, allowing us to showcase the concept on both web and mobile platforms.
+A fast, end-to-end prototype of an HSBC-style digital assets experience built with Flutter. This project was developed as part of a job application process to demonstrate Flutter capabilities and rapid prototyping skills. It explores adaptive Material/Cupertino design, mock authentication, market browsing, asset details with a chart, a buy flow with review/confirmation, a portfolio view with recent activity, and persistent theme settings.
 
-### 1. Design Philosophy
+> **⚠️ Important Note**: This is an independent prototype created for portfolio demonstration purposes only. It is not affiliated with, endorsed by, or connected to HSBC Bank or HSBC Digital in any way.
 
-We carefully followed HSBC's existing design language and user experience patterns from their current banking and investment apps to ensure our prototype would feel familiar to existing HSBC customers. Key considerations included:
+## Context & Purpose
 
-- **Brand Consistency**: Adhered to HSBC's color palette, typography, and UI components
-- **Familiar Navigation**: Mirrored existing HSBC app navigation patterns
-- **Security First**: Incorporated HSBC's standard security UI patterns
-- **Investment Focus**: Aligned with existing investment product presentation
+This prototype was created during a job application process to showcase:
+- **Flutter Development Skills**: Demonstrating proficiency in Dart and Flutter framework
+- **Rapid Prototyping**: Built in approximately 4 hours to validate UX flows
+- **Cross-Platform Delivery**: Works seamlessly on mobile and web platforms
+- **Financial UI/UX**: Experience with complex financial interfaces and user flows
 
-### 2. Technical Implementation
+## What This Prototype Demonstrates
 
-| Component | Technology Choice | Reasoning |
+### 🎨 **Design & UX**
+- **Adaptive UI**: Material Design + Cupertino components with shared elements
+- **Brand-Inspired Design**: HSBC-style interface (visual inspiration only)
+- **Responsive Layout**: Optimized for both mobile and web experiences
+
+### 🔐 **Authentication Flow**
+- **Mock Authentication**: Emulated login process with staged loading states
+- **State Streaming**: Real-time state updates during authentication
+- **Error Handling**: Graceful error states and retry mechanisms
+
+### 📊 **Market & Trading Features**
+- **Market Browsing**: Browse digital assets with filtering and search
+- **Asset Details**: Individual asset pages with lightweight charts
+- **Buy Flow**: Complete purchase journey (amount → review → confirmation)
+- **Portfolio View**: Holdings overview with recent activity
+
+### 💾 **Technical Features**
+- **Theme Persistence**: Light/dark mode settings via SharedPreferences
+- **State Management**: Provider pattern for scalable state handling
+- **Performance**: Optimized rendering and smooth animations
+
+## Technical Implementation
+
+| Component | Technology | Purpose |
 | :--- | :--- | :--- |
-| **Framework** | Flutter | Cross-platform capability, native performance |
-| **Architecture** | Clean Architecture | Scalable, maintainable codebase |
-| **State Management** | Provider | HSBC's preferred pattern |
-| **UI Components** | Custom Flutter Widgets | Matching HSBC's design system |
+| **Framework** | Flutter (Dart 3) | Cross-platform development |
+| **UI Design** | Adaptive Material/Cupertino | Native look & feel |
+| **Persistence** | SharedPreferences | Theme and settings storage |
+| **Formatting** | `intl` + `google_fonts` | Internationalization & typography |
+| **Charts** | CustomPainter | Lightweight chart rendering |
 
-### 3. Key Features
-
-**Portfolio Integration**
-- Digital currency holdings alongside traditional investments
-- Real-time value tracking and performance metrics
-- Portfolio allocation visualization
-
-**Investment Features**
-- Digital currency trading interface
-- Investment tracking and history
-- Market analysis tools
-- Risk assessment indicators
-
-**Educational Content**
-- Digital currency basics
-- Investment strategies
-- Risk management guidelines
-- Regulatory compliance information
-
-### 4. Development Process
-
-1. **Research Phase**
-   - Analyzed existing HSBC investment app
-   - Studied competitor digital currency offerings
-   - Identified key user journeys
-
-2. **Design Phase**
-   - Created high-fidelity wireframes
-   - Developed interactive prototypes
-   - Validated with stakeholders
-
-3. **Development Phase**
-   - Built core functionality in Flutter
-   - Implemented responsive design
-   - Created demo data layer
-
-4. **Testing & Refinement**
-   - Cross-platform testing
-   - Performance optimization
-   - UX refinement
-
-### 5. Technical Architecture
+## Project Structure
 
 ```
-├── Core Features
-│   ├── Authentication
-│   ├── Portfolio Management
-│   ├── Trading Engine
-│   └── Market Data Integration
-│
-├── UI Components
-│   ├── Custom HSBC Widgets
-│   ├── Charts & Graphs
-│   └── Interactive Elements
-│
-└── Data Layer
-    ├── Mock API Integration
-    ├── State Management
-    └── Local Storage
+├── lib/main.dart                 # App bootstrapping, routing, theme
+├── lib/pages/                    # App screens and navigation
+│   ├── home/                     # Landing and authentication
+│   ├── market/                   # Asset browsing and details
+│   ├── portfolio/                # Holdings and activity
+│   ├── buy/                      # Purchase flow screens
+│   └── settings/                 # Theme and preferences
+├── lib/services/                 # Business logic layer
+│   ├── auth_service.dart         # Authentication emulation
+│   ├── digital_asset_service.dart # Mock market data
+│   ├── theme_service.dart        # Theme persistence
+│   └── transaction_service.dart  # Mock transactions
+└── lib/widgets/                  # Reusable UI components
+    ├── hsbc_styled_components/   # HSBC-inspired widgets
+    ├── charts/                   # Custom chart components
+    └── common/                   # Shared UI elements
 ```
 
-### 6. Results & Impact
+## Development Process
 
-The prototype successfully demonstrated:
-- Seamless integration of digital currencies into HSBC's existing platform
-- Cross-platform functionality (iOS, Android, Web)
-- Scalable architecture for future development
-- Adherence to HSBC's security and compliance requirements
+### ⏱️ **Timeline**
+- **Total Development Time**: ~4 hours
+- **Planning & Design**: 30 minutes
+- **Core Implementation**: 2.5 hours
+- **Polish & Testing**: 1 hour
 
-### 7. Key Learnings
+### 🎯 **Goals Achieved**
+- ✅ **Cross-platform compatibility** (iOS, Android, Web)
+- ✅ **Complete user journey** from login to purchase
+- ✅ **Professional UI/UX** with smooth animations
+- ✅ **Scalable architecture** for future expansion
+- ✅ **Demonstration of Flutter capabilities**
 
-- **Flutter Advantages**: The framework proved ideal for rapid prototyping while maintaining production-quality capabilities
-- **Design System Integration**: Successfully replicated HSBC's design language in Flutter
-- **Cross-Platform Efficiency**: Single codebase served multiple platforms effectively
-- **Stakeholder Communication**: Regular demos helped refine the direction
+## Key Features Showcase
 
-### 8. Future Potential
+### 📱 **Adaptive Design**
+- Seamlessly switches between Material and Cupertino designs
+- Consistent experience across platforms
+- Responsive layouts for different screen sizes
 
-The prototype laid groundwork for:
-- Full-scale digital currency integration
-- Enhanced investment features
-- Additional asset class support
-- Expanded educational content
+### 📈 **Market Interface**
+- Real-time market data simulation
+- Interactive asset detail pages
+- Custom chart rendering with CustomPainter
 
-This project demonstrated our ability to:
-1. Work within enterprise design systems
-2. Deliver complex financial interfaces
-3. Build scalable Flutter applications
-4. Create production-ready prototypes
+### 💼 **Portfolio Management**
+- Holdings overview with performance metrics
+- Recent transaction history
+- Asset allocation visualization
+
+### 🔄 **Buy Flow**
+- Intuitive amount input with keypad
+- Review and confirmation screens
+- Success states and error handling
+
+## Status & Limitations
+
+### ✅ **What's Working**
+- Complete user authentication flow
+- Market browsing and asset details
+- Full purchase journey
+- Portfolio management
+- Theme switching and persistence
+
+### ⚠️ **Prototype Limitations**
+- **Mock Data Only**: No real backend or trading capabilities
+- **Demo Quality**: Built for demonstration, not production use
+- **No Real Transactions**: All trading is simulated
+- **Static Content**: Market data doesn't update in real-time
+
+## Getting Started
+
+### Prerequisites
+- Flutter SDK (stable)
+- Dart SDK (bundled with Flutter)
+
+### Installation & Running
+```bash
+# Install dependencies
+flutter pub get
+
+# Run on connected device
+flutter run
+
+# Run on web (Chrome)
+flutter run -d chrome
+```
+
+### Building for Web
+```bash
+flutter build web
+```
+Artifacts available in `build/web/` with included `vercel.json` for easy hosting.
+
+## Lessons Learned
+
+### 🎯 **Flutter Strengths Demonstrated**
+- **Rapid Development**: Complex app built in hours
+- **Cross-Platform**: Single codebase, multiple platforms
+- **Performance**: Smooth animations and responsive UI
+- **Ecosystem**: Rich packages and community support
+
+### 📚 **Technical Insights**
+- **State Management**: Provider pattern for scalable apps
+- **Custom Painting**: Efficient chart rendering techniques
+- **Theme Adaptation**: Dynamic theming for different platforms
+- **Mock Services**: Effective prototyping with simulated data
+
+### 🎨 **Design Learnings**
+- **Financial UX**: Complex flows made intuitive
+- **Brand Adaptation**: Creating familiar experiences
+- **Accessibility**: Inclusive design considerations
+- **Performance UX**: Smooth interactions matter
+
+## Future Enhancements
+
+If this were to be developed further, potential improvements include:
+- Real-time market data integration
+- Actual trading capabilities
+- Enhanced security features
+- Push notifications
+- Advanced analytics and reporting
+- Multi-language support
+
+---
+
+**Note**: This prototype showcases technical capabilities and design thinking. It was created independently and is not affiliated with HSBC or any financial institution. All trademarks and brand elements are used for demonstration purposes only.
