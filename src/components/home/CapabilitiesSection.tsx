@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Heading, Text, Column, Row } from "@/once-ui/components";
+import { Heading, Text, Column, Row, Card, Flex } from "@/once-ui/components";
 import { RevealFx } from "@/once-ui/components";
 import {
   Bot,
@@ -45,39 +45,46 @@ const CapabilitiesSection = () => {
         <Column maxWidth="m">
           <Row gap="m" mobileDirection="column">
             {capabilities.map((capability, index) => (
-              <div
+              <Card
                 key={index}
-                className="flex-1 p-6 md:p-8 rounded-xl bg-background border border-neutral-weak/50 hover:border-neutral-weak hover:shadow-lg transition-all duration-300 group"
+                fillWidth
+                direction="column"
+                radius="l"
+                padding="32"
+                background="surface"
+                border="neutral-medium"
+                shadow="l"
               >
-                <Column gap="l">
-                  {/* Simple icon */}
-                  <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-neutral-alpha-weak group-hover:bg-neutral-alpha-medium transition-colors duration-300">
-                    <div className="text-neutral-strong">
-                      {capability.icon}
+                <Column gap="16">
+                  <Flex gap="12" vertical="center">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-neutral-alpha-weak">
+                      <div className="text-neutral-strong">
+                        {capability.icon}
+                      </div>
                     </div>
-                  </div>
-
-                  <div>
-                    <Heading as="h3" variant="heading-strong-l" wrap="balance" className="mb-4">
+                    <Heading
+                      as="h3"
+                      variant="heading-strong-l"
+                      onBackground="neutral-strong"
+                    >
                       {capability.title}
                     </Heading>
-                    <Text wrap="balance" onBackground="neutral-weak" variant="body-default-l" className="mb-6 leading-relaxed">
-                      {capability.description}
-                    </Text>
-                  </div>
-
-                  <Column gap="s">
+                  </Flex>
+                  <Text
+                    variant="body-default-m"
+                    onBackground="neutral-weak"
+                  >
+                    {capability.description}
+                  </Text>
+                  <Column gap="12">
                     {capability.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-start">
-                        <span className="text-neutral-weak mt-0.5 mr-3 text-xs font-normal leading-normal select-none w-3 flex-shrink-0">•</span>
-                        <Text variant="body-default-m" onBackground="neutral-weak" className="leading-relaxed">
-                          {feature}
-                        </Text>
-                      </div>
+                      <Text key={featureIndex} variant="body-default-m" onBackground="neutral-weak">
+                        • {feature}
+                      </Text>
                     ))}
                   </Column>
                 </Column>
-              </div>
+              </Card>
             ))}
           </Row>
         </Column>
