@@ -141,31 +141,42 @@ export const LogosSection: React.FC = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const autoScrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-scroll effect with smooth looping
+  // Improved auto-scroll effect with better seamless looping
   useEffect(() => {
-    if (!isAutoScrolling || !scrollContainerRef.current) return;
+    if (!isAutoScrolling || !scrollContainerRef.current || isUserInteracting) return;
 
     const container = scrollContainerRef.current;
-    const scrollSpeed = 1.5; // Slightly faster, smoother speed
+    const scrollSpeed = 1.2; // Slower, smoother speed
     let animationId: number;
+    let lastTimestamp = 0;
 
-    const animate = () => {
-      if (container) {
+    const animate = (timestamp: number) => {
+      if (container && !isUserInteracting) {
         const { scrollLeft, scrollWidth, clientWidth } = container;
 
-        // Check if we're near the end (leave some buffer for smooth transition)
-        const threshold = scrollWidth - clientWidth - 200; // 200px buffer
+        // Use time-based animation for consistent speed
+        const deltaTime = timestamp - lastTimestamp;
+        if (deltaTime > 16) { // ~60fps
+          const newScrollLeft = scrollLeft + scrollSpeed;
 
-        if (scrollLeft >= threshold) {
-          // Instead of instant reset, smoothly scroll back to start
-          container.scrollTo({
-            left: scrollLeft - (scrollWidth / 2), // Jump back halfway to maintain momentum
-            behavior: 'instant' // Instant for seamless loop
-          });
-        } else {
-          // Normal scroll
-          container.scrollBy({ left: scrollSpeed, behavior: 'auto' });
+          // Check if we're near the end of the first set
+          const firstSetEnd = (scrollWidth / 2) - clientWidth - 100;
+
+          if (newScrollLeft >= firstSetEnd) {
+            // Jump back to the start seamlessly
+            container.scrollTo({
+              left: newScrollLeft - (scrollWidth / 2),
+              behavior: 'instant'
+            });
+          } else {
+            // Normal smooth scroll
+            container.scrollBy({ left: scrollSpeed, behavior: 'auto' });
+          }
+
+          lastTimestamp = timestamp;
         }
       }
       animationId = requestAnimationFrame(animate);
@@ -178,23 +189,52 @@ export const LogosSection: React.FC = () => {
         cancelAnimationFrame(animationId);
       }
     };
-  }, [isAutoScrolling]);
+  }, [isAutoScrolling, isUserInteracting]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (autoScrollTimeoutRef.current) {
+        clearTimeout(autoScrollTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
+      setIsUserInteracting(true);
       setIsAutoScrolling(false);
       scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
-      // Resume auto-scroll after manual interaction with longer delay
-      setTimeout(() => setIsAutoScrolling(true), 5000);
+
+      // Clear existing timeout
+      if (autoScrollTimeoutRef.current) {
+        clearTimeout(autoScrollTimeoutRef.current);
+      }
+
+      // Resume auto-scroll after manual interaction
+      autoScrollTimeoutRef.current = setTimeout(() => {
+        setIsUserInteracting(false);
+        setIsAutoScrolling(true);
+      }, 3000);
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
+      setIsUserInteracting(true);
       setIsAutoScrolling(false);
       scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
-      // Resume auto-scroll after manual interaction with longer delay
-      setTimeout(() => setIsAutoScrolling(true), 5000);
+
+      // Clear existing timeout
+      if (autoScrollTimeoutRef.current) {
+        clearTimeout(autoScrollTimeoutRef.current);
+      }
+
+      // Resume auto-scroll after manual interaction
+      autoScrollTimeoutRef.current = setTimeout(() => {
+        setIsUserInteracting(false);
+        setIsAutoScrolling(true);
+      }, 3000);
     }
   };
 
@@ -270,19 +310,45 @@ export const LogosSection: React.FC = () => {
           <ChevronRight size={20} />
         </Button>
 
-        <div 
+        <div
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          onMouseEnter={() => setIsAutoScrolling(false)}
-          onMouseLeave={() => setIsAutoScrolling(true)}
-          style={{ 
+          onMouseEnter={() => {
+            setIsUserInteracting(true);
+            setIsAutoScrolling(false);
+          }}
+          onMouseLeave={() => {
+            // Resume auto-scroll after user stops interacting
+            if (autoScrollTimeoutRef.current) {
+              clearTimeout(autoScrollTimeoutRef.current);
+            }
+            autoScrollTimeoutRef.current = setTimeout(() => {
+              setIsUserInteracting(false);
+              setIsAutoScrolling(true);
+            }, 1500);
+          }}
+          onTouchStart={() => {
+            setIsUserInteracting(true);
+            setIsAutoScrolling(false);
+          }}
+          onTouchEnd={() => {
+            if (autoScrollTimeoutRef.current) {
+              clearTimeout(autoScrollTimeoutRef.current);
+            }
+            autoScrollTimeoutRef.current = setTimeout(() => {
+              setIsUserInteracting(false);
+              setIsAutoScrolling(true);
+            }, 2000);
+          }}
+          style={{
             display: 'flex',
             gap: '2rem',
             alignItems: 'center',
             overflowX: 'auto',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
-            padding: '0 60px'
+            padding: '0 60px',
+            scrollBehavior: 'smooth'
           }}
           className="scrollbar-hide"
         >
