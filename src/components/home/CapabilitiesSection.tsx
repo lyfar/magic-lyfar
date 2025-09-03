@@ -49,9 +49,16 @@ const CapabilitiesSection = () => {
     }
   ];
 
-  const handleCapabilityClick = (filterTags: string[]) => {
-    const tagString = filterTags.join(',');
-    router.push(`/work#${tagString}`);
+  const handleCapabilityClick = (capabilityTitle: string) => {
+    let filterTag = '';
+    if (capabilityTitle === "Automation & AI") {
+      filterTag = "Automation&AI";
+    } else if (capabilityTitle === "Product & Design") {
+      filterTag = "Product&Design";
+    } else if (capabilityTitle === "Video & Content") {
+      filterTag = "Video&Content";
+    }
+    router.push(`/work#${filterTag}`);
   };
 
   return (
@@ -78,7 +85,7 @@ const CapabilitiesSection = () => {
                 border="neutral-medium"
                 shadow="l"
                 style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}
-                onClick={() => handleCapabilityClick(capability.filterTags)}
+                onClick={() => handleCapabilityClick(capability.title)}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
                   e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';

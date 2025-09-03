@@ -19,14 +19,14 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const router = useRouter();
 
-  // Category mapping for display names
+  // Category mapping for display names and filtering
   const categoryMapping = {
-    "ai": "Automation & AI",
-    "dev": "Product & Design",
-    "video": "Video & Content"
+    "Automation&AI": "Automation & AI",
+    "Product&Design": "Product & Design",
+    "Video&Content": "Video & Content"
   };
 
-  const availableTags = React.useMemo(() => ["ai", "dev", "video"], []);
+  const availableTags = React.useMemo(() => ["Automation&AI", "Product&Design", "Video&Content"], []);
 
   // Initialize tags from URL hash on component mount
   useEffect(() => {
