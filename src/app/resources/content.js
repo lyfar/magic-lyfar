@@ -104,7 +104,7 @@ const about = {
     ]
   },
   services: {
-    display: false,
+    display: true,
     title: "Services",
     items: [
       {
@@ -125,7 +125,7 @@ const about = {
     ]
   },
   mission: {
-    display: false,
+    display: true,
     title: "Mission",
     parts: [
       {
