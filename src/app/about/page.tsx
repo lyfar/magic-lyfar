@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Avatar,
   Button,
@@ -18,6 +20,7 @@ import {
   OgCard,
 } from "@/once-ui/components";
 import { Logo } from "@/components/Logo";
+import { useRouter } from "next/navigation";
 import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
@@ -36,6 +39,20 @@ export async function generateMetadata() {
 }
 
 export default function About() {
+  const router = useRouter();
+
+  const handleServiceClick = (serviceTitle: string) => {
+    let filterTag = '';
+    if (serviceTitle === "Automation & AI") {
+      filterTag = "Automation&AI";
+    } else if (serviceTitle === "Product & Design") {
+      filterTag = "Product&Design";
+    } else if (serviceTitle === "Video & Content") {
+      filterTag = "Video&Content";
+    }
+    router.push(`/work#${filterTag}`);
+  };
+
   const structure = [
     {
       title: about.intro.title,
@@ -241,10 +258,26 @@ export default function About() {
                       background="surface"
                       border="neutral-medium"
                       shadow="l"
+                      style={{
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        minHeight: '280px',
+                        display: 'flex',
+                        flexDirection: 'column'
+                      }}
+                      onClick={() => handleServiceClick(service.title)}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-4px)';
+                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '';
+                      }}
                     >
-                      <Column gap="16">
+                      <Column gap="16" fillWidth style={{ flexGrow: 1 }}>
                         <Flex gap="12" vertical="center">
-                          <Icon onBackground="neutral-weak" name={service.icon} />
+                          <Icon onBackground="neutral-weak" name={service.icon} size="xl" />
                           <Heading
                             as="h3"
                             variant="heading-strong-l"
@@ -259,6 +292,14 @@ export default function About() {
                         >
                           {service.description}
                         </Text>
+                        <Flex fillWidth horizontal="end" paddingTop="16" style={{ marginTop: 'auto' }}>
+                          <Flex gap="8" vertical="center" style={{ color: 'var(--brand-primary)' }}>
+                            <Text variant="label-default-s" style={{ color: 'var(--brand-primary)' }}>
+                              View Case Studies
+                            </Text>
+                            <Icon name="arrowRight" size="s" style={{ color: 'var(--brand-primary)' }} />
+                          </Flex>
+                        </Flex>
                       </Column>
                     </Card>
                   ))}

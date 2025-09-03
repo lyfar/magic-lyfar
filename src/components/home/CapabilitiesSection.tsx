@@ -1,15 +1,8 @@
 "use client";
 
 import React from "react";
-import { Heading, Text, Column, Row, Card, Flex } from "@/once-ui/components";
+import { Heading, Text, Column, Row, Card, Flex, Icon } from "@/once-ui/components";
 import { RevealFx } from "@/once-ui/components";
-import {
-  Bot,
-  Monitor,
-  Video,
-  ArrowRight,
-  Code
-} from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const CapabilitiesSection = () => {
@@ -21,19 +14,19 @@ const CapabilitiesSection = () => {
     {
       title: "Automation & AI",
       description: "From CRM integrations and chatbots to workflow pipelines, we design automation that saves time and scales your business.",
-      icon: <Bot className="w-6 h-6" />,
+      icon: "cpu",
       features: ["CRM Integration", "Chatbots", "Workflow Pipelines"]
     },
     {
       title: "Product & Design",
       description: "Websites, mobile apps, and rapid prototypes. We combine UX design with technical execution to take ideas from sketch to production.",
-      icon: <Code className="w-6 h-6" />,
+      icon: "computer",
       features: ["Websites", "Mobile Apps", "Rapid Prototypes"]
     },
     {
       title: "Video & Content",
-      description: "Brand films, interviews, and social campaigns. With a background in high-end video production, we craft stories that resonate and drive attention.",
-      icon: <Video className="w-6 h-6" />,
+      description: "Brand films, interviews, and social campaigns. We craft stories that resonate and drive attention with high-end video production.",
+      icon: "video",
       features: ["Brand Films", "Interviews", "Social Campaigns"]
     }
   ];
@@ -93,9 +86,7 @@ const CapabilitiesSection = () => {
                 <Column gap="16" fillWidth style={{ flexGrow: 1 }}>
                   <Flex gap="12" vertical="center">
                     <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-neutral-alpha-weak">
-                      <div className="text-neutral-strong">
-                        {capability.icon}
-                      </div>
+                      <Icon name={capability.icon} size="xl" onBackground="neutral-strong" />
                     </div>
                     <Heading
                       as="h3"
@@ -123,7 +114,7 @@ const CapabilitiesSection = () => {
                       <Text variant="label-default-s" style={{ color: 'var(--brand-primary)' }}>
                         View Case Studies
                       </Text>
-                      <ArrowRight className="w-4 h-4" />
+                      <Icon name="arrowRight" size="s" />
                     </Flex>
                   </Flex>
                 </Column>
