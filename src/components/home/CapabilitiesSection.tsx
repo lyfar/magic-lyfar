@@ -69,7 +69,7 @@ const CapabilitiesSection = () => {
                 style={{
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
-                  minHeight: '280px',
+                  minHeight: '240px',
                   display: 'flex',
                   flexDirection: 'column'
                 }}
@@ -110,12 +110,7 @@ const CapabilitiesSection = () => {
                     ))}
                   </Column>
                   <Flex fillWidth horizontal="end" paddingTop="16">
-                    <Flex gap="8" vertical="center" style={{ color: 'var(--brand-primary)' }}>
-                      <Text variant="label-default-s" style={{ color: 'var(--brand-primary)' }}>
-                        View Case Studies
-                      </Text>
-                      <Icon name="arrowRight" size="s" />
-                    </Flex>
+                    <Icon name="arrowRight" size="l" onBackground="brand-strong" />
                   </Flex>
                 </Column>
               </Card>
