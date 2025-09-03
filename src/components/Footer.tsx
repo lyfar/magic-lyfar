@@ -10,7 +10,7 @@ export const Footer = () => {
       as="footer"
       fillWidth
       padding="8"
-      horizontal="center"
+      horizontal="start"
       mobileDirection="column"
     >
       <Flex
@@ -19,19 +19,19 @@ export const Footer = () => {
         paddingY="8"
         paddingX="16"
         gap="16"
-        horizontal="space-between"
+        horizontal="start"
         vertical="center"
       >
-        <Flex fillWidth mobileDirection="column" gap="16" horizontal="center" vertical="center">
-          <Text 
-            variant="body-default-s" 
+        <Flex fillWidth mobileDirection="column" gap="16" horizontal="start" vertical="center">
+          <Text
+            variant="body-default-s"
             onBackground="neutral-medium"
             wrap="balance"
-            style={{ textAlign: "center", maxWidth: "32rem" }}
+            style={{ textAlign: "left", maxWidth: "32rem" }}
           >
             We bring ideas to life through film, sharp design, and smart code. From cinematic storytelling to pixel-perfect apps and seamless AI workflows, our projects turn attention into action.
           </Text>
-          <Text variant="body-default-xs" onBackground="neutral-weak" style={{ textAlign: "center" }}>
+          <Text variant="body-default-xs" onBackground="neutral-weak" style={{ textAlign: "left", whiteSpace: "nowrap" }}>
             All Rights Reserved. ©{currentYear} Lyfar Studio | Located in Hong Kong | Business registration Certificate 41163988-000-07-21-A
           </Text>
         </Flex>
