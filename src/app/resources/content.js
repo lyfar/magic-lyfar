@@ -6,7 +6,7 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Technical Lead and Creative Director",
+  role: "Creative Technology Studio",
   avatar: "/images/me.png",
   email: "egor@lyfar.com",
   location: "Asia/Hong_Kong", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
@@ -79,14 +79,14 @@ const about = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "https://meet.egor.lol/lyfar/15min?layout=mobile",
   },
   intro: {
     display: true,
     title: "Introduction",
     description: (
       <>
-        We bring ideas to life through smart code, cutting-edge AI automation, and then cinematic storytelling and sharp design. From technical solutions to creative execution, our projects turn attention into action.
+        We deliver automation that scales your business, product interfaces that convert, and content that drives attention.
       </>
     ),
   },
@@ -108,19 +108,19 @@ const about = {
     title: "Services",
     items: [
       {
-        title: "Development",
-        icon: "code",
-        description: "Websites, web apps, internal tools, intuitive UI/UX design, e-commerce solutions, real-time dashboards, and efficient tech-team integrations."
-      },
-      {
-        title: "AI",
+        title: "Automation & AI",
         icon: "cpu",
-        description: "Practical automations, advanced LLM integrations, custom self-hosted AI models, and fine-tuning solutions built specifically for your data, tech stack, and business goals."
+        description: "From CRM integrations and chatbots to workflow pipelines, we design automation that saves time and scales your business."
       },
       {
-        title: "Content",
+        title: "Product & Design",
+        icon: "monitor",
+        description: "Websites, mobile apps, and rapid prototypes. We combine UX design with technical execution to take ideas from sketch to production."
+      },
+      {
+        title: "Video & Content",
         icon: "video",
-        description: "Cinematic videos, social media content, fashion films, product showcases, corporate storytelling, complete post-production, and tailored distribution strategies."
+        description: "Brand films, interviews, and social campaigns. With a background in high-end video production, we craft stories that resonate and drive attention."
       }
     ]
   },
