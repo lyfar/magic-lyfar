@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Column, Flex, Text, SmartImage } from "@/once-ui/components";
 import styles from "./TestimonialsColumn.module.scss";
 
@@ -80,15 +80,46 @@ export const TestimonialsColumn: React.FC<TestimonialsColumnProps> = ({
   duration,
   className,
 }) => {
+  const [isInView, setIsInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   // Triple the testimonials for smoother infinite scroll
   const tripleTestimonials = [...testimonials, ...testimonials, ...testimonials];
-  
+
+  // Dynamic duration: slower when in view, faster when out of view
+  const dynamicDuration = isInView ? duration * 2.5 : duration * 0.4;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the element is visible
+        rootMargin: '50px', // Add some margin for smoother transitions
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className={`${styles.columnWrapper} ${className || ''}`}>
-      <div 
+    <div
+      ref={containerRef}
+      className={`${styles.columnWrapper} ${className || ''}`}
+    >
+      <div
         className={styles.testimonialsColumn}
         style={{
-          animationDuration: `${duration}s`,
+          animationDuration: `${dynamicDuration}s`,
         }}
       >
         {tripleTestimonials.map((testimonial, index) => (

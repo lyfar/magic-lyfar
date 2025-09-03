@@ -34,7 +34,7 @@ export const Footer = () => {
             <Text
               variant="body-default-xs"
               onBackground="neutral-weak"
-              style={{ textAlign: "left", whiteSpace: "nowrap" }}
+              style={{ textAlign: "left", whiteSpace: "normal" }}
             >
               All Rights Reserved. ©{currentYear} Lyfar Studio | Located in Hong Kong | Business registration Certificate 41163988-000-07-21-A
             </Text>

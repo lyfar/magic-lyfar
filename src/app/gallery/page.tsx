@@ -1,4 +1,5 @@
 import { Flex } from "@/once-ui/components";
+import { RevealFx } from "@/once-ui/components";
 import MasonryGrid from "@/components/gallery/MasonryGrid";
 import { baseURL } from "@/app/resources";
 import { gallery, person } from "@/app/resources/content";
@@ -30,7 +31,9 @@ export default function Gallery() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <MasonryGrid />
+      <RevealFx translateY="16" delay={0.2}>
+        <MasonryGrid />
+      </RevealFx>
     </Flex>
   );
 }

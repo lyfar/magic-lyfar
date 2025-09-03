@@ -1,4 +1,5 @@
 import { Column, Heading } from "@/once-ui/components";
+import { RevealFx } from "@/once-ui/components";
 import { ContactBooking } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { baseURL } from "@/app/resources";
@@ -31,15 +32,19 @@ export default function Blog() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Heading marginBottom="l" variant="display-strong-s">
-        {blog.title}
-      </Heading>
-      <Column
-				fillWidth flex={1}>
-				<Posts range={[1,1]} thumbnail direction="column"/>
-				<Posts range={[2,3]} thumbnail/>
-				<Posts range={[4]} columns="2"/>
-			</Column>
+      <RevealFx translateY="4" fillWidth horizontal="start" paddingBottom="24">
+        <Heading marginBottom="l" variant="display-strong-s">
+          {blog.title}
+        </Heading>
+      </RevealFx>
+      <RevealFx translateY="8" delay={0.2}>
+        <Column
+  				fillWidth flex={1}>
+  				<Posts range={[1,1]} thumbnail direction="column"/>
+  				<Posts range={[2,3]} thumbnail/>
+  				<Posts range={[4]} columns="2"/>
+  			</Column>
+      </RevealFx>
       {contact.display && <ContactBooking contact={contact} />}
     </Column>
   );

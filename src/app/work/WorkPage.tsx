@@ -104,7 +104,8 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
       </RevealFx>
 
       {/* Simple Filter Section */}
-      <Column fillWidth gap="16" paddingX="l" paddingY="m">
+      <RevealFx translateY="16" delay={0.2}>
+        <Column fillWidth gap="16" paddingX="l" paddingY="m">
         <Flex fillWidth horizontal="space-between" vertical="center" wrap>
           <Text variant="heading-strong-s" onBackground="neutral-strong">
             Projects ({filteredProjectsCount})
@@ -136,9 +137,12 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
             />
           ))}
         </Flex>
-      </Column>
+        </Column>
+      </RevealFx>
 
-      <Projects initialProjects={initialProjects} selectedTags={selectedTags} />
+      <RevealFx translateY="16" delay={0.4}>
+        <Projects initialProjects={initialProjects} selectedTags={selectedTags} />
+      </RevealFx>
     </Column>
   );
 } 

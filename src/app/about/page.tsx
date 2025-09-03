@@ -114,7 +114,7 @@ function AboutClient() {
           <TableOfContents structure={structure} about={about} />
         </Column>
       )}
-      <Flex fillWidth mobileDirection="column" horizontal="center">
+      <Flex fillWidth mobileDirection="column" horizontal="start" gap="l">
         {/* Mobile Logo */}
         <RevealFx show="s" fillWidth horizontal="center" paddingBottom="24">
           <Logo width={80} height={40} />
@@ -123,33 +123,26 @@ function AboutClient() {
         {about.avatar.display && about.team.display && (
           <Column
             className={styles.avatar}
-            minWidth="160"
-            paddingX="l"
+            minWidth="0"
+            paddingX="0"
             paddingBottom="xl"
             gap="l"
-            flex={3}
+            flex={0}
             horizontal="center"
             hide="s"
           >
-            {about.team.members.map((member, index) => (
-              <Column key={index} gap="m" horizontal="center" align="center" className={styles["team-member-container"]}>
-                <Avatar
-                  src={member.image}
-                  size="l"
-                />
+          {about.team.members.map((member, index) => (
+            <RevealFx key={index} delay={0.0}>
+              <Column gap="m" horizontal="center" align="center" className={styles["team-member-container"]}>
+                <Avatar src={member.image} size="l" />
                 <Column gap="4" maxWidth={320} className={styles["team-member-info"]}>
-                  <Text variant="heading-strong-s" className={styles["team-member-name"]}>
-                    {member.name}
-                  </Text>
-                  <Text variant="label-default-s" onBackground="neutral-weak" className={styles["team-member-role"]}>
-                    {member.role}
-                  </Text>
-                  <Text variant="body-default-xs" onBackground="neutral-medium" className={styles["team-member-description"]} style={{ lineHeight: "1.4" }}>
-                    {member.description}
-                  </Text>
+                  <Text variant="heading-strong-s" className={styles["team-member-name"]}>{member.name}</Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak" className={styles["team-member-role"]}>{member.role}</Text>
+                  <Text variant="body-default-xs" onBackground="neutral-medium" className={styles["team-member-description"]} style={{ lineHeight: "1.4" }}>{member.description}</Text>
                 </Column>
               </Column>
-            ))}
+            </RevealFx>
+          ))}
           </Column>
         )}
         <Column flex={9} maxWidth={40}>
@@ -229,6 +222,32 @@ function AboutClient() {
               {about.intro.description}
             </Column>
             </RevealFx>
+          )}
+
+          {/* Mobile-only Team Section after intro, before services */}
+          {about.avatar.display && about.team.display && (
+            <div className="s-flex-show">
+              <RevealFx delay={0.1}>
+                <Column paddingX="l" paddingY="l" gap="l" horizontal="start">
+                  {about.team.members.map((member, index) => (
+                    <Column key={index} gap="m" horizontal="start" align="start" className={styles["team-member-container"]}>
+                      <Avatar src={member.image} size="l" />
+                      <Column gap="4" maxWidth={320} className={styles["team-member-info"]}>
+                        <Text variant="heading-strong-s" className={styles["team-member-name"]}>
+                          {member.name}
+                        </Text>
+                        <Text variant="label-default-s" onBackground="neutral-weak" className={styles["team-member-role"]}>
+                          {member.role}
+                        </Text>
+                        <Text variant="body-default-xs" onBackground="neutral-medium" className={styles["team-member-description"]} style={{ lineHeight: "1.4" }}>
+                          {member.description}
+                        </Text>
+                      </Column>
+                    </Column>
+                  ))}
+                </Column>
+              </RevealFx>
+            </div>
           )}
 
           <Line marginBottom="xl" />

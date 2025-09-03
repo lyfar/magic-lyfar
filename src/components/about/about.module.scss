@@ -7,11 +7,22 @@
 }
 
 .avatar {
-    position: sticky;
-    top: var(--static-space-32);
     height: fit-content;
     z-index: 5;
     align-self: flex-start;
+}
+
+/* Desktop: keep avatar column narrow and sticky */
+@media (min-width: 1025px) {
+    .avatar {
+        position: sticky;
+        top: var(--static-space-32);
+        width: 320px;
+        max-width: 320px;
+        flex: 0 0 320px; /* prevent stretching and pushing main content */
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .scheduleButton {
@@ -69,10 +80,13 @@
     .team-member-container {
         justify-content: flex-start !important;
         align-items: flex-start !important;
+        max-width: 360px;
+        width: 100%;
     }
 
     .team-member-info {
         text-align: left !important;
+        max-width: 320px;
     }
 
     .team-member-name {
