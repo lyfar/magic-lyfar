@@ -114,7 +114,7 @@ const about = {
       },
       {
         title: "Product & Design",
-        icon: "monitor",
+        icon: "computer",
         description: "Websites, mobile apps, and rapid prototypes. We combine UX design with technical execution to take ideas from sketch to production."
       },
       {

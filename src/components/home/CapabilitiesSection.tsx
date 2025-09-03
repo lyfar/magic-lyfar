@@ -71,7 +71,8 @@ const CapabilitiesSection = () => {
                   transition: 'all 0.3s ease',
                   minHeight: '240px',
                   display: 'flex',
-                  flexDirection: 'column'
+                  flexDirection: 'column',
+                  position: 'relative'
                 }}
                 onClick={() => handleCapabilityClick(capability.title)}
                 onMouseEnter={(e) => {
@@ -109,7 +110,7 @@ const CapabilitiesSection = () => {
                       </Text>
                     ))}
                   </Column>
-                  <Flex fillWidth horizontal="end" paddingTop="16">
+                  <Flex fillWidth horizontal="end" paddingTop="16" style={{ position: 'absolute', top: '16px', right: '16px' }}>
                     <Icon name="arrowRight" size="l" onBackground="brand-strong" />
                   </Flex>
                 </Column>
