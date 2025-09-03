@@ -1,19 +1,8 @@
-import { baseURL } from "@/app/resources";
-import { person, about, social } from "@/app/resources/content";
-import { Meta } from "@/once-ui/modules";
-
-export async function generateMetadata() {
-  return Meta.generate({
-    title: about.title,
-    description: about.description,
-    baseURL: baseURL,
-    image: `${baseURL}/og?title=${encodeURIComponent(about.title)}`,
-    path: about.path,
-  });
-}
-
 "use client";
 
+import { baseURL } from "@/app/resources";
+import { person, about, social } from "@/app/resources/content";
+import { Schema } from "@/once-ui/modules";
 import {
   Avatar,
   Button,
@@ -38,7 +27,8 @@ import { useRouter } from "next/navigation";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
 import React from "react";
-import { Schema } from "@/once-ui/modules";
+
+// Metadata will be handled automatically by Next.js based on the page structure
 
 function AboutClient() {
   const router = useRouter();
