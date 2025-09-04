@@ -51,11 +51,11 @@ const home = {
   image: "/images/og/home.jpg",
   label: "Home",
   title: `${person.name}'s Portfolio`,
-  description: `${person.name} - ${person.role}: AI, Product & Content`,
-  headline: <>AI, Product & Content</>,
+  description: `${person.name} - ${person.role}: AI, Software & Content`,
+  headline: <>AI, Software & Content</>,
   subline: (
     <>
-      We deliver automation that scales your business, product interfaces that convert, and content that drives attention.
+      Based in Hong Kong. Serving APAC. From idea to live - fast - so you can focus on what you love.
     </>
   ),
   featured: {
@@ -86,7 +86,7 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        We deliver automation that scales your business, product interfaces that convert, and content that drives attention.
+        We deliver automation that scales your business, software interfaces that convert, and content that drives attention.
       </>
     ),
   },
@@ -113,7 +113,7 @@ const about = {
         description: "From CRM integrations and chatbots to workflow pipelines, we design automation that saves time and scales your business."
       },
       {
-        title: "Product & Design",
+        title: "Software & Design",
         icon: "computer",
         description: "Websites, mobile apps, and rapid prototypes. We combine UX design with technical execution to take ideas from sketch to production."
       },
@@ -192,7 +192,7 @@ const about = {
       "Direct conversation is the most efficient and effective method of conveying information to and within a project team.",
       "Working software and finished videos are the primary measure of progress.",
       "We promote sustainable processes. Sponsors, creatives, and users should be able to maintain a constant pace indefinitely.",
-      "Continuous attention to technical excellence and good design enhances the final product.",
+      "Continuous attention to technical excellence and good design enhances the final software.",
       "Simplicity—the art of maximizing the amount of work not done—is essential.",
       "The best architectures, requirements, and designs emerge from self-organizing teams.",
       "At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.",
@@ -249,7 +249,7 @@ const about = {
     members: [
       {
         name: "Egor Lyfar",
-        role: "Technical Product Manager & Creative Director",
+        role: "Technical Software Manager & Creative Director",
         image: person.avatar,
         description: "Creative director and technical lead, bringing together different partners who produce bespoke content, AI automation, development, and more."
       },

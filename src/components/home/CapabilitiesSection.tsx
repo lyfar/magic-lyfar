@@ -16,7 +16,7 @@ const CapabilitiesSection = () => {
       features: ["CRM Integration", "Chatbots", "Workflow Pipelines"]
     },
     {
-      title: "Product & Design",
+      title: "Software & Design",
       description: "Websites, mobile apps, and rapid prototypes. We combine UX design with technical execution to take ideas from sketch to production.",
       icon: "computer",
       features: ["Websites", "Mobile Apps", "Rapid Prototypes"]

@@ -7,7 +7,7 @@ import styles from "./TestimonialsSection.module.scss";
 
 const testimonials = [
   {
-    text: "Egor has solid project management skills. He is professional, reliable and aims at delivering a perfect product for his client. He is creative and a good listener, he has strong eye for detail and make relevant suggestions to elevate further the project.",
+    text: "Egor has solid project management skills. He is professional, reliable and aims at delivering a perfect software for his client. He is creative and a good listener, he has strong eye for detail and make relevant suggestions to elevate further the project.",
     image: "/images/testimonials/TATIANA.jpg",
     name: "Tatiana Delannoy",
     role: "Head of Marketing, Chanel Fashion",
