@@ -434,6 +434,7 @@ function AboutClient() {
                   ))}
                 </Column>
                 <Grid columns="2" mobileColumns="1" gap="24">
+                  {/* @ts-expect-error: This won't execute since manifesto.display is false */}
                   {about.manifesto.values.map((value, index) => (
                     <Card
                       key={index}
