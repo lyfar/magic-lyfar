@@ -345,8 +345,39 @@ function AboutClient() {
                 <Heading as="h2" id={about.mission.title} variant="display-strong-s">
                   {about.mission.title}
                 </Heading>
+                <Card
+                  fillWidth
+                  direction="column"
+                  radius="l"
+                  padding="32"
+                  background="surface"
+                  border="neutral-medium"
+                  shadow="l"
+                >
+                  <Column gap="16">
+                    <Text
+                      variant="body-default-l"
+                      onBackground="neutral-strong"
+                    >
+                      {about.mission.description}
+                    </Text>
+                  </Column>
+                </Card>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {/* Vision Section */}
+          {about.vision.display && (
+            <RevealFx delay={0.7}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading as="h2" id={about.vision.title} variant="display-strong-s">
+                  {about.vision.title}
+                </Heading>
                 <Grid columns="1" mobileColumns="1" gap="24">
-                  {about.mission.parts.map((part, index) => (
+                  {about.vision.parts.map((part, index) => (
                     <Card
                       key={index}
                       fillWidth
@@ -429,7 +460,7 @@ function AboutClient() {
                           variant="body-default-m"
                           onBackground="neutral-weak"
                         >
-                          {value.subline}
+                          {value.description}
                         </Text>
                       </Column>
                     </Card>
@@ -460,15 +491,95 @@ function AboutClient() {
                 >
                   {about.principles.title}
                 </Heading>
-                <AccordionGroup
-                  items={about.principles.points.map((principle: string, index: number) => ({
-                    title: `Principle #${index + 1}`,
-                    content: <Text>{principle}</Text>,
-                  }))}
-                />
+                <Grid columns="1" mobileColumns="1" gap="24">
+                  {about.principles.items.map((principle, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction="column"
+                      radius="l"
+                      padding="32"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                    >
+                      <Column gap="16">
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={principle.icon} />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {principle.title}
+                          </Heading>
+                        </Flex>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {principle.description}
+                        </Text>
+                      </Column>
+                    </Card>
+                  ))}
+                </Grid>
               </Column>
             </RevealFx>
           )}
+
+          <Line marginBottom="xl" />
+
+          {/* Values Section */}
+          {about.values.display && (
+            <RevealFx delay={1.2}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading
+                  as="h2"
+                  id={about.values.title}
+                  variant="display-strong-s"
+                  marginBottom="m"
+                >
+                  {about.values.title}
+                </Heading>
+                <Grid columns="2" mobileColumns="1" gap="24">
+                  {about.values.items.map((value, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction="column"
+                      radius="l"
+                      padding="32"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                    >
+                      <Column gap="16">
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={value.icon} />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {value.title}
+                          </Heading>
+                        </Flex>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {value.description}
+                        </Text>
+                      </Column>
+                    </Card>
+                  ))}
+                </Grid>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
 
           {about.studies.display && (
             <>

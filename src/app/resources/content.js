@@ -156,7 +156,13 @@ const about = {
     description: [
       "From Hong Kong roots, we've grown into a global crew—directing, analysing, coding, managing, automating and marketing. We constantly refine digital-content workflows and pass those gains to our clients, which leads us to value:"
     ],
-    values: [
+    values: [],
+    conclusion: "That is, while there is value in the items on the bottom, we value the items on top more."
+  },
+  values: {
+    display: true,
+    title: "Values",
+    items: [
       {
         title: "Originality over Routine",
         icon: "lightbulb",
@@ -187,8 +193,7 @@ const about = {
         icon: "wrench",
         description: "Use the best tools for the job, regardless of platform or vendor."
       }
-    ],
-    conclusion: "That is, while there is value in the items on the bottom, we value the items on top more."
+    ]
   },
   principles: {
     display: true,
