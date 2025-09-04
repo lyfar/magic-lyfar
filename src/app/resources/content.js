@@ -180,17 +180,17 @@ const about = {
     items: [
       {
         title: "Originality over Routine",
-        icon: "lightbulb",
+        icon: "sparkle",
         description: "Embrace creative solutions and avoid cookie-cutter approaches."
       },
       {
         title: "Craft & Aesthetics",
-        icon: "palette",
+        icon: "gallery",
         description: "Value beautiful, thoughtful design and attention to detail."
       },
       {
         title: "Speed with Stability",
-        icon: "zap",
+        icon: "rocket",
         description: "Deliver quickly while maintaining reliable, quality results."
       },
       {
@@ -205,7 +205,7 @@ const about = {
       },
       {
         title: "Tool-Agnostic Innovation",
-        icon: "wrench",
+        icon: "code",
         description: "Use the best tools for the job, regardless of platform or vendor."
       }
     ]
@@ -216,7 +216,7 @@ const about = {
     items: [
       {
         title: "Right Medium, Shortest Path",
-        icon: "compass",
+        icon: "search",
         description: "Choose the most efficient approach and technology stack for each unique challenge."
       },
       {
@@ -226,17 +226,17 @@ const about = {
       },
       {
         title: "Cut Repetition, Amplify Craft",
-        icon: "scissors",
+        icon: "minus",
         description: "Eliminate repetitive tasks while elevating and showcasing human craftsmanship."
       },
       {
         title: "Measure What Moves the Needle",
-        icon: "barChart",
+        icon: "grid",
         description: "Focus on metrics that drive real business impact and meaningful outcomes."
       },
       {
         title: "Human First",
-        icon: "heart",
+        icon: "person",
         description: "Prioritize people and relationships, giving everyone more time for what they love."
       }
     ]
