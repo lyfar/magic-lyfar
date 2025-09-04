@@ -127,16 +127,26 @@ const about = {
   mission: {
     display: true,
     title: "Mission",
+    description: "We plan, produce, build, ship, and manage in Hong Kong & APAC. We equip teams with AI to remove repetitive work, so content and software go live fast - and people spend time on what they love."
+  },
+  vision: {
+    display: true,
+    title: "Vision",
     parts: [
       {
-        icon: "sparkle",
-        title: "For Our Studio",
-        description: "Operate an autonomous creative hub where AI manages administration and logistics, freeing our artists to fully engage in their craft."
+        icon: "eye",
+        title: "Vision",
+        description: "Help teams automate the repetitive work, keep people doing what they love, and make 'idea to live' a normal pace across APAC — using the right medium for the job."
       },
       {
-        icon: "rocket",
-        title: "For Our Partners",
-        description: "We uncover a brand's purpose, shape it into clear stories, build the digital tools to deliver those stories, and add AI that frees teams to focus on creating new value."
+        icon: "target",
+        title: "BHAG 2030",
+        description: "Free and reinvest 1,000,000 human hours from repetitive work into what people love by 2030 — craft, learning, family, or rest — and publish an annual Happy Hours Report to show where that time went."
+      },
+      {
+        icon: "sun",
+        title: "Vivid Picture",
+        description: "Morning idea → first assets same day; prototypes in days. Routine PM/docs/reporting → auto-generated and connected to CRM/ERP. Every engagement ships with a time-to-ship / hours-saved dashboard. People spend ~80% of their time on what they love. Teams are trained and confident working in a post-labor world."
       }
     ]
   },
@@ -148,54 +158,67 @@ const about = {
     ],
     values: [
       {
-        title: "Mindful Discovery",
-        subline: "over rushed assumptions and template thinking",
-        icon: "search"
+        title: "Originality over Routine",
+        icon: "lightbulb",
+        description: "Embrace creative solutions and avoid cookie-cutter approaches."
       },
       {
-        title: "Continuous Experimentation",
-        subline: "over big-bang launches and fear of failure",
-        icon: "refresh"
+        title: "Craft & Aesthetics",
+        icon: "palette",
+        description: "Value beautiful, thoughtful design and attention to detail."
       },
       {
-        title: "Right-Sized Solutions",
-        subline: "over bloated suites and tech for its own sake",
-        icon: "checkCircle"
+        title: "Speed with Stability",
+        icon: "zap",
+        description: "Deliver quickly while maintaining reliable, quality results."
       },
       {
-        title: "Individuals and Interactions",
-        subline: "Over processes and long-read communication",
-        icon: "users"
+        title: "Honest Data",
+        icon: "barChart",
+        description: "Base decisions on transparent, accurate information and metrics."
       },
       {
-        title: "Finished Project",
-        subline: "Over comprehensive briefs and story boards",
-        icon: "check"
+        title: "Human Interaction",
+        icon: "users",
+        description: "Prioritize genuine human connections and collaboration."
       },
       {
-        title: "Customer Collaboration",
-        subline: "Over contract negotiation",
-        icon: "handshake"
-      },
+        title: "Tool-Agnostic Innovation",
+        icon: "wrench",
+        description: "Use the best tools for the job, regardless of platform or vendor."
+      }
     ],
     conclusion: "That is, while there is value in the items on the bottom, we value the items on top more."
   },
   principles: {
-    display: false,
+    display: true,
     title: "Principles",
-    points: [
-      "Our highest priority is to satisfy the client through early and continuous delivery of valuable work, from video production to software development.",
-      "Welcome changing requirements, even late in the process. We harness change for the client's competitive advantage.",
-      "Deliver working results frequently, from a couple of days to a couple of weeks, whether rough cuts or software builds.",
-      "Business stakeholders, project managers, creatives, and developers must work together daily throughout the project.",
-      "Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.",
-      "Direct conversation is the most efficient and effective method of conveying information to and within a project team.",
-      "Working software and finished videos are the primary measure of progress.",
-      "We promote sustainable processes. Sponsors, creatives, and users should be able to maintain a constant pace indefinitely.",
-      "Continuous attention to technical excellence and good design enhances the final software.",
-      "Simplicity—the art of maximizing the amount of work not done—is essential.",
-      "The best architectures, requirements, and designs emerge from self-organizing teams.",
-      "At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.",
+    items: [
+      {
+        title: "Right Medium, Shortest Path",
+        icon: "compass",
+        description: "Choose the most efficient approach and technology stack for each unique challenge."
+      },
+      {
+        title: "AI Equips People",
+        icon: "cpu",
+        description: "AI enhances human capabilities and creativity; it doesn't replace the human element."
+      },
+      {
+        title: "Cut Repetition, Amplify Craft",
+        icon: "scissors",
+        description: "Eliminate repetitive tasks while elevating and showcasing human craftsmanship."
+      },
+      {
+        title: "Measure What Moves the Needle",
+        icon: "barChart",
+        description: "Focus on metrics that drive real business impact and meaningful outcomes."
+      },
+      {
+        title: "Human First",
+        icon: "heart",
+        description: "Prioritize people and relationships, giving everyone more time for what they love."
+      }
     ]
   },
   studies: {
