@@ -86,7 +86,7 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        We deliver automation that scales your business, software interfaces that convert, and content that drives attention.
+        We diagnose your goal (trust, reach, speed, cost), pick the path (live-action, photo, AI-assisted, interactive, or hybrid), and instrument the flow so you can see time-to-ship, hours saved, and (when relevant) conversion lift.
       </>
     ),
   },
