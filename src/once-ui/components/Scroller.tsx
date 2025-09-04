@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import classNames from "classnames";
 import { Flex, IconButton, BaseColor, Fade } from ".";
 import styles from "./Scroller.module.scss";
@@ -31,7 +31,7 @@ const Scroller: React.FC<ScrollerProps> = ({
   const [showNextButton, setShowNextButton] = useState<boolean>(false);
 
   // Function to check and update scroll buttons visibility
-  const updateScrollButtonsVisibility = () => {
+  const updateScrollButtonsVisibility = useCallback(() => {
     const scroller = scrollerRef.current;
     if (scroller) {
       const scrollPosition = direction === "row" ? scroller.scrollLeft : scroller.scrollTop;
@@ -49,7 +49,7 @@ const Scroller: React.FC<ScrollerProps> = ({
       setShowPrevButton(isScrollable && scrollPosition > 0);
       setShowNextButton(isScrollable && scrollPosition < maxScrollPosition - 1);
     }
-  };
+  }, [direction]);
 
   // Handle scroll events
   useEffect(() => {
