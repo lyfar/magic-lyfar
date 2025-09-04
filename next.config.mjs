@@ -34,6 +34,13 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Domain redirect: new.lyfar.com → www.lyfar.com
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'new.lyfar.com' }],
+        destination: 'https://www.lyfar.com/:path*',
+        permanent: true,
+      },
       // Redirect from old post URLs to new blog structure
       {
         source: '/posts/:slug',
