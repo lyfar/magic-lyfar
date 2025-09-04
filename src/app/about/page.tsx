@@ -1,8 +1,18 @@
-"use client";
-
 import { baseURL } from "@/app/resources";
 import { person, about, social } from "@/app/resources/content";
-import { Schema } from "@/once-ui/modules";
+import { Schema, Meta } from "@/once-ui/modules";
+
+export async function generateMetadata() {
+  return Meta.generate({
+    title: about.title,
+    description: about.description,
+    baseURL: baseURL,
+    image: `${baseURL}/og?title=${encodeURIComponent(about.title)}`,
+    path: about.path,
+  });
+}
+
+"use client";
 import {
   Avatar,
   Button,

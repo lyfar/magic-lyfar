@@ -50,8 +50,8 @@ const home = {
   path: "/",
   image: "/images/og/home.jpg",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `${person.name} - ${person.role}: AI, Software & Content`,
+  title: `${person.name} - Creative Technology Studio | AI, Software & Content`,
+  description: `Hong Kong-based Creative Technology Studio unifying creative direction, software engineering, and AI automation to turn ideas live fast.`,
   headline: <>AI, Software & Content</>,
   subline: (
     <>
@@ -68,8 +68,8 @@ const home = {
 const about = {
   path: "/about",
   label: "About",
-  title: `About – ${person.name}`,
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+  title: `About – ${person.name} | Creative Technology Studio`,
+  description: `Meet ${person.name}, Hong Kong-based Creative Technology Studio specializing in AI automation, software engineering, and content production.`,
   tableOfContent: {
     display: true,
     subItems: false,
@@ -304,8 +304,8 @@ const about = {
 const blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
+  title: `${person.name} Blog - Creative Technology Insights`,
+  description: `Creative technology insights, design trends, and AI automation strategies from ${person.name}, Hong Kong-based Creative Technology Studio.`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route
 };
@@ -313,8 +313,8 @@ const blog = {
 const work = {
   path: "/work",
   label: "Work",
-  title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
+  title: `${person.name} Portfolio - Creative Technology Projects`,
+  description: `Explore ${person.name}'s portfolio of creative technology projects, from AI automation and software development to content production and digital experiences.`,
   // Create new project pages by adding a new .mdx file to app/blog/posts
   // All projects will be listed on the /home and /work routes
 };
@@ -322,8 +322,8 @@ const work = {
 const gallery = {
   path: "/gallery",
   label: "Gallery",
-  title: `Photo gallery – ${person.name}`,
-  description: `A photo collection by ${person.name}`,
+  title: `${person.name} Gallery - Visual Storytelling`,
+  description: `Explore ${person.name}'s visual storytelling through photography and creative imagery from projects and creative explorations.`,
   // Images by https://lorant.one
   // These are placeholder images, replace with your own
   images: [

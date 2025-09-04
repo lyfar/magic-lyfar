@@ -47,6 +47,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       )}
     >
       <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.jpg" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -65,6 +70,33 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                 }
               })();
             `,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Lyfar Studio",
+              "url": baseURL,
+              "logo": `${baseURL}/images/LOGO.svg`,
+              "description": "Hong Kong-based Creative Technology Studio unifying creative direction, software engineering, and AI automation to turn ideas live fast.",
+              "founder": {
+                "@type": "Person",
+                "name": "Egor Lyfar"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Hong Kong",
+                "addressRegion": "HK",
+                "addressCountry": "HK"
+              },
+              "sameAs": [
+                "https://www.instagram.com/egor.lyfar/",
+                "https://www.linkedin.com/in/lyfar/"
+              ]
+            })
           }}
         />
       </head>
