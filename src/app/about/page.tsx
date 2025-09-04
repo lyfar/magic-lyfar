@@ -1,6 +1,6 @@
 import { baseURL } from "@/app/resources";
-import { person, about, social } from "@/app/resources/content";
-import { Schema, Meta } from "@/once-ui/modules";
+import { about } from "@/app/resources/content";
+import { Meta } from "@/once-ui/modules";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -13,6 +13,9 @@ export async function generateMetadata() {
 }
 
 "use client";
+
+import { person, social } from "@/app/resources/content";
+import { Schema } from "@/once-ui/modules";
 import {
   Avatar,
   Button,
