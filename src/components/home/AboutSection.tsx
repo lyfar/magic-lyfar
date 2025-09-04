@@ -14,7 +14,7 @@ const AboutSection = () => {
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="start" paddingBottom="32">
             <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              Lyfar Studio is a creative technology studio built by a technologist with 15+ years across software and content. I run a lean core and bring in trusted collaborators when the brief calls for it - choosing the right medium and using AI where it helps.
+              The only Hong Kong–based Creative Technology studio that unifies creative direction, software engineering, and AI automation to turn ideas live fast.
             </Text>
           </RevealFx>
         </Column>
