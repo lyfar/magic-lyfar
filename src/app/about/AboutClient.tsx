@@ -1,0 +1,599 @@
+"use client";
+
+import { baseURL } from "@/app/resources";
+import { person, social, about } from "@/app/resources/content";
+import { Schema } from "@/once-ui/modules";
+import {
+  Avatar,
+  Button,
+  Column,
+  Flex,
+  Grid,
+  Heading,
+  HoloFx,
+  Icon,
+  IconButton,
+  RevealFx,
+  SmartImage,
+  Tag,
+  Text,
+  Line,
+  AccordionGroup,
+  Card,
+  OgCard,
+} from "@/once-ui/components";
+import { Logo } from "@/components/Logo";
+import { useRouter } from "next/navigation";
+import TableOfContents from "@/components/about/TableOfContents";
+import styles from "@/components/about/about.module.scss";
+import React from "react";
+
+function AboutClient() {
+  const router = useRouter();
+
+  const handleServiceClick = (serviceTitle: string) => {
+    let filterTag = '';
+    if (serviceTitle === "Automation & AI") {
+      filterTag = "Automation&AI";
+    } else if (serviceTitle === "Software") {
+      filterTag = "Software&Design";
+    } else if (serviceTitle === "Video & Content" || serviceTitle === "Content Production") {
+      filterTag = "Video&Content";
+    }
+    router.push(`/work#${filterTag}`);
+  };
+
+  const structure = [
+    {
+      title: about.intro.title,
+      display: about.intro.display,
+      items: [],
+    },
+    {
+      title: about.work.title,
+      display: about.work.display,
+      items: [],
+    },
+    {
+      title: about.services.title,
+      display: about.services.display,
+      items: [],
+    },
+    {
+      title: about.mission.title,
+      display: about.mission.display,
+      items: [],
+    },
+    {
+      title: about.vision.title,
+      display: about.vision.display,
+      items: [],
+    },
+    {
+      title: about.principles.title,
+      display: about.principles.display,
+      items: [],
+    },
+    {
+      title: about.values.title,
+      display: about.values.display,
+      items: [],
+    },
+    {
+      title: about.studies.title,
+      display: about.studies.display,
+      items: about.studies.institutions.map((institution) => institution.name),
+    },
+    {
+      title: about.technical.title,
+      display: about.technical.display,
+      items: about.technical.skills.map((skill) => skill.title),
+    },
+  ];
+
+  return (
+    <Column maxWidth="m">
+      <Schema
+        as="webPage"
+        baseURL={baseURL}
+        title={about.title}
+        description={about.description}
+        path={about.path}
+        image={`${baseURL}/og?title=${encodeURIComponent(about.title)}`}
+        author={{
+          name: person.name,
+          url: `${baseURL}${about.path}`,
+          image: `${baseURL}${person.avatar}`,
+        }}
+      />
+      {about.tableOfContent.display && (
+        <Column
+          left="0"
+          style={{ top: "50%", transform: "translateY(-50%)" }}
+          position="fixed"
+          paddingLeft="24"
+          gap="32"
+          hide="s"
+        >
+          <TableOfContents structure={structure} about={about} />
+        </Column>
+      )}
+      <Flex fillWidth mobileDirection="column" horizontal="start" gap="l">
+        {/* Mobile Logo */}
+        <RevealFx show="s" fillWidth horizontal="center" paddingBottom="24">
+          <Logo width={80} height={40} />
+        </RevealFx>
+
+        {about.avatar.display && about.team.display && (
+          <Column
+            className={styles.avatar}
+            minWidth="0"
+            paddingX="0"
+            paddingBottom="xl"
+            gap="l"
+            flex={0}
+            horizontal="center"
+            hide="s"
+          >
+          {about.team.members.map((member, index) => (
+            <RevealFx key={index} delay={0.0}>
+              <Column gap="m" horizontal="center" align="center" className={styles["team-member-container"]}>
+                <Avatar src={member.image} size="l" />
+                <Column gap="4" maxWidth={320} className={styles["team-member-info"]}>
+                  <Text variant="heading-strong-s" className={styles["team-member-name"]}>{member.name}</Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak" className={styles["team-member-role"]}>{member.role}</Text>
+                  <Text variant="body-default-xs" onBackground="neutral-medium" className={styles["team-member-description"]} style={{ lineHeight: "1.4" }}>{member.description}</Text>
+                </Column>
+              </Column>
+            </RevealFx>
+          ))}
+          </Column>
+        )}
+        <Column flex={9} maxWidth={40}>
+          <RevealFx>
+          <Column
+            id={about.intro.title}
+            fillWidth
+            minHeight="160"
+            vertical="center"
+            marginBottom="32"
+          >
+            {about.calendar.display && (
+              <a
+                href={about.calendar.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+                className={styles.scheduleButton}
+              >
+                <div
+                  className={styles.scheduleButtonInner}
+                >
+                  <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
+                  <Flex paddingX="8">Schedule a call</Flex>
+                  <IconButton
+                    data-border="rounded"
+                    variant="secondary"
+                    icon="chevronRight"
+                    style={{ pointerEvents: 'none' }}
+                  />
+                </div>
+              </a>
+            )}
+              <Heading variant="display-strong-xl">
+              {person.name}
+            </Heading>
+            <Text
+              variant="display-default-xs"
+              onBackground="neutral-weak"
+            >
+              {person.role}
+            </Text>
+            {social.length > 0 && (
+                <Flex paddingTop="20" paddingBottom="8" gap="8" wrap horizontal="center" fitWidth data-border="rounded">
+                {social.map(
+                  (item) =>
+                    item.link && (
+                        <React.Fragment key={item.name}>
+                            <Button
+                                className="s-flex-hide"
+                                key={item.name}
+                                href={item.link}
+                                prefixIcon={item.icon}
+                                label={item.name}
+                                size="s"
+                                variant="secondary"
+                            />
+                            <IconButton
+                                className="s-flex-show"
+                                size="l"
+                                key={`${item.name}-icon`}
+                                href={item.link}
+                                icon={item.icon}
+                                variant="secondary"
+                            />
+                        </React.Fragment>
+                    ),
+                )}
+              </Flex>
+            )}
+          </Column>
+          </RevealFx>
+
+          {about.intro.display && (
+            <RevealFx delay={0.2}>
+            <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
+              {about.intro.description}
+            </Column>
+            </RevealFx>
+          )}
+
+          {/* Mobile-only Team Section after intro, before services */}
+          {about.avatar.display && about.team.display && (
+            <div className="s-flex-show">
+              <RevealFx delay={0.1}>
+                <Column paddingX="l" paddingY="l" gap="l" horizontal="start">
+                  {about.team.members.map((member, index) => (
+                    <Column key={index} gap="m" horizontal="start" align="start" className={styles["team-member-container"]}>
+                      <Avatar src={member.image} size="l" />
+                      <Column gap="4" maxWidth={320} className={styles["team-member-info"]}>
+                        <Text variant="heading-strong-s" className={styles["team-member-name"]}>
+                          {member.name}
+                        </Text>
+                        <Text variant="label-default-s" onBackground="neutral-weak" className={styles["team-member-role"]}>
+                          {member.role}
+                        </Text>
+                        <Text variant="body-default-xs" onBackground="neutral-medium" className={styles["team-member-description"]} style={{ lineHeight: "1.4" }}>
+                          {member.description}
+                        </Text>
+                      </Column>
+                    </Column>
+                  ))}
+                </Column>
+              </RevealFx>
+            </div>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {/* Services Section */}
+          {about.services.display && (
+            <RevealFx delay={0.4}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading as="h2" id={about.services.title} variant="display-strong-s">
+                  {about.services.title}
+                </Heading>
+                <Grid columns="1" mobileColumns="1" gap="24">
+                  {about.services.items.map((service, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction="column"
+                      radius="l"
+                      padding="32"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                      style={{
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        position: 'relative'
+                      }}
+                      onClick={() => handleServiceClick(service.title)}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-4px)';
+                        e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '';
+                      }}
+                    >
+                      <Column gap="16" fillWidth style={{ flexGrow: 1 }}>
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={service.icon} size="xl" />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {service.title}
+                          </Heading>
+                        </Flex>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {service.description}
+                        </Text>
+
+                      </Column>
+                    </Card>
+                  ))}
+                </Grid>
+              </Column>
+            </RevealFx>
+          )}
+
+          {/* Work Section */}
+          {about.work.display && (
+            <RevealFx delay={0.4}>
+              <Column>
+              <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
+                {about.work.title}
+              </Heading>
+                {about.work.subline && (
+                  <Text variant="body-default-l" onBackground="brand-weak" marginBottom="m">
+                    {about.work.subline}
+                      </Text>
+                )}
+                <Column gap="24" marginBottom="40">
+                  {about.work.description.map((paragraph, index) => (
+                    <Text key={index} variant="body-default-m">
+                      {paragraph}
+                    </Text>
+                  ))}
+                </Column>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {/* Mission Section */}
+          {about.mission.display && (
+            <RevealFx delay={0.6}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading as="h2" id={about.mission.title} variant="display-strong-s">
+                  {about.mission.title}
+                </Heading>
+                <Card
+                  fillWidth
+                  direction="column"
+                  radius="l"
+                  padding="32"
+                  background="surface"
+                  border="neutral-medium"
+                  shadow="l"
+                >
+                  <Column gap="16">
+                    <Text
+                      variant="body-default-l"
+                      onBackground="neutral-strong"
+                    >
+                      {about.mission.description}
+                    </Text>
+                  </Column>
+                </Card>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {/* Vision Section */}
+          {about.vision.display && (
+            <RevealFx delay={0.7}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading as="h2" id={about.vision.title} variant="display-strong-s">
+                  {about.vision.title}
+                </Heading>
+                <Grid columns="1" mobileColumns="1" gap="24">
+                  {about.vision.parts.map((part, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction="column"
+                      radius="l"
+                      padding="32"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                    >
+                      <Column gap="16">
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={part.icon} />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {part.title}
+                          </Heading>
+                        </Flex>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {part.description}
+                        </Text>
+                      </Column>
+                    </Card>
+                  ))}
+                </Grid>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+
+          {/* Principles Section */}
+          {about.principles.display && (
+            <RevealFx delay={1.0}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading
+                  as="h2"
+                  id={about.principles.title}
+                  variant="display-strong-s"
+                  marginBottom="m"
+                >
+                  {about.principles.title}
+                </Heading>
+                <Grid columns="1" mobileColumns="1" gap="24">
+                  {about.principles.items.map((principle, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction="column"
+                      radius="l"
+                      padding="32"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                    >
+                      <Column gap="16">
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={principle.icon} />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {principle.title}
+                          </Heading>
+                        </Flex>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {principle.description}
+                        </Text>
+                      </Column>
+                    </Card>
+                  ))}
+                </Grid>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {/* Values Section */}
+          {about.values.display && (
+            <RevealFx delay={1.2}>
+              <Column fillWidth gap="m" marginBottom="xl">
+                <Heading
+                  as="h2"
+                  id={about.values.title}
+                  variant="display-strong-s"
+                  marginBottom="m"
+                >
+                  {about.values.title}
+                </Heading>
+                <Grid columns="2" mobileColumns="1" gap="24">
+                  {about.values.items.map((value, index) => (
+                    <Card
+                      key={index}
+                      fillWidth
+                      direction="column"
+                      radius="l"
+                      padding="32"
+                      background="surface"
+                      border="neutral-medium"
+                      shadow="l"
+                    >
+                      <Column gap="16">
+                        <Flex gap="12" vertical="center">
+                          <Icon onBackground="neutral-weak" name={value.icon} />
+                          <Heading
+                            as="h3"
+                            variant="heading-strong-l"
+                            onBackground="neutral-strong"
+                          >
+                            {value.title}
+                          </Heading>
+                        </Flex>
+                        <Text
+                          variant="body-default-m"
+                          onBackground="neutral-weak"
+                        >
+                          {value.description}
+                        </Text>
+                      </Column>
+                    </Card>
+                  ))}
+                </Grid>
+              </Column>
+            </RevealFx>
+          )}
+
+          <Line marginBottom="xl" />
+
+          {about.studies.display && (
+            <>
+              <Heading as="h2" id={about.studies.title} variant="display-strong-s" marginBottom="m">
+                {about.studies.title}
+              </Heading>
+              <Column fillWidth gap="l" marginBottom="40">
+                {about.studies.institutions.map((institution, index) => (
+                  <Column key={`${institution.name}-${index}`} fillWidth gap="4">
+                    <Text id={institution.name} variant="heading-strong-l">
+                      {institution.name}
+                    </Text>
+                    <Text variant="heading-default-xs" onBackground="neutral-weak">
+                      {institution.description}
+                    </Text>
+                  </Column>
+                ))}
+              </Column>
+            </>
+          )}
+
+          {about.technical.display && (
+            <>
+              <Heading
+                as="h2"
+                id={about.technical.title}
+                variant="display-strong-s"
+                marginBottom="40"
+              >
+                {about.technical.title}
+              </Heading>
+              <Column fillWidth gap="l">
+                {about.technical.skills.map((skill, index) => (
+                  <Column key={`${skill}-${index}`} fillWidth gap="4">
+                    <Text variant="heading-strong-l">{skill.title}</Text>
+                    <Text variant="body-default-m" onBackground="neutral-weak">
+                      {skill.description}
+                    </Text>
+                    {skill.images && skill.images.length > 0 && (
+                      <Flex fillWidth paddingTop="m" gap="12" wrap>
+                        {skill.images.map((image, index) => (
+                          <Flex
+                            key={index}
+                            border="neutral-medium"
+                            radius="m"
+                            //@ts-ignore
+                            minWidth={image.width}
+                            //@ts-ignore
+                            height={image.height}
+                          >
+                            <SmartImage
+                              enlarge
+                              radius="m"
+                              //@ts-ignore
+                              sizes={image.width.toString()}
+                              //@ts-ignore
+                              alt={image.alt}
+                              //@ts-ignore
+                              src={image.src}
+                            />
+                          </Flex>
+                        ))}
+                      </Flex>
+                    )}
+                  </Column>
+                ))}
+              </Column>
+            </>
+          )}
+        </Column>
+      </Flex>
+    </Column>
+  );
+}
+
+export default AboutClient;

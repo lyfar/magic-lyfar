@@ -32,29 +32,29 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  async redirects() {
-    return [
-      // Domain redirect: new.lyfar.com → www.lyfar.com
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'new.lyfar.com' }],
-        destination: 'https://www.lyfar.com/:path*',
-        permanent: true,
-      },
-      // Redirect from old post URLs to new blog structure
-      {
-        source: '/posts/:slug',
-        destination: '/blog/posts/:slug',
-        permanent: true, // This is a 308 redirect
-      },
-      {
-        source: '/the-importance-of-video-production-services',
-        destination: '/blog/posts/the-importance-of-video-production-services',
-        permanent: true,
-      },
-      // Add more specific redirects as needed
-    ];
-  },
+  // Note: Redirects are handled via Cloudflare Page Rules
+  // async redirects() {
+  //   return [
+  //     // Domain redirect: new.lyfar.com → www.lyfar.com
+  //     {
+  //       source: '/:path*',
+  //       has: [{ type: 'host', value: 'new.lyfar.com' }],
+  //       destination: 'https://www.lyfar.com/:path*',
+  //       permanent: true,
+  //     },
+  //     // Redirect from old post URLs to new blog structure
+  //     {
+  //       source: '/posts/:slug',
+  //       destination: '/blog/posts/:slug',
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: '/the-importance-of-video-production-services',
+  //       destination: '/blog/posts/the-importance-of-video-production-services',
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 };
 
 export default withMDX(nextConfig);
