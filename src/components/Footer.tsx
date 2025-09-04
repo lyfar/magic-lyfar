@@ -29,7 +29,7 @@ export const Footer = () => {
               wrap="balance"
               style={{ textAlign: "left" }}
             >
-              Based in Hong Kong, we bring ideas to life through film, sharp design, and smart code. From cinematic storytelling to pixel-perfect apps and seamless AI workflows, our projects turn attention into action across Asia.
+              The only Hong Kong–based Creative Technology studio that unifies creative direction, software engineering, and AI automation to turn ideas live fast.
             </Text>
             <Text
               variant="body-default-xs"
