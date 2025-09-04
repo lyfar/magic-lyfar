@@ -108,19 +108,39 @@ const about = {
     title: "Services",
     items: [
       {
+        title: "Strategy & Diagnostic",
+        icon: "search",
+        description: "Discovery, value-stream map, 'idea to live' plan, SLOs, KPI setup."
+      },
+      {
+        title: "Content Production",
+        icon: "video",
+        description: "Live-action interviews/events, photography, AI-assisted media, motion, social kits."
+      },
+      {
+        title: "Software",
+        icon: "computer",
+        description: "Websites, microsites, prototypes, and interfaces."
+      },
+      {
         title: "Automation & AI",
         icon: "cpu",
-        description: "From CRM integrations and chatbots to workflow pipelines, we design automation that saves time and scales your business."
+        description: "CRM, chatbots, workflow pipelines, data stitching, dashboards."
       },
       {
-        title: "Software & Design",
-        icon: "computer",
-        description: "Websites, mobile apps, and rapid prototypes. We combine UX design with technical execution to take ideas from sketch to production."
+        title: "Content Ops & SMM",
+        icon: "calendar",
+        description: "Calendars, posting, moderation, ads ops, reporting."
       },
       {
-        title: "Video & Content",
-        icon: "video",
-        description: "Brand films, interviews, and social campaigns. With a background in high-end video production, we craft stories that resonate and drive attention."
+        title: "Ongoing Management",
+        icon: "grid",
+        description: "Roadmap, sprints, QA, releases, performance dashboards."
+      },
+      {
+        title: "Education & Masterclasses",
+        icon: "book",
+        description: "Applied AI for content/software/ops; prompts; playbooks."
       }
     ]
   },
@@ -136,17 +156,12 @@ const about = {
       {
         icon: "eye",
         title: "Vision",
-        description: "Help teams automate the repetitive work, keep people doing what they love, and make 'idea to live' a normal pace across APAC — using the right medium for the job."
+        description: "Help teams automate the repetitive work, keep people doing what they love, and make 'idea to live' a normal pace across APAC - using the right medium for the job."
       },
       {
         icon: "target",
         title: "BHAG 2030",
-        description: "Free and reinvest 1,000,000 human hours from repetitive work into what people love by 2030 — craft, learning, family, or rest — and publish an annual Happy Hours Report to show where that time went."
-      },
-      {
-        icon: "sun",
-        title: "Vivid Picture",
-        description: "Morning idea → first assets same day; prototypes in days. Routine PM/docs/reporting → auto-generated and connected to CRM/ERP. Every engagement ships with a time-to-ship / hours-saved dashboard. People spend ~80% of their time on what they love. Teams are trained and confident working in a post-labor world."
+        description: "Free and reinvest 1,000,000 human hours from repetitive work into what people love by 2030 - craft, learning, family, or rest - and publish an annual Happy Hours Report to show where that time went."
       }
     ]
   },
@@ -154,7 +169,7 @@ const about = {
     display: false,
     title: "Manifesto",
     description: [
-      "From Hong Kong roots, we've grown into a global crew—directing, analysing, coding, managing, automating and marketing. We constantly refine digital-content workflows and pass those gains to our clients, which leads us to value:"
+      "From Hong Kong roots, we've grown into a global crew - directing, analysing, coding, managing, automating and marketing. We constantly refine digital-content workflows and pass those gains to our clients, which leads us to value:"
     ],
     values: [],
     conclusion: "That is, while there is value in the items on the bottom, we value the items on top more."
@@ -180,7 +195,7 @@ const about = {
       },
       {
         title: "Honest Data",
-        icon: "barChart",
+        icon: "grid",
         description: "Base decisions on transparent, accurate information and metrics."
       },
       {
