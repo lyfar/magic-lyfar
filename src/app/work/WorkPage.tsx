@@ -22,11 +22,11 @@ export function WorkPage({ initialProjects }: WorkPageProps) {
   // Category mapping for display names and filtering
   const categoryMapping = {
     "Automation&AI": "Automation & AI",
-    "Product&Design": "Product & Design",
+    "Software&Design": "Software & Design",
     "Video&Content": "Video & Content"
   };
 
-  const availableTags = React.useMemo(() => ["Automation&AI", "Product&Design", "Video&Content"], []);
+  const availableTags = React.useMemo(() => ["Automation&AI", "Software&Design", "Video&Content"], []);
 
   // Initialize tags from URL hash on component mount
   useEffect(() => {
