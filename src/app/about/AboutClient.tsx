@@ -118,7 +118,7 @@ function AboutClient() {
           <TableOfContents structure={structure} about={about} />
         </Column>
       )}
-      <Flex fillWidth mobileDirection="column" horizontal="start" gap="l" style={{ minHeight: '100vh' }}>
+      <Flex fillWidth mobileDirection="column" horizontal="start" gap="l" style={{ minHeight: '100vh', position: 'relative' }}>
         {/* Mobile Logo */}
         <RevealFx show="s" fillWidth horizontal="center" paddingBottom="24">
           <Logo width={80} height={40} />

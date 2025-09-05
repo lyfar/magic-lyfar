@@ -164,7 +164,7 @@ const about = {
         description: "Help teams automate the repetitive work, keep people doing what they love, and make 'idea to live' a normal pace across APAC - using the right medium for the job."
       },
       {
-        icon: "target",
+        icon: "arrowUpRight",
         title: "BHAG 2030",
         description: "Free and reinvest 1,000,000 human hours from repetitive work into what people love by 2030 - craft, learning, family, or rest - and publish an annual Happy Hours Report to show where that time went."
       }
