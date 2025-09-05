@@ -17,7 +17,7 @@
     .avatar {
         position: fixed;
         top: 140px; /* Adjusted for header + some padding */
-        left: 180px; /* More gap from table of contents */
+        left: 210px; /* Center card within the left column (TOC rail + bio area) */
         width: 280px;
         max-width: 280px;
         z-index: 20;
@@ -29,7 +29,7 @@
     }
 
     .mainContent {
-        margin-left: 520px; /* 180px left offset + 280px card width + buffer ~60px */
+        margin-left: 560px; /* 210px left offset + 280px card width + ~70px buffer */
     }
 }
 
