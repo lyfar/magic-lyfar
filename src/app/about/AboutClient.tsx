@@ -128,8 +128,6 @@ function AboutClient() {
           <Column
             className={styles.avatar}
             minWidth="0"
-            paddingX="0"
-            paddingBottom="xl"
             gap="l"
             flex={0}
             horizontal="center"
