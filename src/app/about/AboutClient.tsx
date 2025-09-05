@@ -134,12 +134,6 @@ function AboutClient() {
             flex={0}
             horizontal="center"
             hide="s"
-            position="sticky"
-            top="120"
-            style={{
-              height: 'fit-content',
-              alignSelf: 'flex-start'
-            }}
           >
           {about.team.members.map((member, index) => (
             <RevealFx key={index} delay={0.0}>
