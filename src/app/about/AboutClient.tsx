@@ -134,9 +134,9 @@ function AboutClient() {
             flex={0}
             horizontal="center"
             hide="s"
+            position="sticky"
+            top="120"
             style={{
-              position: 'sticky',
-              top: '120px', // Account for header height
               height: 'fit-content',
               alignSelf: 'flex-start'
             }}
