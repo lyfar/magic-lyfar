@@ -30,6 +30,11 @@ const social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
   {
+    name: "PMQ, H307",
+    icon: "globe",
+    link: "https://maps.app.goo.gl/Y8BDRB1E3UnW6wyP8",
+  },
+  {
     name: "Instagram",
     icon: "instagram",
     link: "https://www.instagram.com/egor.lyfar/",
