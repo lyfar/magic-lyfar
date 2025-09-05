@@ -12,24 +12,16 @@
     align-self: flex-start;
 }
 
-/* Desktop: keep avatar column narrow and fixed */
+/* Desktop: keep avatar column narrow and sticky */
 @media (min-width: 1025px) {
     .avatar {
-        position: fixed;
-        top: 140px; /* Adjusted for header + some padding */
-        left: 210px; /* Center card within the left column (TOC rail + bio area) */
-        width: 280px;
-        max-width: 280px;
-        z-index: 20;
-        padding: var(--static-space-32);
-        background: var(--surface);
-        border: 1px solid var(--neutral-medium);
-        border-radius: var(--border-radius-l);
-        box-shadow: var(--shadow-l);
-    }
-
-    .mainContent {
-        margin-left: 560px; /* 210px left offset + 280px card width + ~70px buffer */
+        position: sticky;
+        top: var(--static-space-32);
+        width: 320px;
+        max-width: 320px;
+        flex: 0 0 320px; /* prevent stretching and pushing main content */
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 

@@ -109,7 +109,7 @@ function AboutClient() {
       {about.tableOfContent.display && (
         <Column
           left="0"
-          style={{ top: "180px" }}
+          style={{ top: "50%", transform: "translateY(-50%)" }}
           position="fixed"
           paddingLeft="24"
           gap="32"
@@ -118,7 +118,7 @@ function AboutClient() {
           <TableOfContents structure={structure} about={about} />
         </Column>
       )}
-      <Flex fillWidth mobileDirection="column" horizontal="start" gap="l" style={{ minHeight: '100vh', position: 'relative' }}>
+      <Flex fillWidth mobileDirection="column" horizontal="start" gap="l">
         {/* Mobile Logo */}
         <RevealFx show="s" fillWidth horizontal="center" paddingBottom="24">
           <Logo width={80} height={40} />
@@ -128,6 +128,8 @@ function AboutClient() {
           <Column
             className={styles.avatar}
             minWidth="0"
+            paddingX="0"
+            paddingBottom="xl"
             gap="l"
             flex={0}
             horizontal="center"
@@ -147,7 +149,7 @@ function AboutClient() {
           ))}
           </Column>
         )}
-        <Column flex={1} className={styles.mainContent}>
+        <Column flex={9} maxWidth={40}>
           <RevealFx>
           <Column
             id={about.intro.title}
