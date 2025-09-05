@@ -147,7 +147,7 @@ function AboutClient() {
           ))}
           </Column>
         )}
-        <Column flex={9} maxWidth={40} className={styles.mainContent}>
+        <Column flex={1} className={styles.mainContent}>
           <RevealFx>
           <Column
             id={about.intro.title}

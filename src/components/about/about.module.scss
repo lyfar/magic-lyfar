@@ -17,9 +17,9 @@
     .avatar {
         position: fixed;
         top: 140px; /* Adjusted for header + some padding */
-        left: 160px; /* Extra horizontal spacing from table of contents */
-        width: 320px;
-        max-width: 320px;
+        left: 180px; /* More gap from table of contents */
+        width: 280px;
+        max-width: 280px;
         z-index: 20;
         padding: var(--static-space-32);
         background: var(--surface);
@@ -29,7 +29,7 @@
     }
 
     .mainContent {
-        margin-left: 520px; /* 160px left offset + 320px card width + buffer */
+        margin-left: 520px; /* 180px left offset + 280px card width + buffer ~60px */
     }
 }
 
