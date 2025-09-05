@@ -17,10 +17,10 @@
     .avatar {
         position: fixed;
         top: 140px; /* Adjusted for header + some padding */
-        left: 24px; /* Match the content padding */
+        left: 120px; /* Increased spacing from table of contents */
         width: 320px;
         max-width: 320px;
-        z-index: 10;
+        z-index: 20;
         padding: var(--static-space-32);
         background: var(--surface);
         border: 1px solid var(--neutral-medium);
