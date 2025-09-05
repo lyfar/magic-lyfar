@@ -109,7 +109,7 @@ function AboutClient() {
       {about.tableOfContent.display && (
         <Column
           left="0"
-          style={{ top: "50%", transform: "translateY(-50%)" }}
+          style={{ top: "280px" }}
           position="fixed"
           paddingLeft="24"
           gap="32"
