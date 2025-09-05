@@ -12,16 +12,21 @@
     align-self: flex-start;
 }
 
-/* Desktop: keep avatar column narrow and sticky */
+/* Desktop: keep avatar column narrow and fixed */
 @media (min-width: 1025px) {
     .avatar {
-        position: sticky;
-        top: var(--static-space-32);
+        position: fixed;
+        top: 140px; /* Adjusted for header + some padding */
+        left: 24px; /* Match the content padding */
         width: 320px;
         max-width: 320px;
-        flex: 0 0 320px; /* prevent stretching and pushing main content */
+        z-index: 10;
         padding-left: 0;
         padding-right: 0;
+    }
+
+    .mainContent {
+        margin-left: 344px; /* 320px width + 24px left margin */
     }
 }
 
